@@ -88,6 +88,32 @@ def test_integer_buffers_and_unaligned_output(gpt2):
     bad.extend(b"resize after failure")
 
 
+def test_exact_integer_conversion_boundaries(gpt2):
+    # Full vocabulary: zero, small immortal integers, and larger single digits.
+    # Compare list/tuple conversion with the independent integer-buffer path.
+    values = list(range(50257))
+    expected = gpt2.decode_bytes(array.array("I", values))
+    for sequence in (values, tuple(values)):
+        assert gpt2.decode_bytes(sequence) == expected
+
+    # Two-digit positive integers fit u32 but are outside this vocabulary. They
+    # must reach core ID validation, while negative/oversized values overflow.
+    for value in (2**30 - 1, 2**30, 2**31, 2**32 - 1):
+        for sequence in ([value], (value,)):
+            with pytest.raises(toks.Error) as error:
+                gpt2.decode(sequence)
+            assert error.value.name == "TOKS_E_ID"
+    for value in (-1, -2**30, -2**64, 2**32, 2**64, 2**128):
+        for sequence in ([value], (value,)):
+            with pytest.raises(OverflowError):
+                gpt2.decode(sequence)
+
+    class Integer(int):
+        pass
+
+    assert gpt2.decode([Integer(64), True, 65]) == gpt2.decode([64, 1, 65])
+
+
 def test_concurrent_lazy_vocab_and_callback(gpt2_path, monkeypatch):
     import toks._vocab as vocab
 

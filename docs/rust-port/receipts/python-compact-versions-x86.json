@@ -1,0 +1,32 @@
+[
+  {
+    "version": "Python 3.10.20",
+    "wheel_sha256": "bc1aeaae3551bd7594e41887244fd34a86df81ef476a7344d8adeacfe04b8717",
+    "tests": ".................s......................                                 [100%]\n=========================== short test summary info ============================\nSKIPPED [1] python/tests/test_api.py:335: no C reference library (make reference, or TOKS_LIB=<path>)\n39 passed, 1 skipped in 1.73s\n",
+    "c_reference_followup": ".                                                                        [100%]\n1 passed in 2.29s\n"
+  },
+  {
+    "version": "Python 3.11.15",
+    "wheel_sha256": "8c262a84c284ba8f2d4c37884e2653279951aca19637cd2a39db189d06bd3509",
+    "tests": ".................s......................                                 [100%]\n=========================== short test summary info ============================\nSKIPPED [1] python/tests/test_api.py:335: no C reference library (make reference, or TOKS_LIB=<path>)\n39 passed, 1 skipped in 1.75s\n",
+    "c_reference_followup": ".                                                                        [100%]\n1 passed in 2.26s\n"
+  },
+  {
+    "version": "Python 3.12.3",
+    "wheel_sha256": "03f9f5fc3e9f05308e0aa90c9203c65131c14772a63940941e3077d8765e2d69",
+    "tests": ".................s......................                                 [100%]\n=========================== short test summary info ============================\nSKIPPED [1] python/tests/test_api.py:335: no C reference library (make reference, or TOKS_LIB=<path>)\n39 passed, 1 skipped in 1.76s\n",
+    "c_reference_followup": ".                                                                        [100%]\n1 passed in 2.36s\n"
+  },
+  {
+    "version": "Python 3.13.13",
+    "wheel_sha256": "55bc256429ae9b5acceadf26282a8eba3884322abd008bf3202927ae931830a6",
+    "tests": ".................s......................                                 [100%]\n=========================== short test summary info ============================\nSKIPPED [1] python/tests/test_api.py:335: no C reference library (make reference, or TOKS_LIB=<path>)\n39 passed, 1 skipped in 1.76s\n",
+    "c_reference_followup": ".                                                                        [100%]\n1 passed in 2.29s\n"
+  },
+  {
+    "version": "Python 3.14.5",
+    "wheel_sha256": "73725acceb61144fd9283e4d6dcea2ef4eaf7694bd7a740d4a1f5b2c623ec8f5",
+    "tests": ".................s......................                                 [100%]\n=========================== short test summary info ============================\nSKIPPED [1] python/tests/test_api.py:335: no C reference library (make reference, or TOKS_LIB=<path>)\n39 passed, 1 skipped in 1.75s\n",
+    "c_reference_followup": ".                                                                        [100%]\n1 passed in 2.28s\n"
+  }
+]

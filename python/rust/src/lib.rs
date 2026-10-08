@@ -8,6 +8,7 @@ use pyo3::{
 use std::sync::{atomic::AtomicBool, Mutex, MutexGuard};
 mod args;
 mod buffers;
+mod compact_ids;
 mod decode;
 mod encode;
 mod encoding;
@@ -211,6 +212,7 @@ impl Tokenizer {
 #[pymodule(gil_used = true)]
 fn _toks(m: &Bound<'_, PyModule>) -> PyResult<()> {
     let py = m.py();
+    compact_ids::init(py)?;
     let error = py.get_type::<Error>();
     error.setattr("__module__", "toks")?;
     m.add("Error", error)?;

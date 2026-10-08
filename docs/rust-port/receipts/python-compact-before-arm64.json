@@ -1,0 +1,5532 @@
+{
+  "host": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "protocol": "whole-process alternating ABBA/BAAB; warm repeated calls; 5 inner repetitions are not independent samples",
+  "runs": [
+    {
+      "python": "3.13.16 (main, Oct  3 2026, 00:54:36) [Clang 22.1.3 ]",
+      "module": "/Users/callen/work/toks/build/c-python-env/lib/python3.13/site-packages/toks/_toks.cpython-313-darwin.so",
+      "module_sha256": "499ea38065b9cc0739b00a3841665465d17be573078f3cd2c22b429791fcfa53",
+      "rows": [
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            117.8417,
+            117.525,
+            118.43125,
+            119.02085,
+            117.6104
+          ],
+          "median_ns": 117.8417
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            100.375,
+            100.3979,
+            101.77915,
+            101.45,
+            101.74375
+          ],
+          "median_ns": 101.45
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            65.52085,
+            68.5542,
+            76.40625,
+            69.43545,
+            77.07085
+          ],
+          "median_ns": 69.43545
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            438.50415,
+            448.01455,
+            452.2958,
+            453.7854,
+            459.9104
+          ],
+          "median_ns": 452.2958
+        },
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 14746,
+          "ns_per_call": [
+            1305.4274379492745,
+            1300.5362810253628,
+            1319.8550793435509,
+            1306.2242642072426,
+            1331.7876712328766
+          ],
+          "median_ns": 1306.2242642072426
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 20000,
+          "ns_per_call": [
+            252.8271,
+            255.63335,
+            254.3604,
+            257.28125,
+            266.1375
+          ],
+          "median_ns": 255.63335
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 10000,
+          "ns_per_call": [
+            1950.8041,
+            1945.9208,
+            1965.7583,
+            1960.2916,
+            1954.8666
+          ],
+          "median_ns": 1954.8666
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 3702,
+          "ns_per_call": [
+            5372.805240410589,
+            5390.374392220421,
+            5354.2004321988115,
+            5334.076175040519,
+            5663.143706104808
+          ],
+          "median_ns": 5372.805240410589
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            141.1604,
+            133.1104,
+            140.2604,
+            132.8854,
+            140.39375
+          ],
+          "median_ns": 140.2604
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            128.91875,
+            121.78125,
+            128.89375,
+            122.3229,
+            125.21455
+          ],
+          "median_ns": 125.21455
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            124.37915,
+            116.2521,
+            123.5604,
+            115.44795,
+            123.1083
+          ],
+          "median_ns": 123.1083
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            525.85625,
+            522.70835,
+            516.4875,
+            508.8979,
+            510.3417
+          ],
+          "median_ns": 516.4875
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1582,
+          "ns_per_call": [
+            13303.835018963338,
+            17404.761694058154,
+            17235.329962073323,
+            17337.65233881163,
+            17203.486725663715
+          ],
+          "median_ns": 17235.329962073323
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1244,
+          "ns_per_call": [
+            16145.397909967845,
+            16533.96302250804,
+            16396.436495176848,
+            16477.156752411574,
+            17083.40032154341
+          ],
+          "median_ns": 16477.156752411574
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1638,
+          "ns_per_call": [
+            11641.02564102564,
+            11270.960927960929,
+            10783.7557997558,
+            10669.388888888889,
+            11114.010989010989
+          ],
+          "median_ns": 11114.010989010989
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 277,
+          "ns_per_call": [
+            73229.54151624549,
+            73831.2274368231,
+            72723.52707581228,
+            72064.53068592057,
+            71064.83032490975
+          ],
+          "median_ns": 72723.52707581228
+        }
+      ],
+      "block": 0,
+      "variant": "c"
+    },
+    {
+      "python": "3.13.16 (main, Oct  3 2026, 00:54:36) [Clang 22.1.3 ]",
+      "module": "/Users/callen/work/toks/build/rust-python-env/lib/python3.13/site-packages/toks/_toks.cpython-313-darwin.so",
+      "module_sha256": "fdae9bbb428f17e65648dcba8903eb4a68cb5cc8f91308e292e3ad61a762be73",
+      "rows": [
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            146.38545,
+            145.78545,
+            143.8854,
+            144.21045,
+            145.1896
+          ],
+          "median_ns": 145.1896
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            133.96665,
+            135.54585,
+            135.26875,
+            139.4854,
+            139.23125
+          ],
+          "median_ns": 135.54585
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            109.61875,
+            109.075,
+            108.8229,
+            107.29165,
+            107.10625
+          ],
+          "median_ns": 108.8229
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            599.79795,
+            584.2625,
+            583.26455,
+            591.0146,
+            588.52705
+          ],
+          "median_ns": 588.52705
+        },
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 13753,
+          "ns_per_call": [
+            1432.635933978041,
+            1434.3143314185995,
+            1438.8345815458445,
+            1403.869483021886,
+            1419.0752563077147
+          ],
+          "median_ns": 1432.635933978041
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 20000,
+          "ns_per_call": [
+            370.7354,
+            364.5375,
+            365.2625,
+            306.7771,
+            299.0125
+          ],
+          "median_ns": 364.5375
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 6570,
+          "ns_per_call": [
+            3035.743378995434,
+            3044.4127853881278,
+            3036.675494672755,
+            3037.3161339421613,
+            3021.3406392694064
+          ],
+          "median_ns": 3036.675494672755
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 3391,
+          "ns_per_call": [
+            5854.258920672368,
+            5858.055735771159,
+            5868.524329106458,
+            5869.08964907107,
+            5895.237393099381
+          ],
+          "median_ns": 5868.524329106458
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            168.18545,
+            167.175,
+            169.54165,
+            168.76665,
+            168.71875
+          ],
+          "median_ns": 168.71875
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            155.2521,
+            154.6979,
+            158.35415,
+            155.71045,
+            156.4875
+          ],
+          "median_ns": 155.71045
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            154.81455,
+            153.68955,
+            153.21875,
+            153.5417,
+            153.33125
+          ],
+          "median_ns": 153.5417
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            667.35,
+            671.53335,
+            668.925,
+            647.20415,
+            666.2625
+          ],
+          "median_ns": 667.35
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1503,
+          "ns_per_call": [
+            12938.318030605456,
+            12865.491017964072,
+            12732.506986027944,
+            12720.974717232202,
+            12979.01397205589
+          ],
+          "median_ns": 12865.491017964072
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1805,
+          "ns_per_call": [
+            11331.117451523545,
+            11363.38891966759,
+            11597.207202216066,
+            12095.290858725763,
+            12005.286426592798
+          ],
+          "median_ns": 11597.207202216066
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1631,
+          "ns_per_call": [
+            12129.70079705702,
+            12084.738810545678,
+            12107.577559779276,
+            12210.632740649908,
+            12252.274064990803
+          ],
+          "median_ns": 12129.70079705702
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 402,
+          "ns_per_call": [
+            51373.96268656717,
+            50719.62935323383,
+            50185.114427860695,
+            50095.562189054726,
+            50471.18656716418
+          ],
+          "median_ns": 50471.18656716418
+        }
+      ],
+      "block": 0,
+      "variant": "rust"
+    },
+    {
+      "python": "3.13.16 (main, Oct  3 2026, 00:54:36) [Clang 22.1.3 ]",
+      "module": "/Users/callen/work/toks/build/rust-python-env/lib/python3.13/site-packages/toks/_toks.cpython-313-darwin.so",
+      "module_sha256": "fdae9bbb428f17e65648dcba8903eb4a68cb5cc8f91308e292e3ad61a762be73",
+      "rows": [
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            147.66045,
+            146.3458,
+            146.0875,
+            146.5354,
+            144.58955
+          ],
+          "median_ns": 146.3458
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            133.2333,
+            131.8396,
+            133.10625,
+            132.11045,
+            131.8375
+          ],
+          "median_ns": 132.11045
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            109.15,
+            108.76665,
+            107.43125,
+            107.36455,
+            107.41045
+          ],
+          "median_ns": 107.43125
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            572.84375,
+            588.71045,
+            597.18545,
+            594.69165,
+            597.72915
+          ],
+          "median_ns": 594.69165
+        },
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 13655,
+          "ns_per_call": [
+            1434.0565360673745,
+            1435.9758330281948,
+            1442.176272427682,
+            1422.3788355913584,
+            1411.5921640424754
+          ],
+          "median_ns": 1434.0565360673745
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 20000,
+          "ns_per_call": [
+            348.43955,
+            353.425,
+            339.31455,
+            297.0375,
+            298.32085
+          ],
+          "median_ns": 339.31455
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 6694,
+          "ns_per_call": [
+            3002.402599342695,
+            3005.7077980280847,
+            2993.41440095608,
+            2990.4578727218404,
+            2972.861368389603
+          ],
+          "median_ns": 2993.41440095608
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 3105,
+          "ns_per_call": [
+            5907.1925925925925,
+            5910.1719806763285,
+            6110.359742351046,
+            6144.444444444444,
+            5859.7961352657
+          ],
+          "median_ns": 5910.1719806763285
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            163.58335,
+            162.0375,
+            162.28545,
+            162.0,
+            162.9417
+          ],
+          "median_ns": 162.28545
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            148.81045,
+            146.73955,
+            145.425,
+            147.3458,
+            146.3667
+          ],
+          "median_ns": 146.73955
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            149.4333,
+            148.2375,
+            147.7,
+            148.65625,
+            148.8521
+          ],
+          "median_ns": 148.65625
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            656.58125,
+            668.90415,
+            671.8104,
+            666.3708,
+            651.52915
+          ],
+          "median_ns": 666.3708
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1597,
+          "ns_per_call": [
+            12577.254226675015,
+            12584.011271133375,
+            12237.137758296807,
+            12525.255479023168,
+            12315.74827802129
+          ],
+          "median_ns": 12525.255479023168
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1710,
+          "ns_per_call": [
+            11406.578947368422,
+            11320.126900584795,
+            11689.059649122806,
+            11624.293567251461,
+            11852.04678362573
+          ],
+          "median_ns": 11624.293567251461
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1476,
+          "ns_per_call": [
+            12360.15108401084,
+            12164.888211382115,
+            12281.673441734418,
+            12080.933604336044,
+            12072.042005420055
+          ],
+          "median_ns": 12164.888211382115
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 382,
+          "ns_per_call": [
+            52056.60994764398,
+            50744.65706806283,
+            49738.002617801045,
+            50828.641361256545,
+            52044.06544502618
+          ],
+          "median_ns": 50828.641361256545
+        }
+      ],
+      "block": 0,
+      "variant": "rust"
+    },
+    {
+      "python": "3.13.16 (main, Oct  3 2026, 00:54:36) [Clang 22.1.3 ]",
+      "module": "/Users/callen/work/toks/build/c-python-env/lib/python3.13/site-packages/toks/_toks.cpython-313-darwin.so",
+      "module_sha256": "499ea38065b9cc0739b00a3841665465d17be573078f3cd2c22b429791fcfa53",
+      "rows": [
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            113.64585,
+            116.3896,
+            112.5146,
+            109.5792,
+            112.3
+          ],
+          "median_ns": 112.5146
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            106.66665,
+            105.82915,
+            106.2625,
+            106.65,
+            106.62915
+          ],
+          "median_ns": 106.62915
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            79.50625,
+            76.1417,
+            69.04795,
+            69.94375,
+            69.81045
+          ],
+          "median_ns": 69.94375
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            445.3104,
+            436.43955,
+            441.5771,
+            433.9521,
+            434.23955
+          ],
+          "median_ns": 436.43955
+        },
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 14306,
+          "ns_per_call": [
+            1256.5998182580736,
+            1340.4137424856704,
+            1357.6384034670768,
+            1287.562910666853,
+            1302.1430169159794
+          ],
+          "median_ns": 1302.1430169159794
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 20000,
+          "ns_per_call": [
+            244.59375,
+            257.6604,
+            266.05625,
+            256.7979,
+            261.41875
+          ],
+          "median_ns": 257.6604
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 10010,
+          "ns_per_call": [
+            1996.3411588411589,
+            1953.9877122877124,
+            1960.705994005994,
+            1972.6814185814185,
+            1973.489010989011
+          ],
+          "median_ns": 1972.6814185814185
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 3664,
+          "ns_per_call": [
+            5348.662663755458,
+            5537.356713973799,
+            5357.328056768559,
+            5542.917576419214,
+            5348.264737991266
+          ],
+          "median_ns": 5357.328056768559
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            140.3125,
+            133.92085,
+            139.43125,
+            132.78955,
+            138.9458
+          ],
+          "median_ns": 138.9458
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            128.6208,
+            121.0917,
+            127.9104,
+            121.0021,
+            128.475
+          ],
+          "median_ns": 127.9104
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            126.59375,
+            115.2458,
+            122.76665,
+            113.95,
+            123.4375
+          ],
+          "median_ns": 122.76665
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            518.6354,
+            516.0104,
+            524.43545,
+            529.05625,
+            525.71875
+          ],
+          "median_ns": 524.43545
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1560,
+          "ns_per_call": [
+            12671.76858974359,
+            12321.420512820512,
+            12241.399358974359,
+            12021.233974358975,
+            12140.625
+          ],
+          "median_ns": 12241.399358974359
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1844,
+          "ns_per_call": [
+            10845.150759219088,
+            11042.616052060737,
+            11086.044468546637,
+            11110.651843817788,
+            11033.893709327549
+          ],
+          "median_ns": 11042.616052060737
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1763,
+          "ns_per_call": [
+            11169.43221781055,
+            11298.922291548497,
+            11259.997163925127,
+            11245.438457175269,
+            11420.424844015883
+          ],
+          "median_ns": 11259.997163925127
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 394,
+          "ns_per_call": [
+            50176.92385786802,
+            50618.654822335026,
+            50511.94923857868,
+            50951.67258883249,
+            50844.22588832487
+          ],
+          "median_ns": 50618.654822335026
+        }
+      ],
+      "block": 0,
+      "variant": "c"
+    },
+    {
+      "python": "3.13.16 (main, Oct  3 2026, 00:54:36) [Clang 22.1.3 ]",
+      "module": "/Users/callen/work/toks/build/rust-python-env/lib/python3.13/site-packages/toks/_toks.cpython-313-darwin.so",
+      "module_sha256": "fdae9bbb428f17e65648dcba8903eb4a68cb5cc8f91308e292e3ad61a762be73",
+      "rows": [
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            149.3354,
+            145.85415,
+            145.1875,
+            144.45835,
+            144.89165
+          ],
+          "median_ns": 145.1875
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            135.02295,
+            133.76455,
+            135.60835,
+            138.00835,
+            136.825
+          ],
+          "median_ns": 135.60835
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            117.76455,
+            120.2625,
+            108.2917,
+            108.6625,
+            108.6979
+          ],
+          "median_ns": 108.6979
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            661.4,
+            637.63335,
+            637.3167,
+            666.7625,
+            629.18955
+          ],
+          "median_ns": 637.63335
+        },
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 12323,
+          "ns_per_call": [
+            1617.7608536882253,
+            1639.1166112148017,
+            1608.5031242392274,
+            1632.5367199545565,
+            1618.2341962184532
+          ],
+          "median_ns": 1618.2341962184532
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 20000,
+          "ns_per_call": [
+            359.1,
+            344.71875,
+            342.975,
+            343.0875,
+            347.09165
+          ],
+          "median_ns": 344.71875
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 6606,
+          "ns_per_call": [
+            3003.727671813503,
+            3095.2543142597638,
+            3176.2602179836513,
+            3108.8151680290644,
+            3084.0712988192554
+          ],
+          "median_ns": 3095.2543142597638
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 2976,
+          "ns_per_call": [
+            6663.488239247312,
+            6645.735551075269,
+            6765.919018817204,
+            6571.8383736559135,
+            6699.330645161291
+          ],
+          "median_ns": 6663.488239247312
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            180.4771,
+            178.55835,
+            178.5292,
+            178.3854,
+            178.40625
+          ],
+          "median_ns": 178.5292
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            157.6708,
+            157.09375,
+            157.14165,
+            158.28335,
+            158.44375
+          ],
+          "median_ns": 157.6708
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            155.7958,
+            154.1146,
+            154.95415,
+            154.5583,
+            154.54375
+          ],
+          "median_ns": 154.5583
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            674.35,
+            673.2708,
+            674.0125,
+            707.09795,
+            659.8979
+          ],
+          "median_ns": 674.0125
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1518,
+          "ns_per_call": [
+            13165.760869565218,
+            13051.411067193676,
+            13205.12187088274,
+            13094.175230566534,
+            13282.004611330698
+          ],
+          "median_ns": 13165.760869565218
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1680,
+          "ns_per_call": [
+            12963.467261904761,
+            12246.105952380953,
+            12191.443452380952,
+            11926.41369047619,
+            11624.008333333333
+          ],
+          "median_ns": 12191.443452380952
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1609,
+          "ns_per_call": [
+            12431.99751398384,
+            11908.302050963332,
+            11992.515848353014,
+            11747.462399005593,
+            11790.605344934742
+          ],
+          "median_ns": 11908.302050963332
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 384,
+          "ns_per_call": [
+            51249.567708333336,
+            51222.981770833336,
+            51750.9765625,
+            52610.567708333336,
+            56700.630208333336
+          ],
+          "median_ns": 51750.9765625
+        }
+      ],
+      "block": 1,
+      "variant": "rust"
+    },
+    {
+      "python": "3.13.16 (main, Oct  3 2026, 00:54:36) [Clang 22.1.3 ]",
+      "module": "/Users/callen/work/toks/build/c-python-env/lib/python3.13/site-packages/toks/_toks.cpython-313-darwin.so",
+      "module_sha256": "499ea38065b9cc0739b00a3841665465d17be573078f3cd2c22b429791fcfa53",
+      "rows": [
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            113.8458,
+            113.41875,
+            118.85415,
+            123.9167,
+            133.31455
+          ],
+          "median_ns": 118.85415
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            126.7042,
+            115.45415,
+            106.3896,
+            105.8396,
+            103.30415
+          ],
+          "median_ns": 106.3896
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            70.81875,
+            69.74585,
+            69.51875,
+            69.2625,
+            69.06665
+          ],
+          "median_ns": 69.51875
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            442.93125,
+            446.6708,
+            437.35625,
+            436.18125,
+            432.0146
+          ],
+          "median_ns": 437.35625
+        },
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 15359,
+          "ns_per_call": [
+            1290.7144345334982,
+            1317.5852594569958,
+            1324.0797577967317,
+            1512.484536753695,
+            1339.1604922195456
+          ],
+          "median_ns": 1324.0797577967317
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 20000,
+          "ns_per_call": [
+            227.18125,
+            246.31875,
+            274.975,
+            297.6,
+            293.48335
+          ],
+          "median_ns": 274.975
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 9886,
+          "ns_per_call": [
+            2050.0075864859396,
+            2429.917661339268,
+            2075.6161238114505,
+            2006.9669229213027,
+            1963.8293546429295
+          ],
+          "median_ns": 2050.0075864859396
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 3301,
+          "ns_per_call": [
+            6030.0666464707665,
+            5928.746440472584,
+            5817.631020902757,
+            5715.4650106028475,
+            5839.265677067555
+          ],
+          "median_ns": 5839.265677067555
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            151.1208,
+            143.3792,
+            149.96875,
+            147.08335,
+            143.30625
+          ],
+          "median_ns": 147.08335
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            127.0458,
+            120.25625,
+            127.54165,
+            117.725,
+            127.76875
+          ],
+          "median_ns": 127.0458
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            123.44375,
+            119.81875,
+            126.925,
+            115.1625,
+            122.31045
+          ],
+          "median_ns": 122.31045
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            514.70625,
+            505.91045,
+            513.6875,
+            507.7083,
+            528.08125
+          ],
+          "median_ns": 513.6875
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1466,
+          "ns_per_call": [
+            13186.533424283765,
+            12786.266712141884,
+            12937.216234652115,
+            12472.800136425649,
+            12454.836971350614
+          ],
+          "median_ns": 12786.266712141884
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1226,
+          "ns_per_call": [
+            11703.234910277324,
+            11615.008156606851,
+            11495.717781402936,
+            11416.667210440457,
+            12293.331973898858
+          ],
+          "median_ns": 11615.008156606851
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1709,
+          "ns_per_call": [
+            11645.040959625512,
+            11499.4880046811,
+            11389.116442363955,
+            11203.188999414862,
+            11205.675833820947
+          ],
+          "median_ns": 11389.116442363955
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 396,
+          "ns_per_call": [
+            50686.343434343435,
+            51302.39898989899,
+            50446.23484848485,
+            51661.19696969697,
+            56160.24747474748
+          ],
+          "median_ns": 51302.39898989899
+        }
+      ],
+      "block": 1,
+      "variant": "c"
+    },
+    {
+      "python": "3.13.16 (main, Oct  3 2026, 00:54:36) [Clang 22.1.3 ]",
+      "module": "/Users/callen/work/toks/build/c-python-env/lib/python3.13/site-packages/toks/_toks.cpython-313-darwin.so",
+      "module_sha256": "499ea38065b9cc0739b00a3841665465d17be573078f3cd2c22b429791fcfa53",
+      "rows": [
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            122.70415,
+            124.0729,
+            121.2729,
+            121.0917,
+            119.22295
+          ],
+          "median_ns": 121.2729
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            104.8604,
+            103.93125,
+            104.9021,
+            105.4,
+            105.3604
+          ],
+          "median_ns": 104.9021
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            67.26665,
+            75.69375,
+            73.0583,
+            76.8229,
+            74.82915
+          ],
+          "median_ns": 74.82915
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            454.9979,
+            453.02915,
+            450.22085,
+            450.8854,
+            451.32085
+          ],
+          "median_ns": 451.32085
+        },
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 14435,
+          "ns_per_call": [
+            1381.532178732248,
+            1250.7591963976447,
+            1246.0743332178731,
+            1243.0839625909248,
+            1409.6784897817804
+          ],
+          "median_ns": 1250.7591963976447
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 20000,
+          "ns_per_call": [
+            259.5417,
+            260.2,
+            259.64165,
+            259.80625,
+            261.2167
+          ],
+          "median_ns": 259.80625
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 9989,
+          "ns_per_call": [
+            1935.2079287215938,
+            1943.054059465412,
+            1943.1249374311742,
+            1931.9334267694464,
+            1947.279507458204
+          ],
+          "median_ns": 1943.054059465412
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 3347,
+          "ns_per_call": [
+            5927.036450552734,
+            5914.587690469077,
+            5914.214221691067,
+            5902.263220794742,
+            5574.482222886167
+          ],
+          "median_ns": 5914.214221691067
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            137.8646,
+            130.1375,
+            138.07915,
+            130.2625,
+            136.92295
+          ],
+          "median_ns": 136.92295
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            126.8375,
+            122.6146,
+            130.02085,
+            123.20205,
+            130.4125
+          ],
+          "median_ns": 126.8375
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            134.59375,
+            118.4875,
+            124.975,
+            115.8396,
+            124.05205
+          ],
+          "median_ns": 124.05205
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            534.6146,
+            519.22085,
+            546.36875,
+            529.8542,
+            536.49165
+          ],
+          "median_ns": 534.6146
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1590,
+          "ns_per_call": [
+            12737.4213836478,
+            12649.632704402517,
+            17711.084905660377,
+            19274.790566037736,
+            19535.71823899371
+          ],
+          "median_ns": 17711.084905660377
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1097,
+          "ns_per_call": [
+            18171.034639927075,
+            18108.17319963537,
+            18176.504102096627,
+            18020.73837739289,
+            18114.40291704649
+          ],
+          "median_ns": 18114.40291704649
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1755,
+          "ns_per_call": [
+            11330.294586894586,
+            11237.48831908832,
+            11383.903133903133,
+            11364.411396011395,
+            11444.041025641025
+          ],
+          "median_ns": 11364.411396011395
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 257,
+          "ns_per_call": [
+            78953.79377431907,
+            76681.906614786,
+            77133.5953307393,
+            77645.59143968871,
+            76940.33463035019
+          ],
+          "median_ns": 77133.5953307393
+        }
+      ],
+      "block": 1,
+      "variant": "c"
+    },
+    {
+      "python": "3.13.16 (main, Oct  3 2026, 00:54:36) [Clang 22.1.3 ]",
+      "module": "/Users/callen/work/toks/build/rust-python-env/lib/python3.13/site-packages/toks/_toks.cpython-313-darwin.so",
+      "module_sha256": "fdae9bbb428f17e65648dcba8903eb4a68cb5cc8f91308e292e3ad61a762be73",
+      "rows": [
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            145.12085,
+            143.26875,
+            143.25415,
+            144.12705,
+            143.70625
+          ],
+          "median_ns": 143.70625
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            131.29165,
+            133.95835,
+            135.83955,
+            136.02915,
+            136.0625
+          ],
+          "median_ns": 135.83955
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            105.67085,
+            105.9979,
+            106.56455,
+            107.28955,
+            107.0271
+          ],
+          "median_ns": 106.56455
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            599.37915,
+            586.675,
+            592.14585,
+            597.25,
+            602.55
+          ],
+          "median_ns": 597.25
+        },
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 12229,
+          "ns_per_call": [
+            1573.1049145473874,
+            1576.7233624989778,
+            1545.6871371330444,
+            1616.7409436585167,
+            1622.7001390138196
+          ],
+          "median_ns": 1576.7233624989778
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 20000,
+          "ns_per_call": [
+            352.6,
+            359.81875,
+            360.29165,
+            360.5146,
+            371.675
+          ],
+          "median_ns": 360.29165
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 5992,
+          "ns_per_call": [
+            3245.382676902537,
+            3064.8434579439254,
+            3038.3983644859813,
+            3029.2960614152203,
+            2899.5952937249667
+          ],
+          "median_ns": 3038.3983644859813
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 3374,
+          "ns_per_call": [
+            6351.573503260225,
+            6382.347954949615,
+            6331.715471250741,
+            6033.269116775341,
+            5880.223770005928
+          ],
+          "median_ns": 6331.715471250741
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            169.15,
+            169.1,
+            210.2,
+            236.4875,
+            235.87705
+          ],
+          "median_ns": 210.2
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            223.2854,
+            227.56665,
+            224.7979,
+            228.7604,
+            230.9396
+          ],
+          "median_ns": 227.56665
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            149.95835,
+            147.5021,
+            147.89375,
+            147.57085,
+            146.94375
+          ],
+          "median_ns": 147.57085
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            931.06665,
+            929.5479,
+            929.55,
+            938.00415,
+            938.73125
+          ],
+          "median_ns": 931.06665
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1252,
+          "ns_per_call": [
+            15284.678115015975,
+            15147.031150159744,
+            15221.511980830672,
+            15476.30431309904,
+            15622.170926517572
+          ],
+          "median_ns": 15284.678115015975
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1407,
+          "ns_per_call": [
+            14297.530206112295,
+            15279.022032693674,
+            14922.648898365316,
+            14878.968017057568,
+            14033.286425017768
+          ],
+          "median_ns": 14878.968017057568
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1610,
+          "ns_per_call": [
+            12933.850931677018,
+            13002.639751552795,
+            12894.073291925466,
+            12703.726708074535,
+            12713.276397515529
+          ],
+          "median_ns": 12894.073291925466
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 320,
+          "ns_per_call": [
+            61286.85,
+            60247.396875,
+            60051.69375,
+            60415.234375,
+            61075.653125
+          ],
+          "median_ns": 60415.234375
+        }
+      ],
+      "block": 1,
+      "variant": "rust"
+    },
+    {
+      "python": "3.13.16 (main, Oct  3 2026, 00:54:36) [Clang 22.1.3 ]",
+      "module": "/Users/callen/work/toks/build/c-python-env/lib/python3.13/site-packages/toks/_toks.cpython-313-darwin.so",
+      "module_sha256": "499ea38065b9cc0739b00a3841665465d17be573078f3cd2c22b429791fcfa53",
+      "rows": [
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            124.55625,
+            123.54585,
+            120.3125,
+            121.93955,
+            125.78125
+          ],
+          "median_ns": 123.54585
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            105.88335,
+            104.0646,
+            104.525,
+            111.38955,
+            112.69375
+          ],
+          "median_ns": 105.88335
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            74.27085,
+            73.0083,
+            72.9771,
+            73.3646,
+            73.49375
+          ],
+          "median_ns": 73.3646
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            455.18125,
+            455.47085,
+            450.21875,
+            449.45205,
+            450.51665
+          ],
+          "median_ns": 450.51665
+        },
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 15047,
+          "ns_per_call": [
+            1309.602113378082,
+            1311.2386522230345,
+            1573.7079816574733,
+            1518.3259121419553,
+            1420.5185086728252
+          ],
+          "median_ns": 1420.5185086728252
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 20000,
+          "ns_per_call": [
+            279.6396,
+            275.2646,
+            275.0792,
+            278.5646,
+            273.96665
+          ],
+          "median_ns": 275.2646
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 10041,
+          "ns_per_call": [
+            2077.2873219798826,
+            2071.3782491783686,
+            2097.247186535206,
+            1986.1774723633105,
+            1994.2900109550842
+          ],
+          "median_ns": 2071.3782491783686
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 3617,
+          "ns_per_call": [
+            5585.706386508156,
+            6451.5598562344485,
+            5837.676251036771,
+            5658.142106718275,
+            5564.2565662150955
+          ],
+          "median_ns": 5658.142106718275
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            141.7396,
+            134.96045,
+            142.2521,
+            136.7354,
+            142.03335
+          ],
+          "median_ns": 141.7396
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            125.41665,
+            120.36665,
+            131.15835,
+            122.75,
+            130.6604
+          ],
+          "median_ns": 125.41665
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            131.3229,
+            121.34375,
+            130.8833,
+            119.78955,
+            127.54165
+          ],
+          "median_ns": 127.54165
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            545.52915,
+            540.7875,
+            548.3521,
+            542.30625,
+            551.0396
+          ],
+          "median_ns": 545.52915
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1480,
+          "ns_per_call": [
+            13395.805405405405,
+            13129.983108108108,
+            13271.621621621622,
+            13142.172972972972,
+            13308.305405405405
+          ],
+          "median_ns": 13271.621621621622
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1715,
+          "ns_per_call": [
+            11500.75335276968,
+            11185.738192419825,
+            11183.916034985423,
+            11407.604081632653,
+            11978.183090379009
+          ],
+          "median_ns": 11407.604081632653
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1617,
+          "ns_per_call": [
+            12070.037105751391,
+            11651.12863327149,
+            11627.448361162647,
+            11582.586270871985,
+            11890.795299938158
+          ],
+          "median_ns": 11651.12863327149
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 247,
+          "ns_per_call": [
+            81271.93117408907,
+            80626.18218623482,
+            79965.92307692308,
+            80160.08502024291,
+            79291.16194331984
+          ],
+          "median_ns": 80160.08502024291
+        }
+      ],
+      "block": 2,
+      "variant": "c"
+    },
+    {
+      "python": "3.13.16 (main, Oct  3 2026, 00:54:36) [Clang 22.1.3 ]",
+      "module": "/Users/callen/work/toks/build/rust-python-env/lib/python3.13/site-packages/toks/_toks.cpython-313-darwin.so",
+      "module_sha256": "fdae9bbb428f17e65648dcba8903eb4a68cb5cc8f91308e292e3ad61a762be73",
+      "rows": [
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            151.81875,
+            147.7979,
+            147.48545,
+            151.9979,
+            179.5479
+          ],
+          "median_ns": 151.81875
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            134.40625,
+            157.21875,
+            142.5833,
+            158.16875,
+            173.54795
+          ],
+          "median_ns": 157.21875
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            143.26665,
+            122.0375,
+            148.8667,
+            149.09375,
+            116.1875
+          ],
+          "median_ns": 143.26665
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            584.76875,
+            666.82085,
+            670.4479,
+            579.33125,
+            597.59165
+          ],
+          "median_ns": 597.59165
+        },
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 11881,
+          "ns_per_call": [
+            1628.7314199141485,
+            1727.6954801784361,
+            1838.9340122885278,
+            1737.7289790421682,
+            1868.873242993014
+          ],
+          "median_ns": 1737.7289790421682
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 20000,
+          "ns_per_call": [
+            364.975,
+            353.80625,
+            366.3854,
+            443.29165,
+            400.24375
+          ],
+          "median_ns": 366.3854
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 5366,
+          "ns_per_call": [
+            3244.828550130451,
+            3185.4422288483042,
+            3191.2271710771524,
+            3255.4353335818114,
+            3163.7858740216175
+          ],
+          "median_ns": 3191.2271710771524
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 3238,
+          "ns_per_call": [
+            6858.991970352069,
+            6061.483323038913,
+            5971.741815935763,
+            6289.774861025324,
+            6219.863187152563
+          ],
+          "median_ns": 6219.863187152563
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            175.40415,
+            175.77705,
+            184.025,
+            175.4958,
+            176.1625
+          ],
+          "median_ns": 175.77705
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            161.0146,
+            163.55625,
+            171.05625,
+            159.4542,
+            157.7854
+          ],
+          "median_ns": 161.0146
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            163.9125,
+            162.84585,
+            162.49585,
+            162.93125,
+            162.8146
+          ],
+          "median_ns": 162.84585
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            697.8208,
+            706.0625,
+            698.6521,
+            698.0875,
+            716.6583
+          ],
+          "median_ns": 698.6521
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1401,
+          "ns_per_call": [
+            13790.566024268379,
+            13903.134189864382,
+            13282.6852248394,
+            13710.950749464668,
+            13756.632405424696
+          ],
+          "median_ns": 13756.632405424696
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1565,
+          "ns_per_call": [
+            12358.280511182109,
+            11940.522044728434,
+            13016.985942492012,
+            12721.485623003195,
+            12956.60319488818
+          ],
+          "median_ns": 12721.485623003195
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1544,
+          "ns_per_call": [
+            13086.004533678757,
+            13071.459196891192,
+            12927.487694300518,
+            12785.838082901555,
+            12816.54792746114
+          ],
+          "median_ns": 12927.487694300518
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 359,
+          "ns_per_call": [
+            56448.119777158776,
+            55383.70473537604,
+            55518.57103064067,
+            54510.79387186629,
+            55393.33983286908
+          ],
+          "median_ns": 55393.33983286908
+        }
+      ],
+      "block": 2,
+      "variant": "rust"
+    },
+    {
+      "python": "3.13.16 (main, Oct  3 2026, 00:54:36) [Clang 22.1.3 ]",
+      "module": "/Users/callen/work/toks/build/rust-python-env/lib/python3.13/site-packages/toks/_toks.cpython-313-darwin.so",
+      "module_sha256": "fdae9bbb428f17e65648dcba8903eb4a68cb5cc8f91308e292e3ad61a762be73",
+      "rows": [
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            153.4833,
+            155.73545,
+            151.4625,
+            150.62915,
+            150.60835
+          ],
+          "median_ns": 151.4625
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            142.6083,
+            142.5917,
+            142.63125,
+            145.2,
+            146.4875
+          ],
+          "median_ns": 142.63125
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            130.26875,
+            129.85,
+            127.5979,
+            127.99165,
+            131.0917
+          ],
+          "median_ns": 129.85
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            645.19585,
+            637.51875,
+            644.98335,
+            648.5333,
+            642.96665
+          ],
+          "median_ns": 644.98335
+        },
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 11664,
+          "ns_per_call": [
+            1719.2679183813443,
+            1756.2907235939642,
+            1762.074159807956,
+            1766.6109396433471,
+            1657.5502400548696
+          ],
+          "median_ns": 1756.2907235939642
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 20000,
+          "ns_per_call": [
+            402.6271,
+            417.57085,
+            379.225,
+            366.31455,
+            358.21875
+          ],
+          "median_ns": 379.225
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 5962,
+          "ns_per_call": [
+            3297.649111036565,
+            3199.031365313653,
+            3219.5571955719556,
+            3218.5858772224087,
+            3228.516772895002
+          ],
+          "median_ns": 3219.5571955719556
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 2896,
+          "ns_per_call": [
+            6657.8325276243095,
+            6998.618784530387,
+            6966.318370165746,
+            7007.078729281768,
+            6959.700276243094
+          ],
+          "median_ns": 6966.318370165746
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            167.51665,
+            167.67085,
+            168.04795,
+            172.97085,
+            165.8
+          ],
+          "median_ns": 167.67085
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            150.8521,
+            156.8,
+            155.6708,
+            159.86045,
+            161.96875
+          ],
+          "median_ns": 156.8
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            163.04795,
+            162.325,
+            162.5333,
+            162.90415,
+            159.49165
+          ],
+          "median_ns": 162.5333
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            732.4604,
+            776.9,
+            963.5625,
+            943.5833,
+            997.60625
+          ],
+          "median_ns": 943.5833
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1215,
+          "ns_per_call": [
+            15669.444444444445,
+            15648.936625514403,
+            16160.59670781893,
+            17262.962962962964,
+            16323.66255144033
+          ],
+          "median_ns": 16160.59670781893
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1414,
+          "ns_per_call": [
+            15205.38684582744,
+            16112.3585572843,
+            15012.081329561528,
+            14559.111032531824,
+            15452.911598302688
+          ],
+          "median_ns": 15205.38684582744
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1552,
+          "ns_per_call": [
+            13088.434278350516,
+            13037.37113402062,
+            12457.903994845361,
+            12272.44394329897,
+            12527.94780927835
+          ],
+          "median_ns": 12527.94780927835
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 330,
+          "ns_per_call": [
+            61886.48787878788,
+            62293.684848484845,
+            62335.35151515152,
+            61868.30909090909,
+            63821.46666666667
+          ],
+          "median_ns": 62293.684848484845
+        }
+      ],
+      "block": 2,
+      "variant": "rust"
+    },
+    {
+      "python": "3.13.16 (main, Oct  3 2026, 00:54:36) [Clang 22.1.3 ]",
+      "module": "/Users/callen/work/toks/build/c-python-env/lib/python3.13/site-packages/toks/_toks.cpython-313-darwin.so",
+      "module_sha256": "499ea38065b9cc0739b00a3841665465d17be573078f3cd2c22b429791fcfa53",
+      "rows": [
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            123.52705,
+            123.0604,
+            121.475,
+            122.22085,
+            127.975
+          ],
+          "median_ns": 123.0604
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            106.34585,
+            102.85625,
+            101.25415,
+            103.99585,
+            103.6271
+          ],
+          "median_ns": 103.6271
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            70.8167,
+            70.40415,
+            69.7167,
+            69.31455,
+            69.3083
+          ],
+          "median_ns": 69.7167
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            464.5375,
+            464.65625,
+            461.87295,
+            466.2104,
+            472.2854
+          ],
+          "median_ns": 464.65625
+        },
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 12886,
+          "ns_per_call": [
+            1497.2903150706193,
+            1409.6047648610895,
+            1372.8044389259662,
+            1372.7074344249572,
+            1520.3645041129907
+          ],
+          "median_ns": 1409.6047648610895
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 20000,
+          "ns_per_call": [
+            265.9875,
+            266.8104,
+            267.325,
+            265.56875,
+            262.3396
+          ],
+          "median_ns": 265.9875
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 9347,
+          "ns_per_call": [
+            2233.0025676687706,
+            2133.8531079490745,
+            2150.315609286402,
+            1998.0786348561035,
+            2005.4116828929068
+          ],
+          "median_ns": 2133.8531079490745
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 3652,
+          "ns_per_call": [
+            5394.0648959474265,
+            5429.878422782037,
+            5466.479737130339,
+            5394.293263964951,
+            5564.87322015334
+          ],
+          "median_ns": 5429.878422782037
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            149.01875,
+            141.1792,
+            148.6354,
+            139.1833,
+            146.85835
+          ],
+          "median_ns": 146.85835
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            129.2771,
+            123.06665,
+            130.2021,
+            127.1208,
+            136.0625
+          ],
+          "median_ns": 129.2771
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            131.3375,
+            122.65,
+            130.51455,
+            126.8604,
+            135.05415
+          ],
+          "median_ns": 130.51455
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            579.0667,
+            577.66875,
+            580.44165,
+            581.1125,
+            582.4271
+          ],
+          "median_ns": 580.44165
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1379,
+          "ns_per_call": [
+            13995.075416968817,
+            14018.763596809282,
+            12519.820884699056,
+            12592.216823785351,
+            12796.440174039159
+          ],
+          "median_ns": 12796.440174039159
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1786,
+          "ns_per_call": [
+            11969.508398656215,
+            11241.97424412094,
+            11446.365061590146,
+            11858.015677491601,
+            11900.242441209406
+          ],
+          "median_ns": 11858.015677491601
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1632,
+          "ns_per_call": [
+            12404.667279411764,
+            12331.674019607843,
+            11923.53431372549,
+            12110.57536764706,
+            12164.675245098038
+          ],
+          "median_ns": 12164.675245098038
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 306,
+          "ns_per_call": [
+            68631.39869281046,
+            79196.2156862745,
+            70135.89215686274,
+            73397.33006535948,
+            72072.71241830065
+          ],
+          "median_ns": 72072.71241830065
+        }
+      ],
+      "block": 2,
+      "variant": "c"
+    },
+    {
+      "python": "3.13.16 (main, Oct  3 2026, 00:54:36) [Clang 22.1.3 ]",
+      "module": "/Users/callen/work/toks/build/rust-python-env/lib/python3.13/site-packages/toks/_toks.cpython-313-darwin.so",
+      "module_sha256": "fdae9bbb428f17e65648dcba8903eb4a68cb5cc8f91308e292e3ad61a762be73",
+      "rows": [
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            149.9375,
+            148.0083,
+            154.6542,
+            171.9521,
+            194.2271
+          ],
+          "median_ns": 154.6542
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            141.525,
+            138.2,
+            137.60415,
+            136.01455,
+            139.72915
+          ],
+          "median_ns": 138.2
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            142.7354,
+            145.96045,
+            144.62705,
+            129.1479,
+            126.24375
+          ],
+          "median_ns": 142.7354
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            654.61665,
+            670.14375,
+            646.70835,
+            622.0146,
+            614.0146
+          ],
+          "median_ns": 646.70835
+        },
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 13043,
+          "ns_per_call": [
+            1576.1104040481484,
+            1770.6783715402898,
+            1510.9094533466227,
+            1899.8057962125279,
+            1497.7446906386567
+          ],
+          "median_ns": 1576.1104040481484
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 20000,
+          "ns_per_call": [
+            374.84795,
+            346.3667,
+            363.275,
+            352.4708,
+            368.6896
+          ],
+          "median_ns": 363.275
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 6366,
+          "ns_per_call": [
+            3384.071630537229,
+            3499.4109330819983,
+            3646.8609802073515,
+            3147.685516808043,
+            3461.2327992459946
+          ],
+          "median_ns": 3461.2327992459946
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 3050,
+          "ns_per_call": [
+            7828.169508196721,
+            7644.371475409836,
+            6751.16131147541,
+            7402.349508196721,
+            7384.740655737705
+          ],
+          "median_ns": 7402.349508196721
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            218.7042,
+            187.74165,
+            179.9396,
+            184.1229,
+            214.1021
+          ],
+          "median_ns": 187.74165
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            192.60625,
+            180.6521,
+            164.49375,
+            163.55415,
+            164.30625
+          ],
+          "median_ns": 164.49375
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            207.61875,
+            205.97915,
+            198.3021,
+            181.48335,
+            180.63125
+          ],
+          "median_ns": 198.3021
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            835.7042,
+            782.6479,
+            734.76665,
+            745.59165,
+            733.34375
+          ],
+          "median_ns": 745.59165
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1422,
+          "ns_per_call": [
+            14656.206047819971,
+            15417.926863572433,
+            14573.194796061885,
+            15189.785513361463,
+            15132.76511954993
+          ],
+          "median_ns": 15132.76511954993
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1286,
+          "ns_per_call": [
+            12696.928460342146,
+            12481.693623639192,
+            12726.57465007776,
+            12810.005443234837,
+            13142.950233281494
+          ],
+          "median_ns": 12726.57465007776
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1375,
+          "ns_per_call": [
+            13011.485090909091,
+            13036.454545454546,
+            13175.302545454546,
+            13628.333090909091,
+            12761.666909090909
+          ],
+          "median_ns": 13036.454545454546
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 368,
+          "ns_per_call": [
+            54293.703804347824,
+            54197.350543478264,
+            57263.13315217391,
+            57648.323369565216,
+            59766.190217391304
+          ],
+          "median_ns": 57263.13315217391
+        }
+      ],
+      "block": 3,
+      "variant": "rust"
+    },
+    {
+      "python": "3.13.16 (main, Oct  3 2026, 00:54:36) [Clang 22.1.3 ]",
+      "module": "/Users/callen/work/toks/build/c-python-env/lib/python3.13/site-packages/toks/_toks.cpython-313-darwin.so",
+      "module_sha256": "499ea38065b9cc0739b00a3841665465d17be573078f3cd2c22b429791fcfa53",
+      "rows": [
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            129.46455,
+            128.04585,
+            138.6854,
+            154.6854,
+            152.45
+          ],
+          "median_ns": 138.6854
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            131.40415,
+            111.74375,
+            123.275,
+            129.41045,
+            122.7271
+          ],
+          "median_ns": 123.275
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            105.16455,
+            97.13955,
+            77.79375,
+            79.4792,
+            74.0146
+          ],
+          "median_ns": 79.4792
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            525.85625,
+            576.10625,
+            524.59795,
+            536.37085,
+            542.50625
+          ],
+          "median_ns": 536.37085
+        },
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 10958,
+          "ns_per_call": [
+            1444.3671290381455,
+            1575.9262639167732,
+            1512.5782989596642,
+            1577.846504836649,
+            1450.7779704325608
+          ],
+          "median_ns": 1512.5782989596642
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 20000,
+          "ns_per_call": [
+            285.2375,
+            274.25415,
+            295.05415,
+            293.11665,
+            284.7542
+          ],
+          "median_ns": 285.2375
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 7384,
+          "ns_per_call": [
+            2155.392334777898,
+            2081.1721289274105,
+            2132.341413867822,
+            2139.225622968581,
+            2455.1564192849405
+          ],
+          "median_ns": 2139.225622968581
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 3140,
+          "ns_per_call": [
+            6218.285668789809,
+            6855.904777070064,
+            6626.220700636943,
+            6188.030891719745,
+            6149.203821656051
+          ],
+          "median_ns": 6218.285668789809
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            155.24165,
+            146.50205,
+            154.18545,
+            147.3979,
+            164.2354
+          ],
+          "median_ns": 154.18545
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            161.3375,
+            153.14375,
+            165.15625,
+            161.6375,
+            157.17085
+          ],
+          "median_ns": 161.3375
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            144.51045,
+            134.17915,
+            143.66045,
+            134.66875,
+            143.36665
+          ],
+          "median_ns": 143.36665
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            594.53125,
+            552.81665,
+            590.95625,
+            593.76875,
+            608.13125
+          ],
+          "median_ns": 593.76875
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1183,
+          "ns_per_call": [
+            16245.139475908707,
+            21648.211327134402,
+            22236.36939983094,
+            20477.986475063397,
+            21763.313609467456
+          ],
+          "median_ns": 21648.211327134402
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1033,
+          "ns_per_call": [
+            21049.894482090996,
+            19201.515972894482,
+            18873.507260406583,
+            18947.76573088093,
+            21929.292352371733
+          ],
+          "median_ns": 19201.515972894482
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1615,
+          "ns_per_call": [
+            11477.941176470587,
+            11939.65386996904,
+            11974.2,
+            12805.185758513931,
+            11917.001857585139
+          ],
+          "median_ns": 11939.65386996904
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 246,
+          "ns_per_call": [
+            91571.30894308943,
+            95691.73577235773,
+            94881.94308943089,
+            93360.09756097561,
+            82610.94308943089
+          ],
+          "median_ns": 93360.09756097561
+        }
+      ],
+      "block": 3,
+      "variant": "c"
+    },
+    {
+      "python": "3.13.16 (main, Oct  3 2026, 00:54:36) [Clang 22.1.3 ]",
+      "module": "/Users/callen/work/toks/build/c-python-env/lib/python3.13/site-packages/toks/_toks.cpython-313-darwin.so",
+      "module_sha256": "499ea38065b9cc0739b00a3841665465d17be573078f3cd2c22b429791fcfa53",
+      "rows": [
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            117.67295,
+            118.9021,
+            118.6896,
+            118.8604,
+            124.51665
+          ],
+          "median_ns": 118.8604
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            101.1604,
+            98.1625,
+            95.54585,
+            105.35625,
+            108.9875
+          ],
+          "median_ns": 101.1604
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            70.5,
+            77.94375,
+            78.8604,
+            82.66045,
+            79.36875
+          ],
+          "median_ns": 78.8604
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            499.01045,
+            497.45835,
+            487.6146,
+            495.14375,
+            485.21875
+          ],
+          "median_ns": 495.14375
+        },
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 10714,
+          "ns_per_call": [
+            1447.1330968825835,
+            1442.49346649244,
+            1441.3073548627963,
+            1416.6511106962853,
+            1399.5512413664364
+          ],
+          "median_ns": 1441.3073548627963
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 20000,
+          "ns_per_call": [
+            283.44375,
+            276.8396,
+            267.725,
+            268.59375,
+            251.61045
+          ],
+          "median_ns": 268.59375
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 10191,
+          "ns_per_call": [
+            2064.0720243351975,
+            2124.2313806299676,
+            2106.6627416347756,
+            2087.691688744971,
+            1970.063487390835
+          ],
+          "median_ns": 2087.691688744971
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 3530,
+          "ns_per_call": [
+            5582.8611898017,
+            5574.7402266288955,
+            5406.728045325779,
+            5414.742776203966,
+            5488.798300283286
+          ],
+          "median_ns": 5488.798300283286
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            144.07915,
+            135.3146,
+            143.48545,
+            139.17915,
+            147.18955
+          ],
+          "median_ns": 143.48545
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            136.65415,
+            127.30625,
+            136.79375,
+            130.18545,
+            137.9896
+          ],
+          "median_ns": 136.65415
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            132.65625,
+            124.35,
+            133.6,
+            125.0667,
+            133.3104
+          ],
+          "median_ns": 132.65625
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            555.2729,
+            530.6875,
+            536.3208,
+            526.78125,
+            531.52705
+          ],
+          "median_ns": 531.52705
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1502,
+          "ns_per_call": [
+            13179.538615179761,
+            13296.910119840213,
+            13608.078561917444,
+            13473.812250332889,
+            15474.089880159787
+          ],
+          "median_ns": 13473.812250332889
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1064,
+          "ns_per_call": [
+            18399.867481203008,
+            18376.487781954886,
+            18950.462406015038,
+            18442.512218045114,
+            18861.842105263157
+          ],
+          "median_ns": 18442.512218045114
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1669,
+          "ns_per_call": [
+            11811.139604553626,
+            11450.993409227081,
+            11339.075494307968,
+            11267.251048532054,
+            11513.830437387658
+          ],
+          "median_ns": 11450.993409227081
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 253,
+          "ns_per_call": [
+            78701.74703557312,
+            89075.09881422925,
+            82663.37154150198,
+            86229.90909090909,
+            81702.56916996048
+          ],
+          "median_ns": 82663.37154150198
+        }
+      ],
+      "block": 3,
+      "variant": "c"
+    },
+    {
+      "python": "3.13.16 (main, Oct  3 2026, 00:54:36) [Clang 22.1.3 ]",
+      "module": "/Users/callen/work/toks/build/rust-python-env/lib/python3.13/site-packages/toks/_toks.cpython-313-darwin.so",
+      "module_sha256": "fdae9bbb428f17e65648dcba8903eb4a68cb5cc8f91308e292e3ad61a762be73",
+      "rows": [
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            192.0979,
+            271.2875,
+            148.86455,
+            167.0854,
+            174.21665
+          ],
+          "median_ns": 174.21665
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            168.25625,
+            155.42295,
+            150.4479,
+            165.2479,
+            170.02915
+          ],
+          "median_ns": 165.2479
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            146.07705,
+            150.1021,
+            114.36875,
+            177.47085,
+            118.58955
+          ],
+          "median_ns": 146.07705
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            658.8479,
+            684.70625,
+            688.04585,
+            653.1208,
+            677.4104
+          ],
+          "median_ns": 677.4104
+        },
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 12598,
+          "ns_per_call": [
+            1605.330846166058,
+            1540.8497380536594,
+            1592.2699634862677,
+            1625.7640101603429,
+            1822.713287823464
+          ],
+          "median_ns": 1605.330846166058
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 20000,
+          "ns_per_call": [
+            388.4604,
+            353.8958,
+            358.46875,
+            370.1396,
+            354.6479
+          ],
+          "median_ns": 358.46875
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 6274,
+          "ns_per_call": [
+            3130.2333439591966,
+            3250.730634364042,
+            3317.0890978642014,
+            3390.234778450749,
+            3296.806981192222
+          ],
+          "median_ns": 3296.806981192222
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 2839,
+          "ns_per_call": [
+            6738.963367382881,
+            6208.729482212047,
+            6230.245508982036,
+            6400.449101796407,
+            6478.0
+          ],
+          "median_ns": 6400.449101796407
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            169.33125,
+            175.37705,
+            174.2146,
+            166.86665,
+            176.18125
+          ],
+          "median_ns": 174.2146
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            163.79795,
+            165.18125,
+            157.26875,
+            198.26875,
+            160.475
+          ],
+          "median_ns": 163.79795
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            167.94795,
+            160.1625,
+            160.35,
+            174.0375,
+            165.16665
+          ],
+          "median_ns": 165.16665
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            717.49585,
+            726.6521,
+            749.6458,
+            765.5375,
+            782.17085
+          ],
+          "median_ns": 749.6458
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1184,
+          "ns_per_call": [
+            14414.0625,
+            13848.887668918918,
+            13614.336993243243,
+            13850.999155405405,
+            13546.381756756757
+          ],
+          "median_ns": 13848.887668918918
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1613,
+          "ns_per_call": [
+            12254.778673279603,
+            11894.993800371978,
+            11958.565406075635,
+            11675.061996280223,
+            12355.006199628022
+          ],
+          "median_ns": 11958.565406075635
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1533,
+          "ns_per_call": [
+            12794.140247879974,
+            12930.555120678408,
+            13038.703848662753,
+            12785.44227005871,
+            12495.759947814742
+          ],
+          "median_ns": 12794.140247879974
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 403,
+          "ns_per_call": [
+            49907.153846153844,
+            52604.32009925559,
+            53082.60794044665,
+            52814.20595533499,
+            53142.369727047146
+          ],
+          "median_ns": 52814.20595533499
+        }
+      ],
+      "block": 3,
+      "variant": "rust"
+    },
+    {
+      "python": "3.13.16 (main, Oct  3 2026, 00:54:36) [Clang 22.1.3 ]",
+      "module": "/Users/callen/work/toks/build/c-python-env/lib/python3.13/site-packages/toks/_toks.cpython-313-darwin.so",
+      "module_sha256": "499ea38065b9cc0739b00a3841665465d17be573078f3cd2c22b429791fcfa53",
+      "rows": [
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            114.5375,
+            112.28955,
+            112.2396,
+            112.1021,
+            112.2667
+          ],
+          "median_ns": 112.2667
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            97.68545,
+            97.72705,
+            97.6354,
+            101.4521,
+            103.09585
+          ],
+          "median_ns": 97.72705
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            67.97295,
+            67.8458,
+            70.02085,
+            72.91455,
+            69.33335
+          ],
+          "median_ns": 69.33335
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            462.6583,
+            440.18335,
+            455.54585,
+            523.3104,
+            485.1292
+          ],
+          "median_ns": 462.6583
+        },
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 13502,
+          "ns_per_call": [
+            1452.334246778255,
+            1393.5126647904015,
+            1303.3778699451932,
+            1289.41386461265,
+            1290.3952007110058
+          ],
+          "median_ns": 1303.3778699451932
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 20000,
+          "ns_per_call": [
+            271.33125,
+            280.4542,
+            275.74585,
+            281.7125,
+            277.24375
+          ],
+          "median_ns": 277.24375
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 9356,
+          "ns_per_call": [
+            1951.6576528430953,
+            1934.4671868319795,
+            2009.3299486960238,
+            2099.1431167165456,
+            2038.8699230440359
+          ],
+          "median_ns": 2009.3299486960238
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 3748,
+          "ns_per_call": [
+            5273.045624332977,
+            5576.440768409819,
+            5793.056296691569,
+            5751.145144076841,
+            5949.561899679829
+          ],
+          "median_ns": 5751.145144076841
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            137.78335,
+            130.15625,
+            137.5271,
+            130.5604,
+            136.85205
+          ],
+          "median_ns": 136.85205
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            123.98125,
+            117.9375,
+            127.8375,
+            119.6146,
+            126.40205
+          ],
+          "median_ns": 123.98125
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            127.41875,
+            121.96875,
+            127.5646,
+            120.2833,
+            127.24375
+          ],
+          "median_ns": 127.24375
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            532.97705,
+            519.0021,
+            514.7146,
+            506.38125,
+            513.0229
+          ],
+          "median_ns": 514.7146
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1647,
+          "ns_per_call": [
+            12240.842137219186,
+            12315.32058287796,
+            12585.73649058895,
+            12755.262295081968,
+            13090.265330904675
+          ],
+          "median_ns": 12585.73649058895
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1723,
+          "ns_per_call": [
+            11715.201392919327,
+            11539.634939059779,
+            11144.031921067904,
+            11290.965177016831,
+            11296.213000580383
+          ],
+          "median_ns": 11296.213000580383
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1805,
+          "ns_per_call": [
+            10995.983379501386,
+            11195.659833795014,
+            11250.946260387811,
+            10481.440443213296,
+            10455.540166204986
+          ],
+          "median_ns": 10995.983379501386
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 396,
+          "ns_per_call": [
+            54868.68686868687,
+            53306.50252525252,
+            51519.88636363636,
+            52152.568181818184,
+            59716.330808080806
+          ],
+          "median_ns": 53306.50252525252
+        }
+      ],
+      "block": 4,
+      "variant": "c"
+    },
+    {
+      "python": "3.13.16 (main, Oct  3 2026, 00:54:36) [Clang 22.1.3 ]",
+      "module": "/Users/callen/work/toks/build/rust-python-env/lib/python3.13/site-packages/toks/_toks.cpython-313-darwin.so",
+      "module_sha256": "fdae9bbb428f17e65648dcba8903eb4a68cb5cc8f91308e292e3ad61a762be73",
+      "rows": [
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            150.9396,
+            149.1833,
+            145.2375,
+            144.425,
+            143.92705
+          ],
+          "median_ns": 145.2375
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            142.65,
+            131.37915,
+            137.41665,
+            139.8375,
+            138.9979
+          ],
+          "median_ns": 138.9979
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            114.82085,
+            111.02705,
+            111.575,
+            111.4854,
+            108.6458
+          ],
+          "median_ns": 111.4854
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            602.73335,
+            599.41875,
+            624.1146,
+            634.08955,
+            588.1125
+          ],
+          "median_ns": 602.73335
+        },
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 13832,
+          "ns_per_call": [
+            1494.8037160208212,
+            1547.4563331405436,
+            1535.4943609022557,
+            1452.7153701561597,
+            1466.331043956044
+          ],
+          "median_ns": 1494.8037160208212
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 20000,
+          "ns_per_call": [
+            368.59795,
+            365.0771,
+            362.28125,
+            342.7354,
+            360.58955
+          ],
+          "median_ns": 362.28125
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 6657,
+          "ns_per_call": [
+            2987.5131440588852,
+            3000.018777226979,
+            3034.337389214361,
+            3128.2047468829805,
+            3001.08292023434
+          ],
+          "median_ns": 3001.08292023434
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 3416,
+          "ns_per_call": [
+            5823.855971896955,
+            5893.966920374707,
+            5956.662177985949,
+            5977.276053864169,
+            5954.247365339578
+          ],
+          "median_ns": 5954.247365339578
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            161.42295,
+            160.2833,
+            160.275,
+            160.60625,
+            160.5479
+          ],
+          "median_ns": 160.5479
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            146.49375,
+            146.1625,
+            147.27705,
+            146.62085,
+            147.0521
+          ],
+          "median_ns": 146.62085
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            149.40835,
+            148.74375,
+            147.95625,
+            148.7875,
+            149.64165
+          ],
+          "median_ns": 148.7875
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            694.6125,
+            679.48335,
+            676.0396,
+            785.9958,
+            689.8292
+          ],
+          "median_ns": 689.8292
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1510,
+          "ns_per_call": [
+            12613.051655629139,
+            12546.964238410595,
+            12360.237086092715,
+            12763.576158940397,
+            12533.223178807946
+          ],
+          "median_ns": 12546.964238410595
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1703,
+          "ns_per_call": [
+            11438.515560775102,
+            11531.904286553141,
+            11953.464474456841,
+            11608.460364063418,
+            11367.2689371697
+          ],
+          "median_ns": 11531.904286553141
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1599,
+          "ns_per_call": [
+            12258.547217010631,
+            12072.36272670419,
+            12325.646654158849,
+            12317.255784865542,
+            12101.391494684178
+          ],
+          "median_ns": 12258.547217010631
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 398,
+          "ns_per_call": [
+            49754.29396984925,
+            54385.25879396985,
+            51658.5,
+            50244.55778894472,
+            54762.1432160804
+          ],
+          "median_ns": 51658.5
+        }
+      ],
+      "block": 4,
+      "variant": "rust"
+    },
+    {
+      "python": "3.13.16 (main, Oct  3 2026, 00:54:36) [Clang 22.1.3 ]",
+      "module": "/Users/callen/work/toks/build/rust-python-env/lib/python3.13/site-packages/toks/_toks.cpython-313-darwin.so",
+      "module_sha256": "fdae9bbb428f17e65648dcba8903eb4a68cb5cc8f91308e292e3ad61a762be73",
+      "rows": [
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            147.68955,
+            147.0,
+            147.92085,
+            146.4271,
+            146.28335
+          ],
+          "median_ns": 147.0
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            136.36045,
+            134.66455,
+            147.075,
+            135.4875,
+            135.90625
+          ],
+          "median_ns": 135.90625
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            114.27295,
+            114.92295,
+            113.39165,
+            113.33125,
+            113.66045
+          ],
+          "median_ns": 113.66045
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            593.8646,
+            591.525,
+            613.8979,
+            613.17295,
+            617.03335
+          ],
+          "median_ns": 613.17295
+        },
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 12516,
+          "ns_per_call": [
+            1463.2270693512305,
+            1494.9497443272612,
+            1581.8585810162992,
+            1432.832694151486,
+            1445.8493128795142
+          ],
+          "median_ns": 1463.2270693512305
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 20000,
+          "ns_per_call": [
+            346.9417,
+            346.6104,
+            350.06455,
+            352.925,
+            360.55205
+          ],
+          "median_ns": 350.06455
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 6699,
+          "ns_per_call": [
+            2993.5438125093297,
+            2993.4194655918795,
+            3025.097029407374,
+            3110.881027018958,
+            3020.2642185400805
+          ],
+          "median_ns": 3020.2642185400805
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 2318,
+          "ns_per_call": [
+            6092.608283002588,
+            5966.350301984469,
+            5998.741587575496,
+            5988.891285591027,
+            6263.841242450389
+          ],
+          "median_ns": 5998.741587575496
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            164.875,
+            164.2354,
+            166.09375,
+            166.9229,
+            167.67295
+          ],
+          "median_ns": 166.09375
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            149.1771,
+            150.20625,
+            149.8229,
+            150.63955,
+            152.6896
+          ],
+          "median_ns": 150.20625
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            152.15,
+            151.37295,
+            151.7375,
+            149.19585,
+            148.75625
+          ],
+          "median_ns": 151.37295
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            653.70625,
+            657.22915,
+            652.99585,
+            652.83125,
+            652.5354
+          ],
+          "median_ns": 652.99585
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1579,
+          "ns_per_call": [
+            12449.20329322356,
+            12570.297656744775,
+            12489.52374920836,
+            12440.495250158328,
+            12567.236225459152
+          ],
+          "median_ns": 12489.52374920836
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1758,
+          "ns_per_call": [
+            11274.696814562003,
+            11294.842434584756,
+            11399.199089874857,
+            11359.736632536973,
+            11351.109215017064
+          ],
+          "median_ns": 11351.109215017064
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1629,
+          "ns_per_call": [
+            12376.17679558011,
+            12156.17986494782,
+            12206.414978514425,
+            12217.822590546348,
+            12173.496009821976
+          ],
+          "median_ns": 12206.414978514425
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 389,
+          "ns_per_call": [
+            51193.9794344473,
+            51353.57583547558,
+            49761.88946015424,
+            48767.78149100257,
+            48829.15681233933
+          ],
+          "median_ns": 49761.88946015424
+        }
+      ],
+      "block": 4,
+      "variant": "rust"
+    },
+    {
+      "python": "3.13.16 (main, Oct  3 2026, 00:54:36) [Clang 22.1.3 ]",
+      "module": "/Users/callen/work/toks/build/c-python-env/lib/python3.13/site-packages/toks/_toks.cpython-313-darwin.so",
+      "module_sha256": "499ea38065b9cc0739b00a3841665465d17be573078f3cd2c22b429791fcfa53",
+      "rows": [
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            122.76875,
+            121.77295,
+            121.88955,
+            120.61665,
+            121.575
+          ],
+          "median_ns": 121.77295
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            104.71455,
+            102.775,
+            105.4021,
+            104.1,
+            104.7833
+          ],
+          "median_ns": 104.71455
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            64.68545,
+            63.6083,
+            64.58335,
+            64.72915,
+            64.9604
+          ],
+          "median_ns": 64.68545
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "4657fa659177f2603c57ca5e7738a30a7f7187097fe858760c03d0dd07d884b2",
+          "iterations": 20000,
+          "ns_per_call": [
+            461.90625,
+            458.875,
+            463.31875,
+            462.17295,
+            470.775
+          ],
+          "median_ns": 462.17295
+        },
+        {
+          "model": "gpt2",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 15458,
+          "ns_per_call": [
+            1353.8889895199895,
+            1315.0526588174407,
+            1285.817505498771,
+            1289.4563979816276,
+            1284.0465778237806
+          ],
+          "median_ns": 1289.4563979816276
+        },
+        {
+          "model": "gpt2",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 20000,
+          "ns_per_call": [
+            217.475,
+            216.5625,
+            216.19165,
+            257.3625,
+            286.07085
+          ],
+          "median_ns": 217.475
+        },
+        {
+          "model": "gpt2",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 8672,
+          "ns_per_call": [
+            1986.5034594095941,
+            1948.2818265682656,
+            1957.5357472324724,
+            1979.3828413284132,
+            1916.1574031365315
+          ],
+          "median_ns": 1957.5357472324724
+        },
+        {
+          "model": "gpt2",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "54bcad3b9f3303cdbdda39d068bfb38ea7a05c076e8c9276dba54c9d94e14c36",
+          "iterations": 3699,
+          "ns_per_call": [
+            5294.809407948094,
+            5264.857799405245,
+            5255.553392808867,
+            5275.88537442552,
+            5759.552041092187
+          ],
+          "median_ns": 5275.88537442552
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            135.375,
+            127.35835,
+            135.20835,
+            129.77915,
+            138.8
+          ],
+          "median_ns": 135.20835
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            126.94795,
+            120.1104,
+            128.26455,
+            116.7271,
+            123.78125
+          ],
+          "median_ns": 123.78125
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            119.6625,
+            113.9771,
+            123.4604,
+            114.8021,
+            123.68955
+          ],
+          "median_ns": 119.6625
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 20,
+          "bytes": 21,
+          "gold": "2606019202eea266e14d50bdd4aa4b0ab17cddbcdf1f321e9dc2214508154acf",
+          "iterations": 20000,
+          "ns_per_call": [
+            511.7125,
+            524.2104,
+            517.9708,
+            522.57915,
+            528.06665
+          ],
+          "median_ns": 522.57915
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1616,
+          "ns_per_call": [
+            12159.834158415842,
+            12061.237004950495,
+            12340.011138613861,
+            12056.672648514852,
+            12353.212252475247
+          ],
+          "median_ns": 12159.834158415842
+        },
+        {
+          "model": "uni_t5base",
+          "method": "encode_into",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1773,
+          "ns_per_call": [
+            11047.095318668922,
+            10969.754653130287,
+            11014.57021996616,
+            10998.66046249295,
+            11027.448392554992
+          ],
+          "median_ns": 11014.57021996616
+        },
+        {
+          "model": "uni_t5base",
+          "method": "decode",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 1791,
+          "ns_per_call": [
+            11070.189279731992,
+            11007.258514796204,
+            11114.484087102177,
+            11260.492462311558,
+            11017.91401451703
+          ],
+          "median_ns": 11070.189279731992
+        },
+        {
+          "model": "uni_t5base",
+          "method": "batch4",
+          "chars": 4096,
+          "bytes": 4148,
+          "gold": "f1ada4d80085922829fea0ae04d085dddc67bde5db876017a4dc30e60b2435a3",
+          "iterations": 406,
+          "ns_per_call": [
+            48477.21674876847,
+            48706.58866995074,
+            48462.54187192118,
+            48503.17980295567,
+            48054.187192118225
+          ],
+          "median_ns": 48477.21674876847
+        }
+      ],
+      "block": 4,
+      "variant": "c"
+    }
+  ],
+  "summary": [
+    {
+      "model": "gpt2",
+      "method": "encode",
+      "chars": 20,
+      "bytes": 21,
+      "block_speedups": [
+        0.7901486406110545,
+        0.8311950327758908,
+        0.8131272539927872,
+        0.783121398567249,
+        0.8008542709269002
+      ],
+      "speedup": 0.8035086719101598
+    },
+    {
+      "model": "gpt2",
+      "method": "encode_into",
+      "chars": 20,
+      "bytes": 21,
+      "block_speedups": [
+        0.7774117403550748,
+        0.7783876758670817,
+        0.6987175254293813,
+        0.739617575208133,
+        0.7364079443689738
+      ],
+      "speedup": 0.745512404535041
+    },
+    {
+      "model": "gpt2",
+      "method": "decode",
+      "chars": 20,
+      "bytes": 21,
+      "block_speedups": [
+        0.6445157237444923,
+        0.6705670217913063,
+        0.5238834761630241,
+        0.5482436785533311,
+        0.5952532547235492
+      ],
+      "speedup": 0.5939052495622353
+    },
+    {
+      "model": "gpt2",
+      "method": "batch4",
+      "chars": 20,
+      "bytes": 21,
+      "block_speedups": [
+        0.7511167208564232,
+        0.7196445720966276,
+        0.7365132084582421,
+        0.7790197065029099,
+        0.7606106243548536
+      ],
+      "speedup": 0.7491061646846974
+    },
+    {
+      "model": "gpt2",
+      "method": "encode",
+      "chars": 4096,
+      "bytes": 4148,
+      "block_speedups": [
+        0.9098873731237376,
+        0.8059070916823093,
+        0.8099906452727418,
+        0.9284740535829712,
+        0.876540663724263
+      ],
+      "speedup": 0.8646869245051012
+    },
+    {
+      "model": "gpt2",
+      "method": "encode_into",
+      "chars": 4096,
+      "bytes": 4148,
+      "block_speedups": [
+        0.729263699665292,
+        0.7585437746733948,
+        0.7259181202408119,
+        0.7673516396920652,
+        0.6944924080411508
+      ],
+      "speedup": 0.7346541936393703
+    },
+    {
+      "model": "gpt2",
+      "method": "decode",
+      "chars": 4096,
+      "bytes": 4148,
+      "block_speedups": [
+        0.6513249531202624,
+        0.651008763471081,
+        0.6559620658907765,
+        0.6254649941464925,
+        0.6588003655168615
+      ],
+      "speedup": 0.6484015185196517
+    },
+    {
+      "model": "gpt2",
+      "method": "batch4",
+      "chars": 4096,
+      "bytes": 4148,
+      "block_speedups": [
+        0.9109780076651816,
+        0.9044475300732442,
+        0.8408818338578448,
+        0.8481674115419788,
+        0.9225333146328314
+      ],
+      "speedup": 0.8847447129104643
+    },
+    {
+      "model": "uni_t5base",
+      "method": "encode",
+      "chars": 20,
+      "bytes": 21,
+      "block_speedups": [
+        0.8435125596593638,
+        0.7306019203085335,
+        0.8402961555449894,
+        0.8223946954915131,
+        0.8329017441590806
+      ],
+      "speedup": 0.8127851538453498
+    },
+    {
+      "model": "uni_t5base",
+      "method": "encode_into",
+      "chars": 20,
+      "bytes": 21,
+      "block_speedups": [
+        0.8369150272772358,
+        0.6590306835433575,
+        0.8013909681934057,
+        0.9077038804209793,
+        0.8347030982009392
+      ],
+      "speedup": 0.8034919544802805
+    },
+    {
+      "model": "uni_t5base",
+      "method": "decode",
+      "chars": 20,
+      "bytes": 21,
+      "block_speedups": [
+        0.8136221638829781,
+        0.8154211535033943,
+        0.7930938414462021,
+        0.7594130169374946,
+        0.8225808896541834
+      ],
+      "speedup": 0.8004923666239193
+    },
+    {
+      "model": "uni_t5base",
+      "method": "batch4",
+      "chars": 20,
+      "bytes": 21,
+      "block_speedups": [
+        0.7804654092520712,
+        0.6531155176989246,
+        0.6856330097378245,
+        0.7525866878200514,
+        0.7724712537943793
+      ],
+      "speedup": 0.72706769391153
+    },
+    {
+      "model": "uni_t5base",
+      "method": "encode",
+      "chars": 4096,
+      "bytes": 4148,
+      "block_speedups": [
+        1.1609240919539436,
+        1.0719466098336972,
+        0.8713394444715166,
+        1.2118709665668743,
+        0.9883802656843074
+      ],
+      "speedup": 1.0536805416753843
+    },
+    {
+      "model": "uni_t5base",
+      "method": "encode_into",
+      "chars": 4096,
+      "bytes": 4148,
+      "block_speedups": [
+        1.1850988046671085,
+        1.0982253116919456,
+        0.8330907725199507,
+        1.5249671707475638,
+        0.9749932288863792
+      ],
+      "speedup": 1.1002213935510718
+    },
+    {
+      "model": "uni_t5base",
+      "method": "decode",
+      "chars": 4096,
+      "bytes": 4148,
+      "block_speedups": [
+        0.9209461475213319,
+        0.9173930933554362,
+        0.9355881526765151,
+        0.9055404053348389,
+        0.9019500002852878
+      ],
+      "speedup": 0.9162056009157948
+    },
+    {
+      "model": "uni_t5base",
+      "method": "batch4",
+      "chars": 4096,
+      "bytes": 4148,
+      "block_speedups": [
+        1.217595176818088,
+        1.1450506640739069,
+        1.2935393502446408,
+        1.5990890634680157,
+        1.0035824139090836
+      ],
+      "speedup": 1.2368202650364135
+    }
+  ]
+}

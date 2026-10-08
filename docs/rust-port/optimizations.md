@@ -283,3 +283,46 @@ including small losses and variance, remain in `receipts/cjk-identity-*.json`.
 The profile captures are `receipts/wp-cjk-*-sample.txt`. These results justify
 keeping the change; the complete matrix and Python adapter still require final
 verification.
+
+## Bind CPython's compact-integer conversion in Rust
+
+A fresh profile of the FASTCALL adapter captured 3,028 samples. Of those, 925
+(30.5%) were in `PyLong_AsUnsignedLong` or its dynamic-link stub, even after the
+earlier tuple/extraction optimization. Score: impact 4 × confidence 5 / effort
+2 = 10. The C adapter already uses CPython's inline compact-integer API. The
+Rust adapter now binds the same known representation for exact nonnegative
+integers on CPython 3.12–3.14 with the GIL and 30-bit/u32 digits. The isolated
+binding excludes other implementations, limited/free-threaded/trace-reference
+ABIs, future versions and other digit formats. `PyLong_GetInfo` verifies the
+digit format; zero's unspecified digit is never read. All other cases retain
+the public conversion function.
+
+The tag determines sign and digit count. Tag 1 (ignoring the 3.14 small-integer
+flag) means zero; tag 8 means one positive digit, which necessarily fits u32.
+Raw field reads avoid forming a reference over trailing struct padding. The
+caller holds the GIL and checks the exact integer type before these reads; no
+Python callbacks intervene. List order, snapshots before user callbacks,
+negative/overflow errors, core ID validation, token bytes, ties and floating-
+point/RNG behavior remain unchanged. The layout comes from CPython's
+[`longintrepr.h`](https://github.com/python/cpython/blob/3.14/Include/cpython/longintrepr.h).
+
+The entire GPT-2 vocabulary is checked through both exact list/tuple inputs and
+the independent integer-buffer path, together with compact/multi-digit bounds,
+negative/oversized values, booleans and integer subclasses. These checks also
+pass against the original C wheel. All 40 API/thread/boundary checks pass on
+arm64. On x86, CPython 3.10, 3.11, 3.12, 3.13 and 3.14 each pass 39 checks and
+initially skip the missing C shared-library comparison; that comparison then
+passes separately for every version after building `make reference`. The full
+arm64 installed-wheel suite passes 332 tests with 43 explicit skips. A wheel
+built from the standalone source archive outside the checkout passes all 40
+API/thread/boundary checks; the archive contains no C implementation.
+
+Five preceding-adapter and seven candidate ABBA/BAAB blocks retain every ID and
+decoded-byte digest. Long GPT-2 decode improves from 0.648× to 0.825× C speed
+(about 27% relative); T5 improves from 0.916× to 0.972×. Short decode improves
+from 0.594× to 0.631× and from 0.800× to 0.834×. These measurements justify
+keeping the change, but the Python adapter still regresses against C. Unchanged
+encode/batch controls include considerable variance and are retained in full.
+The preceding wheel predates the CJK-only WordPiece change; neither timed model
+uses WordPiece. Receipts are `python-compact-*.json` and
+`python-compact-profile-arm64.txt`.

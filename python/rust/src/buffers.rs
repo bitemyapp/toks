@@ -165,6 +165,7 @@ pub fn ids(o: &Bound<'_, PyAny>) -> PyResult<Vec<u32>> {
             } as usize;
             out.try_reserve_exact(n)
                 .map_err(|_| pyo3::exceptions::PyMemoryError::new_err("ids"))?;
+            let compact = crate::compact_ids::enabled();
             for i in 0..n {
                 let value = unsafe {
                     if exact_list {
@@ -175,6 +176,12 @@ pub fn ids(o: &Bound<'_, PyAny>) -> PyResult<Vec<u32>> {
                 };
                 if unsafe { ffi::PyLong_CheckExact(value) } == 0 {
                     break;
+                }
+                if compact {
+                    if let Some(v) = unsafe { crate::compact_ids::unsigned(value) } {
+                        out.push(v);
+                        continue;
+                    }
                 }
                 let v = unsafe { ffi::PyLong_AsUnsignedLong(value) };
                 if v == std::ffi::c_ulong::MAX && !unsafe { ffi::PyErr_Occurred() }.is_null() {
