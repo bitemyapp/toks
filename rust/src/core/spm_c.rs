@@ -993,25 +993,27 @@ unsafe extern "C" fn model(
     if (*t).flags & TOKS_TF_ASM_MERGE as uint32_t != 0 as uint32_t
         && len < 128 as uint64_t
     {
-        let mut sym: crate::Aligned<[uint32_t; 192]> = crate::Aligned([0; 192]);
-        let mut kw: crate::Aligned<[uint32_t; 1088]> = crate::Aligned([0; 1088]);
-        let mut n: uint64_t = symbols(t, s, p, len, wp, &raw mut sym as *mut uint32_t);
-        if n < 2 as uint64_t {
-            *ids.offset(0 as ::core::ffi::c_int as isize) = sym[0 as ::core::ffi::c_int
-                as usize];
-            return n;
+        // symbols writes exactly n entries; K6 initializes its own work region.
+        // Keep the assembly's 64-byte alignment without clearing either array.
+        let mut sym = crate::Aligned([std::mem::MaybeUninit::<u32>::uninit(); 192]);
+        let mut kw = crate::Aligned(std::mem::MaybeUninit::<[u32; 1088]>::uninit());
+        let n = symbols(t, s, p, len, wp, sym.as_mut_ptr().cast());
+        if n == 0 {
+            return 0;
         }
-        let mut a: toks_k6_args = toks_k6_args {
-            piece: &raw mut sym as *mut uint32_t as *mut ::core::ffi::c_void
-                as *const uint8_t,
+        if n == 1 {
+            ids.write(sym[0].assume_init());
+            return 1;
+        }
+        let mut a = toks_k6_args {
+            piece: sym.as_ptr().cast(),
             len: n,
             out: ids,
-            work: &raw mut kw as *mut uint32_t as *mut ::core::ffi::c_void
-                as *mut uint8_t,
-            work_bytes: ::core::mem::size_of::<[uint32_t; 1088]>() as uint64_t,
-            n_out: 0 as uint64_t,
-            merges: 0 as uint64_t,
-            rsv: 0 as uint64_t,
+            work: kw.as_mut_ptr().cast(),
+            work_bytes: std::mem::size_of::<[u32; 1088]>() as u64,
+            n_out: 0,
+            merges: 0,
+            rsv: 0,
         };
         return toks_k6_merge_neon(t, &raw mut a);
     }

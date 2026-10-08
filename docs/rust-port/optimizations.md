@@ -61,3 +61,24 @@ This first probe experiment does **not** establish a speedup: across those 16
 cells, geometric means of the median ratios are 0.996× cold, 1.002× pass-same,
 and 0.993× warm relative to C. It remains off by default. The records in
 `receipts/avx512-vs-c-x86*.json` include every cell and the paired block intervals.
+
+## 3. Leave SentencePiece assembly work uninitialized until used
+
+The arm64 Gemma 4 CJK profile attributed approximately 15% of samples to clearing
+the 4,352-byte assembly work buffer at each model miss, plus further samples to
+clearing the symbol array. Both clears were introduced by translation. Use
+64-aligned `MaybeUninit` storage, passing raw pointers to the existing writers.
+Score: impact 4 × confidence 5 / effort 1 = 20.
+
+`symbols` initializes exactly its returned count; the K6 assembly initializes its
+own work region. The zero-symbol branch now returns before reading any symbol,
+while the one-symbol branch reads the initialized first entry. The merge order,
+rank ties, output bytes, and cache behavior are unchanged; no floating-point or
+RNG operations are involved. Targeted SPM, BPE, K5, misalignment, bounds and model
+tests pass on both architectures, as do every measured full-token hash.
+
+The four-corpus Gemma 4 measurements versus C give geometric means of median
+ratios of 0.960×/1.147×/1.168× on arm64 and 0.822×/0.912×/0.924× on x86 for
+cold/pass-same/warm. This recovers some of the initial regression but does not
+make all SentencePiece workloads faster than C. The remaining x86 CJK regression
+is particularly significant and remains an optimization target.
