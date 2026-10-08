@@ -133,3 +133,26 @@ The 16-cell arm64 byte-BPE matrix matches every C token-stream golden. Its
 cold/pass-same/warm geometric means of median ratios against C are
 1.027×/0.983×/0.986×. These small, mixed changes require confirmation in the
 final matrix; they are not an all-workload win.
+# Python integer-input conversion
+
+The first installed Rust wheel preserved results but regressed on adapter
+overhead. An arm64 `sample` capture of repeated GPT-2 decode attributed about
+63% of samples to ID conversion (Python tuple copies, per-element extraction,
+and vector growth), 14% to a redundant UTF-8 validation pass, and 12% to the
+native decoder. Input conversion scored impact 5, confidence 5, effort 2
+(12.5), so it was addressed first.
+
+Exact list/tuple inputs containing only exact built-in integers now use the
+CPython integer API directly under the GIL and reserve their output once. This
+path cannot invoke a user conversion callback. Encountering a bool, subclass
+or other object takes the existing full tuple snapshot before any `__index__`
+call; negative and oversized integers still raise OverflowError. Mutable
+buffers keep their snapshot policy. The reentrant mutation test passes against
+both implementations, and the updated Rust wheel passes all 38 API, thread,
+and boundary tests.
+
+The initial and updated paired observations are in
+`receipts/python-baseline-arm64.json` and `receipts/python-fastids-arm64.json`.
+These are exploratory three-block warm-call measurements; the adapter still
+has regressions against C. Every measured input retains its complete ID and
+decoded-byte digest.

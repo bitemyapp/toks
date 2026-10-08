@@ -147,7 +147,56 @@ pub fn ids(o: &Bound<'_, PyAny>) -> PyResult<Vec<u32>> {
         return Err(PyTypeError::new_err("ids must be a sequence of ints"));
     }
     if unsafe { ffi::PyObject_CheckBuffer(o.as_ptr()) } == 0 {
-        return tuple(o)?.iter().map(|v| v.extract::<u32>()).collect();
+        // Exact built-in integers cannot invoke __index__. Read an exact list
+        // or tuple under the GIL without allocating a Python tuple or a Bound
+        // reference per element. If any element can invoke user code, snapshot
+        // the entire input before that callback, including the prefix already
+        // inspected. Negative and oversized built-in ints retain OverflowError.
+        let exact_list = unsafe { ffi::PyList_CheckExact(o.as_ptr()) } != 0;
+        let exact_tuple = unsafe { ffi::PyTuple_CheckExact(o.as_ptr()) } != 0;
+        let mut out = Vec::new();
+        if exact_list || exact_tuple {
+            let n = unsafe {
+                if exact_list {
+                    ffi::PyList_GET_SIZE(o.as_ptr())
+                } else {
+                    ffi::PyTuple_GET_SIZE(o.as_ptr())
+                }
+            } as usize;
+            out.try_reserve_exact(n)
+                .map_err(|_| pyo3::exceptions::PyMemoryError::new_err("ids"))?;
+            for i in 0..n {
+                let value = unsafe {
+                    if exact_list {
+                        ffi::PyList_GET_ITEM(o.as_ptr(), i as isize)
+                    } else {
+                        ffi::PyTuple_GET_ITEM(o.as_ptr(), i as isize)
+                    }
+                };
+                if unsafe { ffi::PyLong_CheckExact(value) } == 0 {
+                    break;
+                }
+                let v = unsafe { ffi::PyLong_AsUnsignedLong(value) };
+                if v == std::ffi::c_ulong::MAX && !unsafe { ffi::PyErr_Occurred() }.is_null() {
+                    return Err(PyErr::fetch(o.py()));
+                }
+                out.push(
+                    u32::try_from(v)
+                        .map_err(|_| PyOverflowError::new_err("id does not fit in 32 bits"))?,
+                );
+            }
+            if out.len() == n {
+                return Ok(out);
+            }
+            out.clear();
+        }
+        let snapshot = tuple(o)?;
+        out.try_reserve_exact(snapshot.len())
+            .map_err(|_| pyo3::exceptions::PyMemoryError::new_err("ids"))?;
+        for v in snapshot.iter() {
+            out.push(v.extract::<u32>()?);
+        }
+        return Ok(out);
     }
     let b = Buffer::get(o, ffi::PyBUF_FORMAT | ffi::PyBUF_C_CONTIGUOUS)?;
     let f = b.format();
