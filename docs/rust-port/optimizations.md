@@ -117,3 +117,19 @@ The SPM, K7, tier, breadth, target and bounds tests pass on x86. Across the four
 Gemma 4 corpora, C-golden token streams match. Cold/pass-same/warm geometric means
 against C improve to 0.962×/1.094×/1.110×. The CJK cold cell improves from 0.738×
 to 0.976×; the native path closes the main unexplained regression.
+
+## 6. Restore architecture-specific short scanner thresholds
+
+The translated K3 glue retained x86 crossover thresholds on arm64. Restore the
+original arm64 thresholds and select the scanner family with a const generic,
+removing function-address comparisons (Rust may merge or duplicate functions).
+Each branch still uses the same exact scalar/native scanner twins, keeps cut and
+capacity behavior, and changes only where the crossover occurs. No floating-
+point or RNG operations are involved. Score: impact 2 × confidence 5 / effort 1
+= 10. Native K3, tier, dispatch, model-target and misalignment tests cover this
+choice.
+
+The 16-cell arm64 byte-BPE matrix matches every C token-stream golden. Its
+cold/pass-same/warm geometric means of median ratios against C are
+1.027×/0.983×/0.986×. These small, mixed changes require confirmation in the
+final matrix; they are not an all-workload win.

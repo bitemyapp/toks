@@ -1004,7 +1004,7 @@ pub const TOKS_HAVE_K3_O200K_AVX512: ::core::ffi::c_int = 0 as ::core::ffi::c_in
 pub const TOKS_HAVE_K3_DSV3_AVX512: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
 pub const TOKS_HAVE_K5_AVX512: ::core::ffi::c_int = cfg!(all(feature = "avx512", target_arch = "x86_64")) as ::core::ffi::c_int;
 #[inline(always)]
-unsafe extern "C" fn toks_k3_short(
+unsafe extern "C" fn toks_k3_short<const DSV3: bool>(
     mut twin: toks_k3_fn,
     mut t: *const toks_tables,
     mut a: *mut toks_k3_args,
@@ -1012,7 +1012,14 @@ unsafe extern "C" fn toks_k3_short(
 ) -> ::core::ffi::c_int {
     let mut r: uint64_t = (*a).len.wrapping_sub((*a).pos);
     let mut p: *const uint8_t = (*a).text.offset((*a).pos as isize);
-    if r >= 16 as uint64_t {
+    // Match each architecture's native/scalar crossover without comparing
+    // function addresses (which Rust may merge or duplicate during codegen).
+    let (ascii_min, other_min) = if cfg!(target_arch = "aarch64") {
+        if DSV3 { (16, 32) } else { (7, 24) }
+    } else {
+        if DSV3 { (7, 16) } else { (4, 16) }
+    };
+    if r >= other_min {
         return 0 as ::core::ffi::c_int;
     }
     if r == 1 as uint64_t
@@ -1026,21 +1033,7 @@ unsafe extern "C" fn toks_k3_short(
         *n = 1 as uint64_t;
         return 1 as ::core::ffi::c_int;
     }
-    if r
-        >= (if twin
-            == Some(
-                toks_k3_scan_dsv3_c
-                    as unsafe extern "C" fn(
-                        *const toks_tables,
-                        *mut toks_k3_args,
-                    ) -> uint64_t,
-            )
-        {
-            7 as ::core::ffi::c_uint
-        } else {
-            4 as ::core::ffi::c_uint
-        }) as uint64_t
-    {
+    if r >= ascii_min {
         let mut w: uint64_t = toks_ld32(p as *const ::core::ffi::c_void) as uint64_t
             | (toks_ld32(
                 p
@@ -1063,7 +1056,7 @@ unsafe extern "C" fn toks_k3_short(
     return 1 as ::core::ffi::c_int;
 }
 #[inline(always)]
-unsafe extern "C" fn toks_k3_parts(
+unsafe extern "C" fn toks_k3_parts<const DSV3: bool>(
     mut part: toks_k3_fn,
     mut twin: toks_k3_fn,
     mut t: *const toks_tables,
@@ -1087,7 +1080,7 @@ unsafe extern "C" fn toks_k3_parts(
                     );
                 b.ends = b.ends.offset(1);
                 b.cap = cap.wrapping_sub(1 as uint64_t);
-            } else if toks_k3_short(twin, t, &raw mut b, &raw mut m) != 0 {
+            } else if toks_k3_short::<DSV3>(twin, t, &raw mut b, &raw mut m) != 0 {
                 n = n.wrapping_add(m);
                 break;
             } else {
@@ -1110,7 +1103,7 @@ unsafe extern "C" fn toks_k3(
     mut tier: uint32_t,
 ) -> uint64_t {
     let mut n: uint64_t = 0;
-    if toks_k3_short(
+    if toks_k3_short::<false>(
         Some(
             toks_k3_scan_cl100k_c
                 as unsafe extern "C" fn(
@@ -1137,7 +1130,7 @@ unsafe extern "C" fn toks_k3(
         TOKS_TIER_SCALAR
     } {
         TOKS_TIER_NEON => {
-            return toks_k3_parts(
+            return toks_k3_parts::<false>(
                 Some(
                     toks_k3_scan_cl100k_neon
                         as unsafe extern "C" fn(
@@ -1157,7 +1150,7 @@ unsafe extern "C" fn toks_k3(
             );
         }
         TOKS_TIER_AVX2 => {
-            return toks_k3_parts(
+            return toks_k3_parts::<false>(
                 Some(
                     toks_k3_scan_cl100k_avx2
                         as unsafe extern "C" fn(
@@ -1186,7 +1179,7 @@ unsafe extern "C" fn toks_k3_o200k(
     mut tier: uint32_t,
 ) -> uint64_t {
     let mut n: uint64_t = 0;
-    if toks_k3_short(
+    if toks_k3_short::<false>(
         Some(
             toks_k3_scan_o200k_c
                 as unsafe extern "C" fn(
@@ -1213,7 +1206,7 @@ unsafe extern "C" fn toks_k3_o200k(
         TOKS_TIER_SCALAR
     } {
         TOKS_TIER_NEON => {
-            return toks_k3_parts(
+            return toks_k3_parts::<false>(
                 Some(
                     toks_k3_scan_o200k_neon
                         as unsafe extern "C" fn(
@@ -1233,7 +1226,7 @@ unsafe extern "C" fn toks_k3_o200k(
             );
         }
         TOKS_TIER_AVX2 => {
-            return toks_k3_parts(
+            return toks_k3_parts::<false>(
                 Some(
                     toks_k3_scan_o200k_avx2
                         as unsafe extern "C" fn(
@@ -1262,7 +1255,7 @@ unsafe extern "C" fn toks_k3_dsv3(
     mut tier: uint32_t,
 ) -> uint64_t {
     let mut n: uint64_t = 0;
-    if toks_k3_short(
+    if toks_k3_short::<true>(
         Some(
             toks_k3_scan_dsv3_c
                 as unsafe extern "C" fn(
@@ -1289,7 +1282,7 @@ unsafe extern "C" fn toks_k3_dsv3(
         TOKS_TIER_SCALAR
     } {
         TOKS_TIER_NEON => {
-            return toks_k3_parts(
+            return toks_k3_parts::<true>(
                 Some(
                     toks_k3_scan_dsv3_neon
                         as unsafe extern "C" fn(
@@ -1309,7 +1302,7 @@ unsafe extern "C" fn toks_k3_dsv3(
             );
         }
         TOKS_TIER_AVX2 => {
-            return toks_k3_parts(
+            return toks_k3_parts::<true>(
                 Some(
                     toks_k3_scan_dsv3_avx2
                         as unsafe extern "C" fn(
