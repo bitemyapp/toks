@@ -10,6 +10,24 @@ use pyo3::{
 };
 use std::sync::Mutex;
 use toks::DecodeFlags as D;
+
+fn text<'py>(py: Python<'py>, bytes: &[u8]) -> PyResult<Bound<'py, PyString>> {
+    // The core has already repaired UTF-8. Let CPython construct the string
+    // directly, matching the C adapter, without another Rust validation pass.
+    unsafe {
+        Bound::from_owned_ptr_or_err(
+            py,
+            pyo3::ffi::PyUnicode_DecodeUTF8(
+                bytes.as_ptr().cast(),
+                bytes.len() as isize,
+                c"strict".as_ptr(),
+            ),
+        )?
+        .cast_into::<PyString>()
+        .map_err(Into::into)
+    }
+}
+
 impl Tokenizer {
     fn ids_error(&self, py: Python<'_>, code: i64, message: &str, ids: &[u32], raw: bool) -> PyErr {
         if code == -7 {
@@ -48,7 +66,7 @@ impl Tokenizer {
             Ok(if flags.bits() & 2 != 0 {
                 PyBytes::new(py, &s.bytes).into_any()
             } else {
-                PyString::new(py, &String::from_utf8_lossy(&s.bytes)).into_any()
+                text(py, &s.bytes)?.into_any()
             })
         })
     }
@@ -164,12 +182,12 @@ impl DecodeStream {
                 .get()
                 .ids_error(py, e.code, &e.message, &ids, false)
         })?;
-        Ok(PyString::new(py, &String::from_utf8_lossy(&bytes)))
+        text(py, &bytes)
     }
     fn flush<'py>(&self, py: Python<'py>) -> PyResult<Bound<'py, PyString>> {
         let result = lock(&self.state).flush();
         let bytes = result.map_err(|e| core_error(py, e))?;
-        Ok(PyString::new(py, &String::from_utf8_lossy(&bytes)))
+        text(py, &bytes)
     }
     fn __repr__(&self) -> String {
         format!("<toks.DecodeStream {}>", self.tok.get().core.name())

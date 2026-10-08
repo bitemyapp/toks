@@ -156,3 +156,20 @@ The initial and updated paired observations are in
 These are exploratory three-block warm-call measurements; the adapter still
 has regressions against C. Every measured input retains its complete ID and
 decoded-byte digest.
+
+## Python Unicode result construction
+
+The same decode profile attributed 14% of samples to `String::from_utf8_lossy`
+before `PyString::new` scanned the bytes again. Score: impact 3 × confidence 5 /
+effort 1 = 15. Pass the core's repaired UTF-8 directly to
+`PyUnicode_DecodeUTF8(..., "strict")`, as the C adapter does, for ordinary and
+streaming decode. Raw decoding is unchanged. The core still performs every
+replacement, ordering and token lookup; no tie, floating-point or RNG behavior
+changes. Invalid UTF-8 returned by a defective core now raises the same Python
+exception as the C adapter instead of being repaired a second time.
+
+All 38 API, threading and boundary checks pass. All benchmark token/decoded
+byte digests match C. In the exploratory three-block arm64 measurements, long
+GPT-2 decode improves from 0.441× to 0.616× C's speed and long T5 decode from
+0.823× to 0.903×; short decode is essentially unchanged. The adapter remains
+slower than C. Raw observations are in `receipts/python-utf8-arm64.json`.
