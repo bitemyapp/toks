@@ -1612,8 +1612,13 @@ unsafe extern "C" fn uni_piece(
     if L == 0 as uint64_t {
         return;
     }
-    let mut best: [::core::ffi::c_double; 128] = [0.; 128];
-    let mut bid: [int32_t; 512] = [0; 512];
+    // Only reachable ends have scores/IDs. Each atom has either its own piece
+    // or an unknown edge, so the next atom's score is always written before use.
+    // A score is compared only after delta[end] becomes nonzero. The ring is
+    // 128 wide and no edge spans more than 127 bytes, so live scores cannot alias.
+    // Backtracking reads bid only for reached ends when L < 512.
+    let mut best = [std::mem::MaybeUninit::<f64>::uninit(); 128];
+    let mut bid = [std::mem::MaybeUninit::<i32>::uninit(); 512];
     let mut cell: *const toks_uni_cell = (*u).cell;
     let mut score: *const ::core::ffi::c_double = (*u).score;
     let mut term: *const int32_t = (*u).term;
@@ -1623,7 +1628,7 @@ unsafe extern "C" fn uni_piece(
         0 as ::core::ffi::c_int,
         L.wrapping_add(1 as uint64_t) as size_t,
     );
-    best[0 as ::core::ffi::c_int as usize] = 0.0f64;
+    best[0].write(0.0);
     let mut s: uint64_t = 0 as uint64_t;
     while s < L {
         let mut mb: uint32_t = 1 as uint32_t;
@@ -1634,8 +1639,7 @@ unsafe extern "C" fn uni_piece(
                 mb = 1 as ::core::ffi::c_uint as uint32_t;
             }
         }
-        let mut bs: ::core::ffi::c_double = best[(s & UNI_MAX_PIECE as uint64_t)
-            as usize];
+        let mut bs = best[(s & UNI_MAX_PIECE as uint64_t) as usize].assume_init();
         let mut single: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
         let mut node: uint32_t = 0 as uint32_t;
         let mut nb: uint32_t = (*cell.offset(0 as ::core::ffi::c_int as isize)).base;
@@ -1675,12 +1679,12 @@ unsafe extern "C" fn uni_piece(
                 let mut cand: ::core::ffi::c_double = *score.offset(t as isize) + bs;
                 if *delta.offset(e as isize) as ::core::ffi::c_uint
                     == 0 as ::core::ffi::c_uint
-                    || cand > best[(e & UNI_MAX_PIECE as uint64_t) as usize]
+                    || cand > best[(e & UNI_MAX_PIECE as uint64_t) as usize].assume_init()
                 {
-                    best[(e & UNI_MAX_PIECE as uint64_t) as usize] = cand;
+                    best[(e & UNI_MAX_PIECE as uint64_t) as usize].write(cand);
                     *delta.offset(e as isize) = k.wrapping_add(1 as uint64_t) as uint8_t;
                     if keep != 0 {
-                        bid[e as usize] = *term.offset(t as isize);
+                        bid[e as usize].write(*term.offset(t as isize));
                     }
                 }
                 if k.wrapping_add(1 as uint64_t) == mb as uint64_t {
@@ -1694,12 +1698,12 @@ unsafe extern "C" fn uni_piece(
             let mut cand_0: ::core::ffi::c_double = (*u).unk_score + bs;
             if *delta.offset(e_0 as isize) as ::core::ffi::c_uint
                 == 0 as ::core::ffi::c_uint
-                || cand_0 > best[(e_0 & UNI_MAX_PIECE as uint64_t) as usize]
+                || cand_0 > best[(e_0 & UNI_MAX_PIECE as uint64_t) as usize].assume_init()
             {
-                best[(e_0 & UNI_MAX_PIECE as uint64_t) as usize] = cand_0;
+                best[(e_0 & UNI_MAX_PIECE as uint64_t) as usize].write(cand_0);
                 *delta.offset(e_0 as isize) = mb as uint8_t;
                 if keep != 0 {
-                    bid[e_0 as usize] = -(1 as ::core::ffi::c_int) as int32_t;
+                    bid[e_0 as usize].write(-1);
                 }
             }
         }
@@ -1721,7 +1725,7 @@ unsafe extern "C" fn uni_piece(
             & 0x80 as ::core::ffi::c_uint == 0 as ::core::ffi::c_uint)
         {
             let mut id: int32_t = if keep != 0 {
-                bid[x as usize]
+                bid[x as usize].assume_init()
             } else {
                 exact_id(u, virt, p, ps, x)
             };
