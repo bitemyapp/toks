@@ -1,6 +1,6 @@
 # toks
 
-This fork is migrating toks to **Rust with the original NEON/AVX2 assembly**.
+This fork implements toks in **Rust with the original NEON/AVX2 assembly**.
 `make` builds the Rust static/shared library, and the Python package uses a
 PyO3 extension. The C sources are retained as a differential-test and performance
 reference (`make reference` or `make IMPL=c`).
@@ -19,8 +19,11 @@ mostly unsafe internally; the owned `Tokenizer`, `Encoder` and `Decoder` API
 provides lifetime and scratch ownership. Windows support is still pending.
 The port's measured wins, remaining performance regressions, exact-output
 checks and reproduction commands are in [the migration report](docs/rust-port/README.md)
-and [optimization records](docs/rust-port/optimizations.md). An overall speed
-win over C has **not yet been established**.
+and [optimization records](docs/rust-port/optimizations.md). The final 84-cell
+native-CPU encoder matrix measures aggregate fresh-scratch speedups of **1.009×
+on arm64 and 1.015× on x86**, with larger streaming/replay gains and individual
+regressions. The Python adapter remains slower than C. See [all paired results,
+build flags and uncertainty intervals](docs/rust-port/benchmarks.md).
 
 The upstream description and historical benchmark results below describe the
 original **C implementation**, not measurements of this Rust fork.

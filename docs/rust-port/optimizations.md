@@ -281,8 +281,8 @@ WordPiece corpora, the C-relative geometric means are 1.037×/1.054×/1.056× an
 1.030×/1.048×/1.054×, respectively. English/code/multilingual observations,
 including small losses and variance, remain in `receipts/cjk-identity-*.json`.
 The profile captures are `receipts/wp-cjk-*-sample.txt`. These results justify
-keeping the change; the complete matrix and Python adapter still require final
-verification.
+keeping the change. The [complete native matrix](benchmarks.md) and subsequent
+Python verification now cover the final implementation.
 
 ## Bind CPython's compact-integer conversion in Rust
 
@@ -326,3 +326,9 @@ encode/batch controls include considerable variance and are retained in full.
 The preceding wheel predates the CJK-only WordPiece change; neither timed model
 uses WordPiece. Receipts are `python-compact-*.json` and
 `python-compact-profile-arm64.txt`.
+
+The full x86 suite subsequently passed 331 tests with 44 explicit skips. Its
+initially missing C-capacity comparison passed separately once the C reference
+was built. Both full-suite oracle reports retain 105,732 target encodes across
+89 models with no differences, and are saved in
+`receipts/python-compact-validation.json`.

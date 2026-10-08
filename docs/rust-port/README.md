@@ -5,11 +5,18 @@ compiles Rust and the existing native assembly; it does not compile any C
 implementation. The public C ABI and table layouts are retained so the existing
 callers, kernel tests, and benchmark driver can exercise either implementation.
 
-This is a migration in progress. The initial core was translated with C2Rust
+The initial core was translated with C2Rust
 0.22.1 and then adapted to stable Rust. It remains mostly unsafe Rust. The OS
 boundary was written in Rust; alignment, atomics, Darwin worker support, and
 scratch-header initialization required manual corrections. The architecture map
 is in [rust-architecture.md](../rust-architecture.md).
+
+The [final native encoder matrix](benchmarks.md) covers 84 workloads on each
+architecture, with all outputs equal to the frozen C reference. Paired aggregate
+fresh-scratch/stream/replay speedups are 1.009×/1.025×/1.039× on arm64 and
+1.015×/1.030×/1.042× on x86. These use matched native CPU tuning; portable
+defaults are unchanged. Some workloads regress, and the Python adapter remains
+slower than C despite its optimizations.
 
 ## Build and check
 
@@ -37,10 +44,11 @@ native/scalar, guarded pages and the installed Python package on a hosted Linux
 runner. Local and workstation results, rather than that shared runner, supply
 performance measurements.
 
-The first hosted [Rust port run](https://github.com/bitemyapp/toks/actions/runs/37761708788)
-passed at `89c4e97`, including 331 installed-wheel Python tests with 43 explicit
-skips. This precedes the CJK identity-normalization optimization; its receipt
-is `receipts/ci-89c4e97.json`.
+The hosted [CJK-core verification run](https://github.com/bitemyapp/toks/actions/runs/37765164320)
+passed at `77e5448`: native/scalar checks, both protected-page geometries, source
+archive creation, and 331 installed-wheel Python tests with 43 explicit skips.
+Its receipt is `receipts/ci-77e5448.json`. The later Python compact-integer change
+has separate local/workstation verification described below.
 
 The owned Rust API uses `Tokenizer`, `Encoder` and `Decoder`. A tokenizer's clones
 share immutable tables; each encoder owns its scratch and caches, and each stream
@@ -86,38 +94,42 @@ python3 tools/rust-port/test.py --guard 1 --lib build/rust-guard/release/libtoks
 python3 tools/rust-port/test.py --guard 2 --lib build/rust-guard/release/libtoks.a --out build/rust-tests-guard2
 ```
 
-| Area | Evidence so far | Still required |
+| Area | Evidence | Limitations and follow-ups |
 | --- | --- | --- |
 | ABI, ownership, scratch, allocation | upstream tests; protected pages on both hosts; all 45 callers under AddressSanitizer on x86 | arm64 sanitizer linker compatibility |
 | BPE and SentencePiece BPE | kernel twins, exact IDs, short/long/cache/tie cases | broader differential corpus |
 | WordPiece and Unigram | breadth, primitives, targets, normalization; 12-model oracle and full Python parity suite on both hosts | broader differential corpus |
 | Parallelism | persistent pool, state, stall tests on both hosts | sanitizer coverage |
 | Native assembly | NEON, AVX2, scalar; optional AVX-512 bucket probe tested on x86 | AVX-512 performance improvement (currently tied) |
-| Python | full suite on CPython 3.13, both hosts; x86 API matrix 3.10–3.14; standalone source archive | repeat version matrix after optimizations, export visibility, adapter performance |
+| Python | latest full suite on CPython 3.13, both hosts; x86 API matrix 3.10–3.14; standalone source archive | export visibility, adapter performance |
 | Portability | macOS arm64 and Linux x86-64 | Windows and minimum target checks |
 
-The installed Rust Python wheels passed 324 tests on each host. Their 44 skips
-are explicit in `receipts/python-{arm64,x86}.json`: mostly intentionally refused
-fixtures, plus six absent generated case sets, a tiktoken-specific target lane,
-one missing wrapper alias, and a missing C shared library. Building that C shared
-library resolved the arm64 capacity-comparison skip; the targeted rerun passed.
-The report contains 105,732 target encodes across 89 models with zero differences,
-plus six generated-text families and the field-by-field surface checks. The five
-additional Rust-boundary tests pass against both the Rust and frozen C wheels.
+After the compact-integer optimization, installed Rust wheels pass 332 tests
+with 43 skips on arm64 and 331 tests with 44 skips on x86. The latter initially
+lacked the separate C library; its capacity-comparison test then passed after
+`make reference`. Skips remain explicit: mostly intentionally refused fixtures,
+plus absent generated case sets, a tiktoken-specific target lane and a missing
+wrapper alias. The oracle reports retain 105,732 target encodes across 89 models
+with zero differences, plus generated-text families and field-by-field surface
+checks. See `receipts/python-compact-validation.json` for both full reports.
 
-The x86 wheel API/thread/boundary suite also passed on CPython 3.10, 3.11, 3.12
-and 3.14 (37 passed, one unavailable C-library comparison on each). These
-version checks preceded the FASTCALL optimization and are dated accordingly in
-`receipts/python-versions-x86.json`.
+The latest x86 API/thread/boundary suite passes on CPython 3.10, 3.11, 3.12, 3.13
+and 3.14: 39 checks initially pass on each, and the missing C comparison then
+passes separately for every version. All 40 checks also pass against the frozen
+C wheel on arm64. `receipts/python-compact-versions-x86.json` records versions,
+wheel hashes, initial skips and follow-up results. The comparison helper now
+searches only the separate C-reference build, so it cannot silently compare the
+Rust extension against a Rust shared library from the default build.
 
 `uv build --sdist python` creates a standalone source archive containing the
 adapter, Rust core, assembly, layout headers and locked Cargo dependencies.
 No C implementation is included. Building its wheel in a fresh temporary
-directory outside the repository and running all 39 API/thread/boundary checks
-passed on arm64; `receipts/python-sdist-arm64.json` records artifact hashes.
+directory outside the repository and running all 40 API/thread/boundary checks
+passed on arm64; `receipts/python-compact-validation.json` records artifact hashes.
 Both wheel and source builds require Rust and an assembler-capable C driver;
 the driver compiles only assembly. Python extension tests are run from installed
-wheels; `cargo test --workspace` exercises the owned core API.
+wheels; `cargo test --workspace` passes seven owned-API tests and the exhaustive
+CJK identity-normalization proof.
 
 The replacement retains the Python vocabulary helper and public signatures,
 pickles, subtype factories, scratch leases, cached Python integers and stream
@@ -148,7 +160,7 @@ load, and sibling information are retained with results.
 
 `tools/rust-port/corpora.py` obtains a separate reproducible public corpus. It is
 not the unavailable 23-file upstream benchmark corpus. Its manifest records URLs
-and SHA-256. The initial matrix is seven tokenizer families by English, source
+and SHA-256. The initial matrix is seven tokenizers by English, source
 code, multilingual Latin text, and CJK text at 4096-byte chunks, with cold,
 pass-same, and warm cache states. A warm cache hit is a different workload from
 first-pass tokenization; report the states separately.
