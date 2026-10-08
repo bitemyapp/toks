@@ -22,8 +22,8 @@ TOKS_TIER=scalar python3 tools/rust-port/test.py --out build/rust-tests-scalar
 
 The output is `target/release/libtoks.a` and the platform's shared library. Rust
 1.94.1 on Linux x86-64 and Rust 1.96.0 on macOS arm64 have been exercised. Windows
-support, the Python adapter, and build-system integration remain open. The C
-Makefile still builds the frozen reference implementation.
+support and build-system integration remain open. The Python adapter now uses
+Rust and PyO3; the C Makefile still builds the frozen reference implementation.
 
 The owned Rust API uses `Tokenizer`, `Encoder` and `Decoder`. A tokenizer's clones
 share immutable tables; each encoder owns its scratch and caches, and each stream
@@ -71,13 +71,38 @@ python3 tools/rust-port/test.py --guard 2 --lib build/rust-guard/release/libtoks
 
 | Area | Evidence so far | Still required |
 | --- | --- | --- |
-| ABI, ownership, scratch, allocation | upstream ABI/API/allocation/state tests; both protected-page placements on both hosts | sanitizer builds |
+| ABI, ownership, scratch, allocation | upstream tests; protected pages on both hosts; all 45 callers under AddressSanitizer on x86 | arm64 sanitizer linker compatibility |
 | BPE and SentencePiece BPE | kernel twins, exact IDs, short/long/cache/tie cases | broader differential corpus |
 | WordPiece and Unigram | breadth, primitives, targets, normalization; 12-model Unigram oracle on both hosts | broader Python oracle suite |
 | Parallelism | persistent pool, state, stall tests on both hosts | sanitizer coverage |
 | Native assembly | NEON, AVX2, scalar; optional AVX-512 bucket probe tested on x86 | AVX-512 performance improvement (currently tied) |
-| Python | original adapter retained as reference | Rust adapter and package validation |
+| Python | Rust installed wheels: full suite on CPython 3.13, both hosts | CPython 3.10–3.14 matrix, source distribution, export visibility, adapter performance |
 | Portability | macOS arm64 and Linux x86-64 | Windows and minimum target checks |
+
+The installed Rust Python wheels passed 324 tests on each host. Their 44 skips
+are explicit in `receipts/python-{arm64,x86}.json`: mostly intentionally refused
+fixtures, plus six absent generated case sets, a tiktoken-specific target lane,
+one missing wrapper alias, and a missing C shared library. Building that C shared
+library resolved the arm64 capacity-comparison skip; the targeted rerun passed.
+The report contains 105,732 target encodes across 89 models with zero differences,
+plus six generated-text families and the field-by-field surface checks. The five
+additional Rust-boundary tests pass against both the Rust and frozen C wheels.
+
+The replacement retains the Python vocabulary helper and public signatures,
+pickles, subtype factories, scratch leases, cached Python integers and stream
+hold ownership. Immutable str/bytes remain borrowed across GIL release. Other
+input buffers are snapshotted while attached, and `encode_into` copies from Rust
+staging into the writable export while attached; the accepted formats and exact
+prefix behavior remain the same. This changes the old mutable-buffer zero-copy
+performance contract, so adapter overhead is measured separately from the core.
+
+The x86 sanitizer run instruments both Rust and the C test callers (assembly is
+covered by the protected-page and ABI tests). It uses nightly-2026-08-28,
+`-Zsanitizer=address -Zexternal-clangrt -Cforce-frame-pointers=yes`, an explicit
+Rust target, and `test.py --sanitize address --rust-target x86_64-unknown-linux-gnu`.
+The arm64 archive builds, but Apple ld rejects its sanitizer initializer with
+`initializer pointer has no target`; a second nightly and a no-LTO build did not
+resolve that tooling issue. Those link failures are not counted as passing tests.
 
 ## Performance protocol
 

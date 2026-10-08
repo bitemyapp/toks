@@ -1,0 +1,17 @@
+[package]
+name = "toks-python"
+version = "0.3.2"
+edition = "2021"
+license = "Apache-2.0"
+publish = false
+
+[lib]
+name = "_toks"
+crate-type = ["cdylib"]
+
+[dependencies]
+toks = { path = "../../rust" }
+pyo3 = { version = "=0.29.3", features = ["extension-module", "multiple-pymethods"] }
+
+[build-dependencies]
+pyo3-build-config = "=0.29.3"

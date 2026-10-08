@@ -358,10 +358,21 @@ impl Tokenizer {
         })
     }
     pub fn decode(&self, ids: &[u32], flags: DecodeFlags) -> Result<Vec<u8>, Error> {
+        let mut out = Vec::new();
+        self.decode_to(ids, flags, &mut out)?;
+        Ok(out)
+    }
+    /// Reuses decoded-byte storage. On failure its length is zero.
+    pub fn decode_to(
+        &self,
+        ids: &[u32],
+        flags: DecodeFlags,
+        out: &mut Vec<u8>,
+    ) -> Result<(), Error> {
         let first = ids.len().saturating_mul(4);
         // Each successful core call initializes the exact prefix of its result.
         unsafe {
-            collect_prefix(first, |out, cap| {
+            fill_prefix(out, first, |out, cap| {
                 api::toks_decode(
                     self.ptr(),
                     ids.as_ptr(),
@@ -517,9 +528,21 @@ impl Encoder {
         }
     }
     pub fn pieces(&mut self, text: &[u8], flags: EncodeFlags) -> Result<Vec<u32>, Error> {
+        let mut out = Vec::new();
+        self.pieces_to(text, flags, &mut out)?;
+        Ok(out)
+    }
+    /// Reuses piece-end storage. On failure its length is zero.
+    pub fn pieces_to(
+        &mut self,
+        text: &[u8],
+        flags: EncodeFlags,
+        out: &mut Vec<u32>,
+    ) -> Result<(), Error> {
+        out.clear();
         let scr = self.prepare(text.len())?;
         unsafe {
-            collect_prefix(text.len().saturating_add(1), |out, cap| {
+            fill_prefix(out, text.len().saturating_add(1), |out, cap| {
                 api::toks_pieces(
                     self.tokenizer.ptr(),
                     text.as_ptr().cast(),

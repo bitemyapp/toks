@@ -1,6 +1,6 @@
 """toks: Actual Computer's tokenizer for Python.
 
-Exactly hf tokenizers 0.23.2's ids, from a small C library with asm kernels (this package links it in).
+Exactly hf tokenizers 0.23.2's ids, from a Rust library with native assembly kernels (this package links it in).
 
     import toks
     tok = toks.Tokenizer.from_file("tokenizer.json")   # or a model directory, or .from_str / .from_buffer
