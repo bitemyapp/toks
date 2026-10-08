@@ -1,0 +1,28 @@
+{
+  "runs": [
+    {
+      "host": "arm64",
+      "profile": "release",
+      "command": "cargo test -p toks --test owned --release",
+      "output": "running 7 tests\ntest load_diagnostics_and_options ... ok\ntest stream_grows_hold_and_preserves_failed_push ... ok\ntest expanding_normalizer_retries_output_sizing ... ok\ntest exact_prefix_reuse_and_raw_bytes ... ok\ntest retained_owners_and_concurrent_encoders ... ok\ntest all_families_and_scalar_match ... ok\ntest padding_and_template ... ok\n\ntest result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n"
+    },
+    {
+      "host": "arm64",
+      "profile": "debug",
+      "command": "cargo test -p toks --test owned",
+      "output": "running 7 tests\ntest exact_prefix_reuse_and_raw_bytes ... ok\ntest expanding_normalizer_retries_output_sizing ... ok\ntest stream_grows_hold_and_preserves_failed_push ... ok\ntest load_diagnostics_and_options ... ok\ntest retained_owners_and_concurrent_encoders ... ok\ntest all_families_and_scalar_match ... ok\ntest padding_and_template ... ok\n\ntest result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s\n\n"
+    },
+    {
+      "host": "x86",
+      "profile": "release",
+      "command": "cargo test -p toks --test owned --release",
+      "output": "running 7 tests\ntest stream_grows_hold_and_preserves_failed_push ... ok\ntest exact_prefix_reuse_and_raw_bytes ... ok\ntest expanding_normalizer_retries_output_sizing ... ok\ntest load_diagnostics_and_options ... ok\ntest retained_owners_and_concurrent_encoders ... ok\ntest padding_and_template ... ok\ntest all_families_and_scalar_match ... ok\n\ntest result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n"
+    },
+    {
+      "host": "x86",
+      "profile": "debug",
+      "command": "cargo test -p toks --test owned",
+      "output": "running 7 tests\ntest expanding_normalizer_retries_output_sizing ... ok\ntest exact_prefix_reuse_and_raw_bytes ... ok\ntest stream_grows_hold_and_preserves_failed_push ... ok\ntest load_diagnostics_and_options ... ok\ntest retained_owners_and_concurrent_encoders ... ok\ntest all_families_and_scalar_match ... ok\ntest padding_and_template ... ok\n\ntest result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s\n\n"
+    }
+  ]
+}

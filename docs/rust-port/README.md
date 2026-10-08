@@ -22,8 +22,30 @@ TOKS_TIER=scalar python3 tools/rust-port/test.py --out build/rust-tests-scalar
 
 The output is `target/release/libtoks.a` and the platform's shared library. Rust
 1.94.1 on Linux x86-64 and Rust 1.96.0 on macOS arm64 have been exercised. Windows
-support, a safe Rust interface, the Python adapter, and build-system integration
-remain open. The C Makefile still builds the frozen reference implementation.
+support, the Python adapter, and build-system integration remain open. The C
+Makefile still builds the frozen reference implementation.
+
+The owned Rust API uses `Tokenizer`, `Encoder` and `Decoder`. A tokenizer's clones
+share immutable tables; each encoder owns its scratch and caches, and each stream
+owns any growing byte-fallback hold. The owner stays alive while an encoder or
+decoder exists. `encode_into` preserves the C API's total-count and exact-prefix
+semantics. `encode_to` retains the output allocation between calls.
+
+```rust,no_run
+use toks::{Tokenizer, Tier, ScratchOptions, EncodeFlags, DecodeFlags};
+
+let tokenizer = Tokenizer::from_file("tokenizer.json", Tier::Auto)?;
+let mut encoder = tokenizer.encoder(ScratchOptions::default())?;
+let ids = encoder.encode(b"hello world", EncodeFlags::ALL)?;
+let bytes = tokenizer.decode(&ids, DecodeFlags::SKIP_SPECIAL)?;
+# Ok::<(), toks::Error>(())
+```
+
+`cargo test -p toks --test owned` (also with `--release`) covers all four
+tokenizer families, native/scalar parity, expansion requiring an output retry,
+concurrent ownership, short outputs, and stream hold growth and failed-push
+recovery. Vocabulary byte slices borrow their tokenizer; they use the core's
+decoded-byte namespace, which can differ from Hugging Face's written spelling.
 
 The harness links all 44 upstream C test callers plus the native BPE kernel test
 against Rust. Four test features expose internals or replace allocation/kernel
