@@ -1,0 +1,26 @@
+{
+  "implementation": "bcca3a4 (Unicode result construction); before int_list and FASTCALL changes",
+  "skipped": "C shared-library capacity comparison unavailable on this host",
+  "results": [
+    {
+      "version": "Python 3.10.20",
+      "wheel_sha256": "d0d24203ac41ea2a06c3ca0450bf50f8f774d5074ed1a6ce3e9afe78b19d0e2d",
+      "tests": ".................s....................                                   [100%]\n37 passed, 1 skipped in 1.75s\n"
+    },
+    {
+      "version": "Python 3.11.15",
+      "wheel_sha256": "6deb74c676b2aad9c9f1b19b79184af08fe9b229343ca923491bfd874e868c7a",
+      "tests": ".................s....................                                   [100%]\n37 passed, 1 skipped in 1.72s\n"
+    },
+    {
+      "version": "Python 3.12.3",
+      "wheel_sha256": "f5678161406eade4426942a6ad5d525be137bf69d1691567405cd8a90b208b88",
+      "tests": ".................s....................                                   [100%]\n37 passed, 1 skipped in 1.77s\n"
+    },
+    {
+      "version": "Python 3.14.5",
+      "wheel_sha256": "b4cad92aa235ab17b845eb6b1a7d59b73c10098c88f4404dfd9ffcbd8f05cfc5",
+      "tests": ".................s....................                                   [100%]\n37 passed, 1 skipped in 1.75s\n"
+    }
+  ]
+}

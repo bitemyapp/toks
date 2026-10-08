@@ -1,0 +1,4 @@
+include Cargo.toml Cargo.lock
+recursive-include rust *.rs *.toml
+recursive-include native *.rs *.toml *.S *.h *.inc
+exclude toks/_toks.c

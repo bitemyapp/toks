@@ -8,6 +8,8 @@ publish = false
 [lib]
 name = "_toks"
 crate-type = ["cdylib"]
+test = false
+doctest = false
 
 [dependencies]
 toks = { path = "../../rust" }

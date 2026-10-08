@@ -1,0 +1,8 @@
+{
+  "implementation_commit": "4dd98c4",
+  "source": "Rust plus native assembly; no C source in archive",
+  "archive_sha256": "94f27c709698efe4aca703937a98f5de10c579692a508a32600b36874b0c46a8",
+  "wheel_sha256": "3b594ec4943ba7c7e2beb1be1b0fd702c37d517245fe13e6baa305e19186e730",
+  "build_location": "fresh temporary directory outside repository",
+  "test_result": ".......................................                                  [100%]\n39 passed in 3.20s\n"
+}

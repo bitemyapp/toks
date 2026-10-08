@@ -73,10 +73,10 @@ python3 tools/rust-port/test.py --guard 2 --lib build/rust-guard/release/libtoks
 | --- | --- | --- |
 | ABI, ownership, scratch, allocation | upstream tests; protected pages on both hosts; all 45 callers under AddressSanitizer on x86 | arm64 sanitizer linker compatibility |
 | BPE and SentencePiece BPE | kernel twins, exact IDs, short/long/cache/tie cases | broader differential corpus |
-| WordPiece and Unigram | breadth, primitives, targets, normalization; 12-model Unigram oracle on both hosts | broader Python oracle suite |
+| WordPiece and Unigram | breadth, primitives, targets, normalization; 12-model oracle and full Python parity suite on both hosts | broader differential corpus |
 | Parallelism | persistent pool, state, stall tests on both hosts | sanitizer coverage |
 | Native assembly | NEON, AVX2, scalar; optional AVX-512 bucket probe tested on x86 | AVX-512 performance improvement (currently tied) |
-| Python | Rust installed wheels: full suite on CPython 3.13, both hosts | CPython 3.10–3.14 matrix, source distribution, export visibility, adapter performance |
+| Python | full suite on CPython 3.13, both hosts; x86 API matrix 3.10–3.14; standalone source archive | repeat version matrix after optimizations, export visibility, adapter performance |
 | Portability | macOS arm64 and Linux x86-64 | Windows and minimum target checks |
 
 The installed Rust Python wheels passed 324 tests on each host. Their 44 skips
@@ -87,6 +87,20 @@ library resolved the arm64 capacity-comparison skip; the targeted rerun passed.
 The report contains 105,732 target encodes across 89 models with zero differences,
 plus six generated-text families and the field-by-field surface checks. The five
 additional Rust-boundary tests pass against both the Rust and frozen C wheels.
+
+The x86 wheel API/thread/boundary suite also passed on CPython 3.10, 3.11, 3.12
+and 3.14 (37 passed, one unavailable C-library comparison on each). These
+version checks preceded the FASTCALL optimization and are dated accordingly in
+`receipts/python-versions-x86.json`.
+
+`uv build --sdist python` creates a standalone source archive containing the
+adapter, Rust core, assembly, layout headers and locked Cargo dependencies.
+No C implementation is included. Building its wheel in a fresh temporary
+directory outside the repository and running all 39 API/thread/boundary checks
+passed on arm64; `receipts/python-sdist-arm64.json` records artifact hashes.
+Both wheel and source builds require Rust and an assembler-capable C driver;
+the driver compiles only assembly. Python extension tests are run from installed
+wheels; `cargo test --workspace` exercises the owned core API.
 
 The replacement retains the Python vocabulary helper and public signatures,
 pickles, subtype factories, scratch leases, cached Python integers and stream
