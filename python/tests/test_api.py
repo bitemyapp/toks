@@ -326,13 +326,13 @@ def test_encode_bound(gpt2):
 
 
 def _libtoks():
-    """the C library of this checkout (make lib), or $TOKS_LIB: the binding is checked against it where present"""
+    """The separate C reference (make reference), or an explicit $TOKS_LIB."""
     suffix = {"Darwin": ".dylib", "Windows": ".dll"}.get(platform.system(), ".so")   # this platform's, never a foreign one
     paths = [os.environ["TOKS_LIB"]] if os.environ.get("TOKS_LIB") else sorted(
         glob.glob(os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
-                               "build", "*", "libtoks" + suffix)))
+                               "build", "c-reference", "*", "libtoks" + suffix)))
     if not paths:
-        pytest.skip("no shared libtoks (make lib, or TOKS_LIB=<path>)")
+        pytest.skip("no C reference library (make reference, or TOKS_LIB=<path>)")
     lib = ctypes.CDLL(paths[0])
     lib.toks_load.argtypes = [ctypes.POINTER(ctypes.c_void_p), ctypes.c_char_p, ctypes.c_void_p]
     lib.toks_load.restype = ctypes.c_int64
