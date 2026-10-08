@@ -1488,7 +1488,10 @@ unsafe extern "C" fn window_batch(
                     wk[nw as usize].lo,
                     wk[nw as usize].hi,
                 );
-                !(*t).words.is_null();
+                crate::prefetch_read(c.add(((h as u64 & cm) * TOKS_BUCKET as u64) as usize));
+                if !(*t).words.is_null() {
+                    crate::prefetch_read((*t).words.add(((h as u64 & (*t).words_mask) * TOKS_BUCKET as u64) as usize));
+                }
             }
             nw = nw.wrapping_add(1);
             ws = at;

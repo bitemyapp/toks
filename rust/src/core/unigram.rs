@@ -2700,8 +2700,12 @@ unsafe extern "C" fn piece_close(mut g: *mut seg) {
                 (*g).tlen.wrapping_sub((*g).p_s),
             );
             let mut h: uint32_t = toks_spm_whash(k_0.lo, k_0.hi);
-            !(*c).cache.is_null();
-            !(*u).words.is_null();
+            if !(*c).cache.is_null() {
+                crate::prefetch_read((*c).cache.add(((h as u64 & (*c).cache_mask) * TOKS_BUCKET as u64) as usize));
+            }
+            if !(*u).words.is_null() {
+                crate::prefetch_read((*u).words.add(((h as u64 & (*u).words_mask) * TOKS_BUCKET as u64) as usize));
+            }
             let fresh1 = (*g).qn;
             (*g).qn = (*g).qn.wrapping_add(1);
             let mut j: uint32_t = fresh1;

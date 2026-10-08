@@ -61,6 +61,15 @@ pub mod par;
 mod atomic;
 mod platform;
 
+/// Bring a valid table/cache line into the read cache before its queued lookup.
+#[inline(always)]
+unsafe fn prefetch_read(p: *const u8) {
+    #[cfg(target_arch = "x86_64")]
+    std::arch::x86_64::_mm_prefetch::<{ std::arch::x86_64::_MM_HINT_T0 }>(p.cast());
+    #[cfg(target_arch = "aarch64")]
+    std::arch::asm!("prfm pldl1keep, [{p}]", p = in(reg) p, options(readonly, nostack, preserves_flags));
+}
+
 /// Stack storage whose alignment is part of the assembly ABI.
 #[repr(C, align(64))]
 struct Aligned<T>(T);

@@ -26,7 +26,11 @@ this particular generator because its Python model lacks their normalizers;
 they remain in the C test harness. A generator correction was needed for MiniLM:
 continuation chunks must disable document truncation/padding, as `toks.h` states.
 Before that correction, C and Rust emitted identical logs with 264 mismatches;
-afterwards both pass.
+afterwards both pass. The LLM-jp continuation oracle also compared a regex
+containing a newline escape with a Python string containing an actual newline.
+Using the correct raw string removes that start prefix. Before this correction
+both C and Rust reported the same 2,500 continuation mismatches for each of
+LLM-jp 3 and 4; all 12 corrected model streams now pass on both architectures.
 
 The five-block paired arm64 comparison with the preceding Rust executable gives
 a 1.082× geometric mean cold speedup across the four corpora (block estimator),
@@ -82,3 +86,19 @@ ratios of 0.960×/1.147×/1.168× on arm64 and 0.822×/0.912×/0.924× on x86 fo
 cold/pass-same/warm. This recovers some of the initial regression but does not
 make all SentencePiece workloads faster than C. The remaining x86 CJK regression
 is particularly significant and remains an optimization target.
+
+## 4. Restore queued table prefetches
+
+C2Rust omitted the prefetch builtins in the WordPiece, Unigram and SentencePiece
+lookup queues. Restore read-prefetch hints at exactly the original addresses,
+using the target's native instruction. Each address is inside an existing table
+or cache bucket; the existing nonnull guards remain. Prefetch does not change
+data, ordering, ties, floating-point or RNG behavior. Score: impact 2 × confidence
+5 / effort 1 = 10. The WordPiece code-corpus profile attributes about half its
+samples to encoding/lookup, making this a relevant region to restore.
+
+The six targeted test executables pass on both architectures. Full-stream hashes
+match C for the three affected tokenizer families on all four corpora. Across
+those 12 cells the cold/pass-same/warm geometric means versus C are
+0.983×/1.074×/1.088× on arm64 and 0.937×/0.974×/0.985× on x86. The x86
+SentencePiece gap remains; restoring these hints alone does not explain it.

@@ -1416,6 +1416,7 @@ pub unsafe extern "C" fn toks_wp_encode_c(
                     hq[j.wrapping_sub(i) as usize] = wp_whash(
                         kq[j.wrapping_sub(i) as usize],
                     );
+                    crate::prefetch_read((*t).wtab.add(((hq[j.wrapping_sub(i) as usize] as u64 & (*t).wtab_mask) * TOKS_BUCKET as u64) as usize));
                 }
                 j = j.wrapping_add(1);
             }
