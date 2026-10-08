@@ -1,0 +1,109 @@
+{
+  "en": {
+    "sources": [
+      {
+        "url": "https://www.gutenberg.org/cache/epub/1342/pg1342.txt",
+        "sha256": "3f6bb9d6f78e0293b56acd4714dd68cb7d6d1d293402031ce9d5a216bcaf9d75"
+      },
+      {
+        "url": "https://www.gutenberg.org/cache/epub/2701/pg2701.txt",
+        "sha256": "907420db6c4b68c70e2988cd2ad9c8cf79138667a01b63376d18dd17fef1a18b"
+      }
+    ],
+    "bytes": 2048654,
+    "sha256": "89074ee53287a7082a46c2c98ca9bc3319f440b4d9cec869a4875df17e7b23a7"
+  },
+  "ml": {
+    "sources": [
+      {
+        "url": "https://www.gutenberg.org/cache/epub/2229/pg2229.txt",
+        "sha256": "fed2a58edd6910ee96d27ada614d34bcc41f03750d86541c41246bb74c564ff7"
+      },
+      {
+        "url": "https://www.gutenberg.org/cache/epub/2000/pg2000.txt",
+        "sha256": "534f41d59f7142163fa0964076ac6351845c006ea6433778be637fac6d5b04d7"
+      },
+      {
+        "url": "https://www.gutenberg.org/cache/epub/17489/pg17489.txt",
+        "sha256": "a5de514ba7b9f2e1790e7e259c4e8b7a35ae1d29e4bf9a5f8767039c58b80503"
+      }
+    ],
+    "bytes": 3154741,
+    "sha256": "1151b5e2fd7b652404e215213669a10720893a59d58a52475fad379f6ba3dc0d"
+  },
+  "cjk": {
+    "sources": [
+      {
+        "url": "https://www.gutenberg.org/cache/epub/24264/pg24264.txt",
+        "sha256": "ff1526996bf4b81807651921a85e5c1c0f1d1d123c9fa4553057ba6a3ec72011"
+      }
+    ],
+    "bytes": 2663455,
+    "sha256": "ff1526996bf4b81807651921a85e5c1c0f1d1d123c9fa4553057ba6a3ec72011"
+  },
+  "code": {
+    "sources": [
+      "src/core/alloc.c",
+      "src/core/api.c",
+      "src/core/bpe.h",
+      "src/core/bpe_build.c",
+      "src/core/classes.c",
+      "src/core/classes.h",
+      "src/core/compile.c",
+      "src/core/compile.h",
+      "src/core/config.c",
+      "src/core/config.h",
+      "src/core/core.h",
+      "src/core/da.h",
+      "src/core/gen.c",
+      "src/core/json.c",
+      "src/core/json.h",
+      "src/core/k1_c.c",
+      "src/core/k3_c.c",
+      "src/core/k3_dsv3_c.c",
+      "src/core/k3_o200k_c.c",
+      "src/core/k5_c.c",
+      "src/core/k5_long.c",
+      "src/core/k6_c.c",
+      "src/core/kernels.h",
+      "src/core/layout.h",
+      "src/core/load.c",
+      "src/core/norm.c",
+      "src/core/norm.h",
+      "src/core/precompiled.c",
+      "src/core/segment.c",
+      "src/core/split.c",
+      "src/core/split.h",
+      "src/core/spm.h",
+      "src/core/spm_build.c",
+      "src/core/spm_c.c",
+      "src/core/stream.c",
+      "src/core/tiktoken.c",
+      "src/core/tiktoken.h",
+      "src/core/uni_api.c",
+      "src/core/unigram.c",
+      "src/core/unigram.h",
+      "src/core/version.c",
+      "src/core/vocab.c",
+      "src/core/wp.c",
+      "src/core/wp.h",
+      "src/core/wp_api.c",
+      "src/core/wp_scan.c",
+      "python/bench/bench.py",
+      "python/setup.py",
+      "python/tests/conftest.py",
+      "python/tests/test_api.py",
+      "python/tests/test_parity.py",
+      "python/tests/test_surface.py",
+      "python/tests/test_threads.py",
+      "python/toks/__init__.py",
+      "python/toks/_vocab.py",
+      "python/toks_oracle/__init__.py",
+      "python/toks_oracle/gen.py",
+      "python/toks_oracle/oracle.py",
+      "python/toks_oracle/primitives.py"
+    ],
+    "bytes": 943534,
+    "sha256": "0436b37367b218936e6a5b5cfebb3f1462aad5725c5f3ccb75691c23c07527f2"
+  }
+}
