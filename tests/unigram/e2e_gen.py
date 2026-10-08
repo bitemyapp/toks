@@ -65,7 +65,7 @@ def continuation_twin(path: str):
             x = dict(x)
             x["strip_left"] = False
             return x
-        if x.get("type") == "Replace" and x["pattern"].get("Regex") == "(?<!\n)^":
+        if x.get("type") == "Replace" and x["pattern"].get("Regex") == r"(?<!\n)^":
             return None
         return x
 
