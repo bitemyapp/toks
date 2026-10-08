@@ -22,8 +22,20 @@ TOKS_TIER=scalar python3 tools/rust-port/test.py --out build/rust-tests-scalar
 
 The output is `target/release/libtoks.a` and the platform's shared library. Rust
 1.94.1 on Linux x86-64 and Rust 1.96.0 on macOS arm64 have been exercised. Windows
-support and build-system integration remain open. The Python adapter now uses
-Rust and PyO3; the C Makefile still builds the frozen reference implementation.
+support remains open. `make` builds the Rust library; `make test` runs the owned
+API and upstream callers, and `make asmcheck` checks the assembly formats and
+register contracts. `make reference` builds the C implementation separately;
+`make IMPL=c` selects its retained `Makefile.reference`. The Python adapter uses PyO3.
+
+The default `make test` passed all 45 callers and seven owned-API tests on both
+hosts (`receipts/default-build-*.json`). `tools/ci/suites.py --rust` requires the
+assembly-format and register audits, nonempty owned Rust tests, a complete
+successful Rust caller harness, and every upstream suite/critical model. The
+original C control-flow audit and source-size budgets remain under `IMPL=c`;
+they are not reported as Rust passes. The fork's `Rust port` workflow exercises
+native/scalar, guarded pages and the installed Python package on a hosted Linux
+runner. Local and workstation results, rather than that shared runner, supply
+performance measurements.
 
 The owned Rust API uses `Tokenizer`, `Encoder` and `Decoder`. A tokenizer's clones
 share immutable tables; each encoder owns its scratch and caches, and each stream

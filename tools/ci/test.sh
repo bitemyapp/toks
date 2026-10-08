@@ -43,5 +43,7 @@ for t in "${tiers[@]}"; do
     echo "test.sh: make test ($t, TOKS_TIER=$([ "$t" = native ] && echo unset || echo "$t")):" \
          "$([ "$rc" = 0 ] && echo passed || echo "FAILED, exit $rc"), done at ${SECONDS} s"
 done
-python3 tools/ci/suites.py "${logs[@]}" || status=1
+suite_flags=()
+[ "${IMPL:-rust}" != rust ] || suite_flags+=(--rust)
+python3 tools/ci/suites.py "${suite_flags[@]}" "${logs[@]}" || status=1
 exit $status

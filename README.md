@@ -1,5 +1,32 @@
 # toks
 
+This fork is migrating toks to **Rust with the original NEON/AVX2 assembly**.
+`make` builds the Rust static/shared library, and the Python package uses a
+PyO3 extension. The C sources are retained as a differential-test and performance
+reference (`make reference` or `make IMPL=c`).
+
+```sh
+make                         # requires Rust and clang; builds Rust + assembly
+python3 tools/ci/fetch_tokenizers.py
+make test                    # owned Rust API and all upstream C callers
+make test-scalar
+make test-guard
+uv build --wheel python --python 3.13
+```
+
+The Rust port has been exercised on macOS arm64 and Linux x86-64. It remains
+mostly unsafe internally; the owned `Tokenizer`, `Encoder` and `Decoder` API
+provides lifetime and scratch ownership. Windows support is still pending.
+The port's measured wins, remaining performance regressions, exact-output
+checks and reproduction commands are in [the migration report](docs/rust-port/README.md)
+and [optimization records](docs/rust-port/optimizations.md). An overall speed
+win over C has **not yet been established**.
+
+The upstream description and historical benchmark results below describe the
+original **C implementation**, not measurements of this Rust fork.
+
+---
+
 [![test](https://github.com/actual-computer/toks/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/actual-computer/toks/actions/workflows/test.yml) [![nightly parity](https://github.com/actual-computer/toks/actions/workflows/nightly.yml/badge.svg)](https://github.com/actual-computer/toks/actions/workflows/nightly.yml) [![license](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSING.md) [![python](https://img.shields.io/badge/python-3.10%E2%80%933.14-blue)](python/README.md)
 
 **The tokenizer that keeps up with your memory bus.** (ﾉ◕ヮ◕)ﾉ*:・ﾟ✧

@@ -1,0 +1,62 @@
+name: Rust port
+
+on:
+  push:
+    branches: [codex/rust-port]
+  pull_request:
+    paths: ['rust/**', 'python/**', 'src/asm/**', 'include/**', 'Cargo.*', 'Makefile*', 'tools/rust-port/**', 'tools/ci/**', '.github/workflows/rust.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rust-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  linux-x86_64:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Toolchains
+        run: |
+          rustup toolchain install 1.94.1 --profile minimal
+          rustup override set 1.94.1
+          mkdir -p build/ci
+          python3 -m venv build/ci-tools
+          build/ci-tools/bin/pip install uv==0.12.23
+          echo "$PWD/build/ci-tools/bin" >> "$GITHUB_PATH"
+      - name: Pinned tokenizer fixtures
+        run: python3 tools/ci/fetch_tokenizers.py | tee build/ci/fetch.log
+      - name: Native and scalar Rust core
+        run: tools/ci/test.sh
+      - name: Protected pages
+        run: make test-guard > build/ci/guard.log 2>&1
+      - name: Installed Python wheel and C reference
+        run: |
+          make reference > build/ci/c-reference.log 2>&1
+          uv build --wheel python --python 3.13 --out-dir build/wheels
+          uv venv --python 3.13 build/python-env
+          uv pip install --python build/python-env/bin/python build/wheels/*.whl pytest tokenizers==0.23.2 tiktoken==0.14.0 transformers==5.18.0
+          TOKS_LIB="$PWD/build/c-reference/linux-x86_64/libtoks.so" TOKS_PY_REPORT=build/ci/python.json build/python-env/bin/python -m pytest -q -ra -p no:cacheprovider python/tests | tee build/ci/python.log
+      - name: Source archive
+        run: uv build --sdist python --python 3.13 --out-dir build/dist
+      - name: Logs
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: rust-port-results
+          path: |
+            build/ci/*.log
+            build/ci/*.json
+            build/linux-x86_64/tests/results.json
+            build/linux-x86_64/guard1/results.json
+            build/linux-x86_64/guard2/results.json
+          retention-days: 14

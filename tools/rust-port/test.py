@@ -13,6 +13,7 @@ os.chdir(ROOT)
 p = argparse.ArgumentParser()
 p.add_argument('--lib', default='target/release/libtoks.a')
 p.add_argument('--jobs', type=int, default=8)
+p.add_argument('--print-logs', action='store_true', help='emit upstream suite logs for tools/ci/suites.py')
 p.add_argument('--tests', nargs='*')
 p.add_argument('--out', default='build/rust-tests')
 p.add_argument('--avx512', action='store_true', help='the supplied library includes the avx512 Cargo feature')
@@ -91,4 +92,10 @@ for s in sources:
 report = {'host': platform.platform(), 'tier': os.environ.get('TOKS_TIER', 'auto'), 'library': a.lib, 'guard': a.guard, 'sanitizer': a.sanitize, 'rust_target': a.rust_target, 'results': results}
 (out/'results.json').write_text(json.dumps(report, indent=2)+'\n')
 print(json.dumps(report, indent=2))
+if a.print_logs:
+    print(f'rust harness: {len(results)} callers, {sum(r["status"] != "pass" for r in results)} failures', flush=True)
+    for result in results:
+        print(f'== {out / result["test"]}', flush=True)
+        log = out / (result['test'] + ('.build.log' if result['status'] == 'build-fail' else '.log'))
+        if log.exists(): print(log.read_text(), end='', flush=True)
 raise SystemExit(any(r['status'] != 'pass' for r in results))

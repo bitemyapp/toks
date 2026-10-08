@@ -35,6 +35,10 @@ PRELUDE = (("asmcheck", re.compile(r"^asmcheck: \d+ objects .* assemble$")),
            ("abi lint", re.compile(r"^asm_regs_audit: .* 0 violations$")),
            ("cf_audit", re.compile(r"^cf_audit: .* 0 violations, \d+ allowed$")),   # SPEC §9 on the objects
            ("size", BUDGET))
+RUST_PRELUDE = PRELUDE[:2] + (
+    ("owned Rust tests", re.compile(r"^test result: ok\. [1-9]\d* passed; 0 failed;")),
+    ("Rust caller harness", re.compile(r"^rust harness: (?:4[5-9]|[5-9]\d|\d{3,}) callers, 0 failures$")),
+)
 
 
 def critical_names():
@@ -80,6 +84,8 @@ def parse(path):
 
 def main():
     logs = sys.argv[1:]
+    rust = '--rust' in logs
+    if rust: logs.remove('--rust')
     if not logs:
         sys.exit(__doc__)
     want = sorted(os.path.splitext(os.path.basename(p))[0] for p in glob.glob(os.path.join(ROOT, "tests", "c", "*.c")))
@@ -90,9 +96,9 @@ def main():
         runs, pre, oversize, win = parse(path) if os.path.exists(path) else ({}, [], [], None)
         cols.append((label, runs))
         if win is None:
-            for name, rx in PRELUDE:
+            for name, rx in RUST_PRELUDE if rust else PRELUDE:
                 if not any(rx.match(p) for p in pre):
-                    bad.append(f"{label}: no {name} line (asmcheck / abi lint / cf_audit pass line, size budget lines)")
+                    bad.append(f"{label}: no {name} pass line")
         else:
             if win["end"] != "test.cmd: FAIL=0":
                 bad.append(f"{label}: test.cmd ended " + (repr(win["end"]) if win["end"] else "without its FAIL= line"))
