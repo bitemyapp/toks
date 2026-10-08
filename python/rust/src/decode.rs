@@ -1,12 +1,12 @@
 use crate::{
-    args::{parse, truth},
+    args::{truth, Arg},
     buffers, core_error, lock, native_error, Tokenizer,
 };
 use pyo3::{
     class::gc::{PyTraverseError, PyVisit},
     exceptions::{PyKeyError, PyTypeError},
     prelude::*,
-    types::{PyBytes, PyDict, PyInt, PyList, PyString, PyTuple},
+    types::{PyBytes, PyInt, PyList, PyString},
 };
 use std::sync::Mutex;
 use toks::DecodeFlags as D;
@@ -89,32 +89,30 @@ impl Tokenizer {
 }
 #[pymethods]
 impl Tokenizer {
-    #[pyo3(signature=(*args,**kwargs))]
+    #[pyo3(signature=(ids, skip_special_tokens=Arg::MISSING))]
     fn decode<'py>(
         &self,
-        args: &Bound<'py, PyTuple>,
-        kwargs: Option<&Bound<'py, PyDict>>,
+        ids: &Bound<'py, PyAny>,
+        skip_special_tokens: Arg<'py>,
     ) -> PyResult<Bound<'py, PyAny>> {
-        let a = parse(args, kwargs, &["ids", "skip_special_tokens"], 2, 1)?;
         self.decode_one(
-            a.required(0)?,
-            if truth(a.get(1), true)? {
+            ids,
+            if truth(skip_special_tokens.get(), true)? {
                 D::SKIP_SPECIAL
             } else {
                 D::ALL
             },
         )
     }
-    #[pyo3(signature=(*args,**kwargs))]
+    #[pyo3(signature=(sequences, skip_special_tokens=Arg::MISSING))]
     fn decode_batch<'py>(
         &self,
-        args: &Bound<'py, PyTuple>,
-        kwargs: Option<&Bound<'py, PyDict>>,
+        sequences: &Bound<'py, PyAny>,
+        skip_special_tokens: Arg<'py>,
     ) -> PyResult<Bound<'py, PyList>> {
-        let a = parse(args, kwargs, &["sequences", "skip_special_tokens"], 2, 1)?;
         self.decode_many(
-            a.required(0)?,
-            if truth(a.get(1), true)? {
+            sequences,
+            if truth(skip_special_tokens.get(), true)? {
                 D::SKIP_SPECIAL
             } else {
                 D::ALL
@@ -125,26 +123,24 @@ impl Tokenizer {
     fn decode_bytes<'py>(&self, ids: &Bound<'py, PyAny>) -> PyResult<Bound<'py, PyAny>> {
         self.decode_one(ids, D::RAW)
     }
-    #[pyo3(signature=(*args,**kwargs))]
+    #[pyo3(signature=(batch, *, num_threads=Arg::MISSING))]
     fn decode_bytes_batch<'py>(
         &self,
-        args: &Bound<'py, PyTuple>,
-        kwargs: Option<&Bound<'py, PyDict>>,
+        batch: &Bound<'py, PyAny>,
+        num_threads: Arg<'py>,
     ) -> PyResult<Bound<'py, PyList>> {
-        let a = parse(args, kwargs, &["batch", "num_threads"], 1, 1)?;
-        self.decode_many(a.required(0)?, D::RAW)
+        let _ = num_threads;
+        self.decode_many(batch, D::RAW)
     }
-    #[pyo3(signature=(*args,**kwargs))]
+    #[pyo3(signature=(skip_special_tokens=Arg::MISSING))]
     fn decode_stream<'py>(
         slf: &Bound<'py, Self>,
-        args: &Bound<'py, PyTuple>,
-        kwargs: Option<&Bound<'py, PyDict>>,
+        skip_special_tokens: Arg<'py>,
     ) -> PyResult<Bound<'py, DecodeStream>> {
-        let a = parse(args, kwargs, &["skip_special_tokens"], 1, 0)?;
         let state = slf
             .get()
             .core
-            .decoder(if truth(a.get(0), false)? {
+            .decoder(if truth(skip_special_tokens.get(), false)? {
                 D::SKIP_SPECIAL
             } else {
                 D::ALL

@@ -1,5 +1,5 @@
 use crate::{
-    args::{parse, truth},
+    args::{truth, Arg},
     buffers::{self, Buffer, Text},
     core_error,
     encoding::Encoding,
@@ -8,7 +8,7 @@ use crate::{
 use pyo3::{
     exceptions::{PyTypeError, PyValueError},
     prelude::*,
-    types::{PyBytes, PyDict, PyList, PySet, PyString, PyTuple},
+    types::{PyBytes, PyDict, PyList, PySet, PyString},
 };
 use std::sync::atomic::Ordering;
 use toks::EncodeFlags as F;
@@ -285,38 +285,35 @@ impl Tokenizer {
 }
 #[pymethods]
 impl Tokenizer {
-    #[pyo3(signature=(*args,**kwargs))]
+    #[pyo3(signature=(text, *, add_special_tokens=Arg::MISSING, added_tokens=Arg::MISSING, continuation=Arg::MISSING, allowed_special=Arg::MISSING, disallowed_special=Arg::MISSING))]
     fn encode<'py>(
         slf: &Bound<'py, Self>,
-        args: &Bound<'py, PyTuple>,
-        kwargs: Option<&Bound<'py, PyDict>>,
+        text: &Bound<'py, PyAny>,
+        add_special_tokens: Arg<'py>,
+        added_tokens: Arg<'py>,
+        continuation: Arg<'py>,
+        allowed_special: Arg<'py>,
+        disallowed_special: Arg<'py>,
     ) -> PyResult<Bound<'py, PyAny>> {
-        let a = parse(
-            args,
-            kwargs,
-            &[
-                "text",
-                "add_special_tokens",
-                "added_tokens",
-                "continuation",
-                "allowed_special",
-                "disallowed_special",
-            ],
-            1,
-            1,
-        )?;
-        if a.get(4).is_some() || a.get(5).is_some() {
-            if (1..4).any(|i| a.get(i).is_some()) {
+        if allowed_special.get().is_some() || disallowed_special.get().is_some() {
+            if add_special_tokens.get().is_some()
+                || added_tokens.get().is_some()
+                || continuation.get().is_some()
+            {
                 return Err(PyTypeError::new_err(
                     "cannot combine Hugging Face and tiktoken arguments",
                 ));
             }
-            return Self::tt_encode(slf, a.required(0)?, a.get(4), a.get(5));
+            return Self::tt_encode(slf, text, allowed_special.get(), disallowed_special.get());
         }
         Self::one_out(
             slf,
-            a.required(0)?,
-            slf.get().flags(a.get(1), a.get(2), a.get(3))?,
+            text,
+            slf.get().flags(
+                add_special_tokens.get(),
+                added_tokens.get(),
+                continuation.get(),
+            )?,
             0,
         )
     }
@@ -328,69 +325,57 @@ impl Tokenizer {
         let ord = Self::tt(slf)?.get_item(2)?.extract::<u32>()?;
         Self::one_out(slf, &buffers::repaired_text(text)?, ord | 4 | 16 | 32, 0)
     }
-    #[pyo3(signature=(*args,**kwargs))]
+    #[pyo3(signature=(text, *, add_special_tokens=Arg::MISSING, added_tokens=Arg::MISSING, continuation=Arg::MISSING))]
     fn encode_ex<'py>(
         slf: &Bound<'py, Self>,
-        args: &Bound<'py, PyTuple>,
-        kwargs: Option<&Bound<'py, PyDict>>,
+        text: &Bound<'py, PyAny>,
+        add_special_tokens: Arg<'py>,
+        added_tokens: Arg<'py>,
+        continuation: Arg<'py>,
     ) -> PyResult<Bound<'py, PyAny>> {
-        let a = parse(
-            args,
-            kwargs,
-            &["text", "add_special_tokens", "added_tokens", "continuation"],
-            1,
-            1,
-        )?;
         Self::one_out(
             slf,
-            a.required(0)?,
-            slf.get().flags(a.get(1), a.get(2), a.get(3))?,
+            text,
+            slf.get().flags(
+                add_special_tokens.get(),
+                added_tokens.get(),
+                continuation.get(),
+            )?,
             2,
         )
     }
-    #[pyo3(signature=(*args,**kwargs))]
+    #[pyo3(signature=(text, *, added_tokens=Arg::MISSING, continuation=Arg::MISSING))]
     fn pieces<'py>(
         slf: &Bound<'py, Self>,
-        args: &Bound<'py, PyTuple>,
-        kwargs: Option<&Bound<'py, PyDict>>,
+        text: &Bound<'py, PyAny>,
+        added_tokens: Arg<'py>,
+        continuation: Arg<'py>,
     ) -> PyResult<Bound<'py, PyAny>> {
-        let a = parse(
-            args,
-            kwargs,
-            &["text", "added_tokens", "continuation"],
-            1,
-            1,
-        )?;
         Self::one_out(
             slf,
-            a.required(0)?,
-            slf.get().flags(None, a.get(1), a.get(2))?,
+            text,
+            slf.get()
+                .flags(None, added_tokens.get(), continuation.get())?,
             1,
         )
     }
-    #[pyo3(signature=(*args,**kwargs))]
-    fn encode_into(
+    #[pyo3(signature=(text, out, *, add_special_tokens=Arg::MISSING, added_tokens=Arg::MISSING, continuation=Arg::MISSING))]
+    fn encode_into<'py>(
         &self,
-        args: &Bound<'_, PyTuple>,
-        kwargs: Option<&Bound<'_, PyDict>>,
+        text: &Bound<'py, PyAny>,
+        out: &Bound<'py, PyAny>,
+        add_special_tokens: Arg<'py>,
+        added_tokens: Arg<'py>,
+        continuation: Arg<'py>,
     ) -> PyResult<usize> {
-        let py = args.py();
-        let a = parse(
-            args,
-            kwargs,
-            &[
-                "text",
-                "out",
-                "add_special_tokens",
-                "added_tokens",
-                "continuation",
-            ],
-            2,
-            2,
-        )?;
-        let flags = F::from_bits(self.flags(a.get(2), a.get(3), a.get(4))?);
-        let mut out = Buffer::output(a.required(1)?)?;
-        let tx = Text::get(a.required(0)?)?;
+        let py = text.py();
+        let flags = F::from_bits(self.flags(
+            add_special_tokens.get(),
+            added_tokens.get(),
+            continuation.get(),
+        )?);
+        let mut out = Buffer::output(out)?;
+        let tx = Text::get(text)?;
         out.reject_overlap(&tx)?;
         self.with_slot(py, tx.len, |s| {
             let mut run = || s.encoder.encode_to(tx.bytes(), flags, &mut s.ids);
@@ -404,53 +389,41 @@ impl Tokenizer {
             Ok(s.ids.len())
         })
     }
-    #[pyo3(signature=(*args,**kwargs))]
+    #[pyo3(signature=(texts, *, add_special_tokens=Arg::MISSING, added_tokens=Arg::MISSING, continuation=Arg::MISSING))]
     fn encode_batch<'py>(
         slf: &Bound<'py, Self>,
-        args: &Bound<'py, PyTuple>,
-        kwargs: Option<&Bound<'py, PyDict>>,
+        texts: &Bound<'py, PyAny>,
+        add_special_tokens: Arg<'py>,
+        added_tokens: Arg<'py>,
+        continuation: Arg<'py>,
     ) -> PyResult<Bound<'py, PyList>> {
-        let a = parse(
-            args,
-            kwargs,
-            &[
-                "texts",
-                "add_special_tokens",
-                "added_tokens",
-                "continuation",
-            ],
-            1,
-            1,
-        )?;
         Self::batch_out(
             slf,
-            a.required(0)?,
-            slf.get().flags(a.get(1), a.get(2), a.get(3))?,
+            texts,
+            slf.get().flags(
+                add_special_tokens.get(),
+                added_tokens.get(),
+                continuation.get(),
+            )?,
             false,
         )
     }
-    #[pyo3(signature=(*args,**kwargs))]
+    #[pyo3(signature=(texts, *, add_special_tokens=Arg::MISSING, added_tokens=Arg::MISSING, continuation=Arg::MISSING))]
     fn encode_batch_ex<'py>(
         slf: &Bound<'py, Self>,
-        args: &Bound<'py, PyTuple>,
-        kwargs: Option<&Bound<'py, PyDict>>,
+        texts: &Bound<'py, PyAny>,
+        add_special_tokens: Arg<'py>,
+        added_tokens: Arg<'py>,
+        continuation: Arg<'py>,
     ) -> PyResult<Bound<'py, PyList>> {
-        let a = parse(
-            args,
-            kwargs,
-            &[
-                "texts",
-                "add_special_tokens",
-                "added_tokens",
-                "continuation",
-            ],
-            1,
-            1,
-        )?;
         Self::batch_out(
             slf,
-            a.required(0)?,
-            slf.get().flags(a.get(1), a.get(2), a.get(3))?,
+            texts,
+            slf.get().flags(
+                add_special_tokens.get(),
+                added_tokens.get(),
+                continuation.get(),
+            )?,
             true,
         )
     }

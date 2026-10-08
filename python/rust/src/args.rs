@@ -4,6 +4,24 @@ use pyo3::{
     types::{PyDict, PyTuple},
 };
 
+/// A supplied Python `None` is distinct from an omitted argument. In
+/// particular, supplying any Hugging Face option selects that interface even
+/// when its value is None. A custom extractor keeps this distinction while
+/// letting PyO3 generate CPython FASTCALL argument parsing.
+pub struct Arg<'py>(Option<Bound<'py, PyAny>>);
+impl<'py> Arg<'py> {
+    pub const MISSING: Self = Self(None);
+    pub fn get(&self) -> Option<&Bound<'py, PyAny>> {
+        self.0.as_ref()
+    }
+}
+impl<'py> FromPyObject<'_, 'py> for Arg<'py> {
+    type Error = PyErr;
+    fn extract(obj: Borrowed<'_, 'py, PyAny>) -> PyResult<Self> {
+        Ok(Self(Some(obj.to_owned())))
+    }
+}
+
 pub struct Args<'py>(Vec<Option<Bound<'py, PyAny>>>);
 impl<'py> Args<'py> {
     pub fn get(&self, i: usize) -> Option<&Bound<'py, PyAny>> {

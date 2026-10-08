@@ -191,3 +191,23 @@ The three-block arm64 estimate for long GPT-2 encode improves from 0.530× to
 0.944× C's speed, and batch4 from 0.545× to 0.954×. Short encode improves from
 0.607× to 0.700×. The corresponding T5 estimates are 0.983×, 0.988× and 0.718×.
 These exploratory results are in `receipts/python-intlist-arm64.json`.
+
+## Python FASTCALL entry points
+
+The encode profile shows CPython constructing a positional tuple for
+`method_vectorcall_VARARGS_KEYWORDS`, followed by the adapter allocating its
+argument vector. Score: impact 3 × confidence 5 / effort 2 = 7.5. Explicit PyO3
+signatures now generate FASTCALL parsing for encode, decode and their batch/
+stream variants. A custom argument extractor retains explicit `None` instead
+of conflating it with an omitted option. Keyword-only and positional limits,
+truth callbacks, tiktoken/Hugging Face interface conflicts, token ordering,
+ties, floating-point and RNG behavior remain unchanged. Argument-error wording
+is now supplied by PyO3; exception types remain the same.
+
+All 39 API/thread/boundary checks pass, including a new omission/None and
+reentrant truth-callback test which also passes against the C wheel. All timed
+digests match C. The three-block arm64 short-call estimates improve from
+0.700×/0.602×/0.530× to 0.805×/0.753×/0.627× C speed for GPT-2 encode,
+encode_into and decode; T5 improves from 0.718×/0.662×/0.710× to
+0.840×/0.814×/0.825×. Longer-call results remain mixed and are fully retained
+in `receipts/python-fastcall-arm64.json`.

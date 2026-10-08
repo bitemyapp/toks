@@ -40,6 +40,30 @@ def test_reentrant_index_uses_snapshot(gpt2):
     assert values == []
 
 
+def test_omitted_and_explicit_none_arguments(gpt2):
+    # Explicit None selects the supplied interface and is false for truth-valued
+    # options. It must not collapse into the omitted/default case.
+    special = "<|endoftext|>"
+    assert gpt2.decode([50256]) == ""
+    assert gpt2.decode([50256], None) == special
+    assert gpt2.decode_batch([[50256]], skip_special_tokens=None) == [special]
+    for name in ("add_special_tokens", "added_tokens", "continuation"):
+        with pytest.raises(TypeError):
+            gpt2.encode("Hello", allowed_special="all", **{name: None})
+    for name in ("allowed_special", "disallowed_special"):
+        with pytest.raises(TypeError):
+            gpt2.encode("Hello", **{name: None})
+    assert gpt2.encode(text="Hello", added_tokens=None) == [15496]
+    assert gpt2.decode_bytes_batch(batch=[[15496]], num_threads=object()) == [b"Hello"]
+
+    class Truth:
+        def __bool__(self):
+            assert gpt2.encode("world") == [6894]
+            return False
+
+    assert gpt2.decode([50256], skip_special_tokens=Truth()) == special
+
+
 def test_integer_buffers_and_unaligned_output(gpt2):
     for format in "bBhHiIlLqQ":
         assert gpt2.decode(array.array(format, [64, 65])) == "ab"
