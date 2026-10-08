@@ -14,7 +14,7 @@ p = argparse.ArgumentParser()
 p.add_argument('--lib', default='target/release/libtoks.a')
 p.add_argument('--jobs', type=int, default=8)
 p.add_argument('--print-logs', action='store_true', help='emit upstream suite logs for tools/ci/suites.py')
-p.add_argument('--tests', nargs='*')
+p.add_argument('--tests', nargs='+')
 p.add_argument('--out', default='build/rust-tests')
 p.add_argument('--avx512', action='store_true', help='the supplied library includes the avx512 Cargo feature')
 p.add_argument('--guard', type=int, choices=(1, 2), help='protected-page geometry; supplied library must include test-guard')
@@ -50,7 +50,10 @@ if a.avx512:
     # K6 is internal to K5 and has no public kernel declaration in upstream.
     avx512_bpe.write_text('#include "kernels.h"\nextern uint64_t toks_k6_bpe_avx512(const toks_tables *, toks_k6_args *);\n' + avx512_bpe.read_text())
     sources.append(avx512_bpe)
-if a.tests: sources = [s for s in sources if s.stem in a.tests]
+if a.tests:
+    missing = set(a.tests) - {s.stem for s in sources}
+    if missing: p.error('unknown test callers: ' + ', '.join(sorted(missing)))
+    sources = [s for s in sources if s.stem in a.tests]
 variants = {}
 for feature in sorted({special[s.stem] for s in sources if s.stem in special}):
     dest = out / feature
