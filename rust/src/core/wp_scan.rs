@@ -169,6 +169,14 @@ pub const TOKS_WPF_CLEAN: ::core::ffi::c_uint = TOKS_NS_CLEAN;
 pub const TOKS_WPF_CHINESE: ::core::ffi::c_uint = TOKS_NS_CJK;
 pub const TOKS_WPF_STRIP: ::core::ffi::c_uint = TOKS_NS_STRIP_MN;
 pub const TOKS_WPF_LOWER: ::core::ffi::c_uint = TOKS_NS_LOWER;
+
+#[inline]
+fn cjk_normalization_is_identity(cls: u8) -> bool {
+    // The scanner has already classified this as CJK. With no decomposition,
+    // lowercase mapping, combining class or Mn removal, every supported BERT
+    // flag combination leaves the character unchanged.
+    cls as u32 & (TOKS_BC_DECOMP | TOKS_BC_LOWER | TOKS_BC_NS | TOKS_BC_MN) == 0
+}
 pub const TOKS_WPA_WORD: ::core::ffi::c_uint = 0 as ::core::ffi::c_uint;
 pub const TOKS_WPA_FOLD: ::core::ffi::c_uint = 1 as ::core::ffi::c_uint;
 pub const TOKS_WPA_SPLIT: ::core::ffi::c_uint = 2 as ::core::ffi::c_uint;
@@ -666,11 +674,12 @@ pub unsafe extern "C" fn toks_wp_scan_c(
                 }
                 5 => {
                     close_piece(&raw mut s, i);
-                    let mut n: uint32_t = toks_norm_char(
-                        f,
-                        cp,
-                        &raw mut o as *mut uint32_t,
-                    );
+                    let n = if cjk_normalization_is_identity(cls) {
+                        o[0] = cp;
+                        1
+                    } else {
+                        toks_norm_char(f, cp, o.as_mut_ptr())
+                    };
                     if n == 1 as uint32_t && o[0 as ::core::ffi::c_int as usize] == cp {
                         emit1(
                             &raw mut s,
@@ -808,4 +817,31 @@ pub unsafe extern "C" fn toks_wp_scan_c(
     close_piece(&raw mut s, len);
     (*a).pos = len;
     return (*a).n;
+}
+
+#[cfg(test)]
+mod identity_tests {
+    use super::*;
+
+    #[test]
+    fn cjk_identity_matches_normalizer_for_every_scalar_and_flag_set() {
+        let bits = [TOKS_WPF_CLEAN, TOKS_WPF_CHINESE, TOKS_WPF_STRIP, TOKS_WPF_LOWER];
+        let mut checked = 0;
+        for cp in 0..=0x10ffff {
+            let cls = unsafe { toks_bert_cls(cp) };
+            if cls as u32 & TOKS_BC_CJK == 0 || !cjk_normalization_is_identity(cls) {
+                continue;
+            }
+            checked += 1;
+            for combination in 0..16 {
+                let flags = bits.iter().enumerate().fold(0, |f, (i, bit)| {
+                    f | if combination & (1 << i) != 0 { *bit } else { 0 }
+                });
+                let mut out = [u32::MAX; 32];
+                let n = unsafe { toks_norm_char(flags, cp, out.as_mut_ptr()) };
+                assert_eq!((n, out[0]), (1, cp), "U+{cp:04X}, flags {flags}");
+            }
+        }
+        assert_eq!(checked, 80_262, "review coverage when the pinned Unicode tables change");
+    }
 }

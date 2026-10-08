@@ -1,0 +1,58 @@
+{
+  "host": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "tier": "auto",
+  "library": "build/rust-native/release/libtoks.a",
+  "guard": null,
+  "sanitizer": null,
+  "rust_target": null,
+  "results": [
+    {
+      "test": "test_bound",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 2.3625344169558957
+    },
+    {
+      "test": "test_breadth",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 1.2811986249871552
+    },
+    {
+      "test": "test_misalign",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 2.8487880409811623
+    },
+    {
+      "test": "test_norm",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 2.0251295840134844
+    },
+    {
+      "test": "test_norm_driver",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 2.571874665969517
+    },
+    {
+      "test": "test_targets",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 6.1402859580121
+    },
+    {
+      "test": "test_wp",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 0.5776792910182849
+    },
+    {
+      "test": "test_wp_e2e",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 0.8589278750005178
+    }
+  ]
+}

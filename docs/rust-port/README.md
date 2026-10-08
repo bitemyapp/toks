@@ -37,6 +37,11 @@ native/scalar, guarded pages and the installed Python package on a hosted Linux
 runner. Local and workstation results, rather than that shared runner, supply
 performance measurements.
 
+The first hosted [Rust port run](https://github.com/bitemyapp/toks/actions/runs/37761708788)
+passed at `89c4e97`, including 331 installed-wheel Python tests with 43 explicit
+skips. This precedes the CJK identity-normalization optimization; its receipt
+is `receipts/ci-89c4e97.json`.
+
 The owned Rust API uses `Tokenizer`, `Encoder` and `Decoder`. A tokenizer's clones
 share immutable tables; each encoder owns its scratch and caches, and each stream
 owns any growing byte-fallback hold. The owner stays alive while an encoder or

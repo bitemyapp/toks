@@ -36,7 +36,7 @@ lib:
 	cp $(RUST_OUT)/libtoks.a $(RUST_OUT)/$(SHLIB) $(BUILD_DIR)/
 
 test: lib asmcheck
-	$(CARGO) test --locked --release -p toks --test owned --target-dir $(CARGO_TARGET_DIR) $(RUST_FLAGS)
+	$(CARGO) test --locked --release -p toks --lib --test owned --target-dir $(CARGO_TARGET_DIR) $(RUST_FLAGS)
 	$(PYTHON) tools/rust-port/test.py --lib $(BUILD_DIR)/libtoks.a --out $(BUILD_DIR)/tests --jobs $(JOBS) --print-logs $(TEST_FLAGS)
 
 test-scalar:

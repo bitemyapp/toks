@@ -1,0 +1,14 @@
+{
+  "commit": "89c4e97",
+  "run": "https://github.com/bitemyapp/toks/actions/runs/37761708788",
+  "conclusion": "success",
+  "scope": [
+    "native/scalar core and critical targets",
+    "owned Rust API",
+    "assembly format/register checks",
+    "protected-page geometries 1 and 2",
+    "installed CPython 3.13 wheel including parity",
+    "source archive build"
+  ],
+  "python_summary": "331 passed, 43 skipped in 621.69s (0:10:21)"
+}

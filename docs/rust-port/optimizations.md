@@ -253,3 +253,33 @@ geometric means are 0.996×/1.023×/1.027× C on arm64 and
 performance is still essentially tied. These host-specific binaries require
 matching CPU capabilities; the default library and wheel remain portable.
 All measurements and build flags are in `receipts/native-cpu-*.json`.
+
+## Skip identity normalization for CJK WordPiece characters
+
+A fresh CJK profile placed 599 of 3,872 samples (15.5%) inside `toks_norm_char`
+and its decomposition/mapping helpers. The scanner has already obtained the
+character's BERT class. When that class has no decomposition, lowercase mapping,
+nonzero combining class or Mn removal, normalization is the identity for every
+supported BERT flag combination. Score: impact 4 × confidence 5 / effort 2 = 10.
+Reuse that classification to emit the unchanged character, retaining the
+original normalizer for all other CJK characters.
+
+An exhaustive Rust test enumerates every Unicode scalar, selects all 80,262
+CJK characters satisfying the predicate, and checks the unchanged normalizer
+under all 16 BERT flag combinations: 1,284,192 identity checks. It passes on
+both architectures. The eight WordPiece/e2e, normalizer/driver, misalignment,
+target, breadth and bound suites also pass on both hosts. The split, materialized
+buffer, maximum-character and exact-prefix paths retain their original order;
+only a pure call is skipped. There are no score, tie, floating-point or RNG
+changes. Every measured token stream matches the frozen C golden.
+
+Against the preceding native-tuned Rust build, CJK cold/pass-same/warm improve
+1.207×/1.259×/1.263× on arm64 and 1.184×/1.235×/1.235× on x86. A separate paired
+comparison against native-tuned thin-LTO C measures CJK at
+1.092×/1.152×/1.161× on arm64 and 1.059×/1.099×/1.105× on x86. Across all four
+WordPiece corpora, the C-relative geometric means are 1.037×/1.054×/1.056× and
+1.030×/1.048×/1.054×, respectively. English/code/multilingual observations,
+including small losses and variance, remain in `receipts/cjk-identity-*.json`.
+The profile captures are `receipts/wp-cjk-*-sample.txt`. These results justify
+keeping the change; the complete matrix and Python adapter still require final
+verification.
