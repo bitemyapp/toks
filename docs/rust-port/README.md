@@ -34,13 +34,26 @@ skips for the upstream private benchmark/fuzz corpora and additional model names
 All 122 files in the public tokenizer manifest were downloaded; the critical
 target test reports 91 targets, no skips, and no failures.
 
+Protected-page builds now preserve the upstream table, scratch, ownership and
+arena hooks. Every table and scratch region is moved beside an inaccessible
+page, with both end and start boundary placements exercised. All 45 callers
+passed both placements on macOS arm64 and Linux x86-64; the four `guard*.json`
+receipts record these runs. Build the instrumented archive as a static library
+because the test callers provide its hook implementations:
+
+```sh
+cargo rustc -p toks --lib --crate-type staticlib --release --features test-guard --target-dir build/rust-guard
+python3 tools/rust-port/test.py --guard 1 --lib build/rust-guard/release/libtoks.a --out build/rust-tests-guard1
+python3 tools/rust-port/test.py --guard 2 --lib build/rust-guard/release/libtoks.a --out build/rust-tests-guard2
+```
+
 | Area | Evidence so far | Still required |
 | --- | --- | --- |
-| ABI, ownership, scratch, allocation | upstream ABI/API/allocation/state tests | sanitizer and guarded Rust builds |
+| ABI, ownership, scratch, allocation | upstream ABI/API/allocation/state tests; both protected-page placements on both hosts | sanitizer builds |
 | BPE and SentencePiece BPE | kernel twins, exact IDs, short/long/cache/tie cases | broader differential corpus |
-| WordPiece and Unigram | breadth, primitives, targets, normalization tests | Python oracle suite |
+| WordPiece and Unigram | breadth, primitives, targets, normalization; 12-model Unigram oracle on both hosts | broader Python oracle suite |
 | Parallelism | persistent pool, state, stall tests on both hosts | sanitizer coverage |
-| Native assembly | original NEON and AVX2 BPE callers, scalar fallback | actual AVX-512 kernel and dispatch |
+| Native assembly | NEON, AVX2, scalar; optional AVX-512 bucket probe tested on x86 | AVX-512 performance improvement (currently tied) |
 | Python | original adapter retained as reference | Rust adapter and package validation |
 | Portability | macOS arm64 and Linux x86-64 | Windows and minimum target checks |
 

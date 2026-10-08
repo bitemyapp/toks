@@ -60,6 +60,8 @@ pub mod par;
 
 mod atomic;
 mod platform;
+#[cfg(feature = "test-guard")]
+mod guard;
 
 /// Bring a valid table/cache line into the read cache before its queued lookup.
 #[inline(always)]

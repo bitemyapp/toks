@@ -525,12 +525,24 @@ pub const TOKS_CHUNK_PIECES: ::core::ffi::c_int = 256 as ::core::ffi::c_int;
 pub const TOKS_TF_ASM_MERGE: ::core::ffi::c_uint = 0x40 as ::core::ffi::c_uint;
 pub const TOKS_AF_SPECIAL: ::core::ffi::c_uint = 0x1 as ::core::ffi::c_uint;
 #[inline]
-unsafe extern "C" fn toks_tab_seal(mut b: *mut ::core::ffi::c_void, mut n: uint64_t) {}
+unsafe extern "C" fn toks_tab_seal(mut b: *mut ::core::ffi::c_void, mut n: uint64_t) {
+    #[cfg(feature = "test-guard")]
+    { crate::guard::toks_guard_seal(b, n); }
+    #[cfg(not(feature = "test-guard"))]
+    {
+    }
+}
 #[inline]
 unsafe extern "C" fn toks_tab_unmapped(
     mut b: *const ::core::ffi::c_void,
     mut n: uint64_t,
-) {}
+) {
+    #[cfg(feature = "test-guard")]
+    { crate::guard::toks_guard_release(b, n); }
+    #[cfg(not(feature = "test-guard"))]
+    {
+    }
+}
 #[inline]
 unsafe extern "C" fn toks_tab_free(mut b: *mut uint8_t, mut n: uint64_t) {
     toks_tab_unmapped(b as *const ::core::ffi::c_void, n);

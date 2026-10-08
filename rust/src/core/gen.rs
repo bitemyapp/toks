@@ -501,7 +501,13 @@ unsafe extern "C" fn toks_scr_p(
     mut h: *const toks_scratch,
     mut p: *mut uint8_t,
 ) -> *mut uint8_t {
+    #[cfg(feature = "test-guard")]
+    { return crate::guard::toks_guard_scr_at(h.cast(), (p as u64).wrapping_sub((*h).base)); }
+    #[cfg(not(feature = "test-guard"))]
+    {
     return p;
+
+    }
 }
 #[inline]
 unsafe extern "C" fn toks_cp_decode(mut p: *const uint8_t, mut k: uint32_t) -> uint32_t {

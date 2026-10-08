@@ -34,12 +34,17 @@ pub unsafe extern "C" fn toks_plat_arena(n: u64) -> *mut u8 {
     }
     #[cfg(target_os = "linux")]
     { libc::madvise(p.cast(), z, libc::MADV_HUGEPAGE); p.write_volatile(0); }
+    #[cfg(feature = "test-guard")]
+    crate::guard::toks_guard_block(p.cast(), n);
     p
 }
 #[cfg(not(feature = "test-allocator"))]
 #[no_mangle]
 pub unsafe extern "C" fn toks_plat_arena_free(p: *mut u8, n: u64) {
-    if !p.is_null() { let pg = page_bytes(); libc::munmap(p.cast(), (n as usize + pg - 1) & !(pg - 1)); }
+    if p.is_null() { return; }
+    #[cfg(feature = "test-guard")]
+    crate::guard::toks_guard_release(p.cast(), n);
+    let pg = page_bytes(); libc::munmap(p.cast(), (n as usize + pg - 1) & !(pg - 1));
 }
 #[cfg(not(feature = "test-allocator"))]
 #[no_mangle]
@@ -135,4 +140,6 @@ pub extern "C" fn toks_cpu_features() -> u64 {
 extern "C" {
     fn toks_plat_alloc(n: u64) -> *mut c_void;
     fn toks_plat_free(p: *mut c_void, n: u64);
+    pub fn toks_plat_arena(n: u64) -> *mut u8;
+    pub fn toks_plat_arena_free(p: *mut u8, n: u64);
 }

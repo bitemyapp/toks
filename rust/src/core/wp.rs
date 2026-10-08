@@ -335,10 +335,20 @@ unsafe extern "C" fn toks_tab_ar(
         n.wrapping_add(x.pad as uint64_t),
         align,
     );
+    #[cfg(feature = "test-guard")]
+    if !p.is_null() {
+        return crate::guard::toks_guard_tab((*a).base.cast(), p, n.wrapping_add(x.pad as u64), x.align as u64);
+    }
     return p;
 }
 #[inline]
-unsafe extern "C" fn toks_tab_seal(mut b: *mut ::core::ffi::c_void, mut n: uint64_t) {}
+unsafe extern "C" fn toks_tab_seal(mut b: *mut ::core::ffi::c_void, mut n: uint64_t) {
+    #[cfg(feature = "test-guard")]
+    { crate::guard::toks_guard_seal(b, n); }
+    #[cfg(not(feature = "test-guard"))]
+    {
+    }
+}
 #[inline]
 unsafe extern "C" fn toks_crc32c_u32(mut crc: uint32_t, mut v: uint32_t) -> uint32_t {
     crc = TOKS_CRC32C_TAB[((crc ^ v) & 0xff as uint32_t) as usize]

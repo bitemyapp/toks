@@ -836,7 +836,13 @@ unsafe extern "C" fn toks_scr_p(
     mut h: *const toks_scratch,
     mut p: *mut uint8_t,
 ) -> *mut uint8_t {
+    #[cfg(feature = "test-guard")]
+    { return crate::guard::toks_guard_scr_at(h.cast(), (p as u64).wrapping_sub((*h).base)); }
+    #[cfg(not(feature = "test-guard"))]
+    {
     return p;
+
+    }
 }
 #[inline]
 unsafe extern "C" fn toks_scr_zero(
@@ -844,13 +850,25 @@ unsafe extern "C" fn toks_scr_zero(
     mut p: *mut uint8_t,
     mut n: uint64_t,
 ) {
+    #[cfg(feature = "test-guard")]
+    { crate::guard::toks_guard_scr_zero(h.cast(), (p as u64).wrapping_sub((*h).base), n); }
+    #[cfg(not(feature = "test-guard"))]
+    {
     memset(p as *mut ::core::ffi::c_void, 0 as ::core::ffi::c_int, n as size_t);
+
+    }
 }
 #[inline]
 unsafe extern "C" fn toks_scr_carved(
     mut ctx: *const toks_ctx,
     mut h: *mut toks_scratch,
-) {}
+) {
+    #[cfg(feature = "test-guard")]
+    { crate::guard::toks_guard_scr(ctx.cast(), h.cast()); }
+    #[cfg(not(feature = "test-guard"))]
+    {
+    }
+}
 #[inline]
 unsafe extern "C" fn toks_scr_work(mut max_len: uint64_t) -> uint64_t {
     return toks_align64(

@@ -159,6 +159,10 @@ unsafe extern "C" fn toks_tab_ar(
         n.wrapping_add(x.pad as uint64_t),
         align,
     );
+    #[cfg(feature = "test-guard")]
+    if !p.is_null() {
+        return crate::guard::toks_guard_tab((*a).base.cast(), p, n.wrapping_add(x.pad as u64), x.align as u64);
+    }
     return p;
 }
 #[inline]
