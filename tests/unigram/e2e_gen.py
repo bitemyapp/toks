@@ -53,6 +53,10 @@ def continuation_twin(path: str):
     d = json.load(open(path, encoding="utf-8"))
     d = copy.deepcopy(d)
     d["added_tokens"] = []
+    # toks.h: continuation suppresses these whole-document steps. Keeping the
+    # file's truncation here compared a truncated HF document with a chunk.
+    d["truncation"] = None
+    d["padding"] = None
 
     def fix(x):
         if x is None:
