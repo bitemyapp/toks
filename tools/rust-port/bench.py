@@ -26,6 +26,7 @@ ap.add_argument('--rounds', type=int, default=3)
 ap.add_argument('--reps', type=int, default=5)
 ap.add_argument('--cpu', type=int)
 ap.add_argument('--out', default='build/rust-bench/paired')
+ap.add_argument('--golden', help='C-generated golden.json from an earlier run; require every cell to match')
 a = ap.parse_args()
 if a.rounds < 1 or a.reps < 1: ap.error('rounds and reps must be positive')
 out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
@@ -45,6 +46,7 @@ meta['processor'] = command(['sysctl','-n','machdep.cpu.brand_string']) if platf
 if a.cpu is not None:
     meta['siblings'] = Path(f'/sys/devices/system/cpu/cpu{a.cpu}/topology/thread_siblings_list').read_text().strip()
 # Golden streams derive from the frozen C implementation, once per cell.
+prior_golden = json.loads(Path(a.golden).read_text()) if a.golden else None
 golden = {}
 for model in a.models:
     tokenizer = Path(os.environ.get('TOKS_TOKENIZER_CACHE', Path.home()/'.cache/toks/tokenizers')) / model
@@ -68,6 +70,8 @@ for model in a.models:
                     elapsed = time.monotonic()-start
                     (out/f'{tag}.log').write_text(cp.stdout)
                     digest = sha(ids); ids.unlink()
+                    if prior_golden is not None:
+                        assert digest == prior_golden[key]['sha256'], f'C golden mismatch: {tag}'
                     expected = golden.setdefault(key, {'sha256': digest, 'from': tag, 'binary_sha256': meta['binaries'][side]['sha256']})
                     # The first block always starts with C; a golden is never generated from Rust.
                     assert digest == expected['sha256'], f'token stream mismatch: {tag}'
