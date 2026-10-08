@@ -1,0 +1,280 @@
+{
+  "host": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "tier": "auto",
+  "library": "build/rust-native/release/libtoks.a",
+  "guard": null,
+  "sanitizer": null,
+  "rust_target": null,
+  "results": [
+    {
+      "test": "test_abi",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 0.21175308397505432
+    },
+    {
+      "test": "test_alloc",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 1.2985284170135856
+    },
+    {
+      "test": "test_api",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 0.9131131250178441
+    },
+    {
+      "test": "test_bound",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 2.976839833019767
+    },
+    {
+      "test": "test_bpe",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 2.2077993329730816
+    },
+    {
+      "test": "test_breadth",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 1.5585512920515612
+    },
+    {
+      "test": "test_compile",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 1.9303994170040824
+    },
+    {
+      "test": "test_cuts",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 1.5344426250085235
+    },
+    {
+      "test": "test_dispatch",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 0.33223137503955513
+    },
+    {
+      "test": "test_e2e",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 15.078494791989215
+    },
+    {
+      "test": "test_guard",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 1.0245997920283116
+    },
+    {
+      "test": "test_json_hostile",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 0.3414860420161858
+    },
+    {
+      "test": "test_json_smoke",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 0.33044212497770786
+    },
+    {
+      "test": "test_k0",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 0.45450095797423273
+    },
+    {
+      "test": "test_k1",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 3.259288083005231
+    },
+    {
+      "test": "test_k3",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 0.4957134170108475
+    },
+    {
+      "test": "test_k3_dsv3",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 0.5256100409897044
+    },
+    {
+      "test": "test_k3_o200k",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 0.6373494580038823
+    },
+    {
+      "test": "test_k7",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 0.7425319160101935
+    },
+    {
+      "test": "test_kimi",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 0.8396706249914132
+    },
+    {
+      "test": "test_load",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 0.7439630420412868
+    },
+    {
+      "test": "test_memo",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 3.620780042023398
+    },
+    {
+      "test": "test_memo_hash",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 4.774338875024114
+    },
+    {
+      "test": "test_misalign",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 2.535315332992468
+    },
+    {
+      "test": "test_norm",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 1.7712794580147602
+    },
+    {
+      "test": "test_norm_driver",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 2.3150576669722795
+    },
+    {
+      "test": "test_par",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 7.192943166010082
+    },
+    {
+      "test": "test_primitives",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 17.09954770898912
+    },
+    {
+      "test": "test_proof",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 0.2107908750185743
+    },
+    {
+      "test": "test_segment",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 0.22837491700192913
+    },
+    {
+      "test": "test_split",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 8.012071000004653
+    },
+    {
+      "test": "test_spm",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 0.8589144999859855
+    },
+    {
+      "test": "test_state",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 8.557867959025316
+    },
+    {
+      "test": "test_state_hash",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 5.1995217080111615
+    },
+    {
+      "test": "test_stream",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 3.077904415957164
+    },
+    {
+      "test": "test_targets",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 6.508343249966856
+    },
+    {
+      "test": "test_tier",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 0.30814770801225677
+    },
+    {
+      "test": "test_tiktoken",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 1.3055299580446444
+    },
+    {
+      "test": "test_tmpl",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 0.290275749983266
+    },
+    {
+      "test": "test_version",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 0.2628810830065049
+    },
+    {
+      "test": "test_vocab",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 3.2744189590448514
+    },
+    {
+      "test": "test_wp",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 0.549178707995452
+    },
+    {
+      "test": "test_wp_e2e",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 0.7262636250234209
+    },
+    {
+      "test": "test_bpe_neon",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 1.5871230000047944
+    },
+    {
+      "test": "test_stall",
+      "status": "pass",
+      "rc": 0,
+      "seconds": 3.6308640419738367
+    }
+  ]
+}

@@ -229,8 +229,10 @@ key preparation. An experiment replaced two scalar ASCII folds of a 16-byte
 key with baseline NEON/SSE2 comparisons. Score: impact 3 × confidence 4 /
 effort 2 = 6. It retained every non-A–Z byte, zero padding, lookup order, hash,
 ties and output, with no floating-point or RNG changes. All byte values at all
-16 positions, randomized keys, and the WordPiece/misalignment/target/breadth/
-bounds suites passed on both hosts. All four corpus token streams matched C.
+16 positions, randomized keys, and the WordPiece/target/breadth suites passed
+on both hosts. Two mistyped extra suite selectors silently selected nothing;
+the harness now rejects unknown or empty selections. All four corpus token
+streams matched C.
 
 The experiment is **rejected**: arm64's median-based ratios were only
 1.006×/1.005×/1.007× the preceding Rust build, while x86 regressed to
@@ -239,3 +241,15 @@ CJK improved about 1%. The extra architecture-specific implementation does not
 justify this mixed result. `experiments/ascii-fold.patch` preserves the candidate,
 and `receipts/ascii-rejected-*.json` preserves all measurements. Production code
 retains scalar folding.
+
+## Native CPU tuning
+
+Both cores were then tuned for the host CPU: Rust adds
+`RUSTFLAGS='-C target-cpu=native'` to the same release profile. All 45 callers and
+seven owned-API tests passed on each host. Every full-matrix token-stream digest
+matches the original C golden. The five-block cold/pass-same/warm descriptive
+geometric means are 0.996×/1.023×/1.027× C on arm64 and
+0.999×/1.029×/1.032× on x86. Native tuning helps modestly, but fresh-input
+performance is still essentially tied. These host-specific binaries require
+matching CPU capabilities; the default library and wheel remain portable.
+All measurements and build flags are in `receipts/native-cpu-*.json`.
