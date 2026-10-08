@@ -102,3 +102,18 @@ match C for the three affected tokenizer families on all four corpora. Across
 those 12 cells the cold/pass-same/warm geometric means versus C are
 0.983×/1.074×/1.088× on arm64 and 0.937×/0.974×/0.985× on x86. The x86
 SentencePiece gap remains; restoring these hints alone does not explain it.
+
+## 5. Select the native SentencePiece scanner on x86
+
+The translation was generated with both native-kernel macro sets defined. The
+original `#if NEON / #elif AVX2` in K7 dispatch therefore selected only NEON's
+tier predicate. Although the function symbol was correctly linked to AVX2 on
+x86, the tier check prevented calls to it. Every x86 SPM scan used scalar Rust.
+The corrected predicate selects tier 2 on arm64 and tiers 3/4 on x86; scalar
+still bypasses native scanning. This is a dispatch repair, with no algorithm or
+memory-layout change. Score: impact 4 × confidence 5 / effort 1 = 20.
+
+The SPM, K7, tier, breadth, target and bounds tests pass on x86. Across the four
+Gemma 4 corpora, C-golden token streams match. Cold/pass-same/warm geometric means
+against C improve to 0.962×/1.094×/1.110×. The CJK cold cell improves from 0.738×
+to 0.976×; the native path closes the main unexplained regression.

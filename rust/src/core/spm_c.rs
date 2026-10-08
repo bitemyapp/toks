@@ -1661,9 +1661,12 @@ pub unsafe extern "C" fn toks_spm_encode(
     };
     while ka.pos < len {
         let mut base: uint64_t = ka.pos;
-        let mut m: uint64_t = if flags >> 8 as ::core::ffi::c_int
-            == TOKS_TIER_NEON as uint32_t
-        {
+        // The translation originally captured the NEON-only preprocessor arm.
+        // A linked x86 kernel must be selected for both AVX2 and AVX-512 tiers.
+        let tier = flags >> 8;
+        let native = (cfg!(target_arch = "aarch64") && tier == 2)
+            || (cfg!(target_arch = "x86_64") && matches!(tier, 3 | 4));
+        let mut m: uint64_t = if native {
             toks_k7_spm_neon(s, &raw mut ka)
         } else {
             0 as uint64_t
