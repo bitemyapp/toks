@@ -17,6 +17,9 @@ p.add_argument('--tests', nargs='*')
 p.add_argument('--out', default='build/rust-tests')
 p.add_argument('--avx512', action='store_true', help='the supplied library includes the avx512 Cargo feature')
 p.add_argument('--guard', type=int, choices=(1, 2), help='protected-page geometry; supplied library must include test-guard')
+p.add_argument('--sanitize', choices=('address',), help='instrument and link the C callers with this sanitizer')
+p.add_argument('--rust-target', help='explicit target triple for instrumented variant builds')
+p.add_argument('--link-arg', action='append', default=[], help='additional compiler-driver link argument')
 a = p.parse_args()
 isa = 'arm64' if platform.machine() in ('arm64', 'aarch64') else 'x86_64'
 out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
@@ -28,6 +31,8 @@ flags = ['clang', '-std=c17', '-O2', '-fno-strict-aliasing', '-fwrapv', '-Wall',
 flags += [f'-DTOKS_HAVE_{f.stem.upper()}=1' for f in asm if f.stem.startswith('k')]
 flags += ['-DTOKS_ASM_SOURCES="' + ' '.join(f.name for f in asm) + '"']
 if a.guard: flags += [f'-DTOKS_GUARD={a.guard}']
+if a.sanitize: flags += [f'-fsanitize={a.sanitize}', '-fno-omit-frame-pointer']
+flags += a.link_arg
 common = ['tests/common/guard.c', f'tests/common/abicheck_{isa}.S', a.lib, '-lpthread', '-lm']
 if platform.system() == 'Linux': common += ['-ldl', '-lrt', '-lutil']
 # These exercise replacements or source-included C internals. They require their
@@ -50,8 +55,9 @@ for feature in sorted({special[s.stem] for s in sources if s.stem in special}):
     dest = out / feature
     with (out/f'{feature}.build.log').open('wb') as log:
         features = feature + (',avx512' if a.avx512 else '') + (',test-guard' if a.guard else '')
-        subprocess.run(['cargo', 'rustc', '-p', 'toks', '--lib', '--crate-type', 'staticlib', '--release', '--features', features, '--target-dir', str(dest)], stdout=log, stderr=subprocess.STDOUT, check=True)
-    variants[feature] = str(dest / 'release/libtoks.a')
+        target = ['--target', a.rust_target] if a.rust_target else []
+        subprocess.run(['cargo', 'rustc', '-p', 'toks', '--lib', '--crate-type', 'staticlib', '--release', '--features', features, '--target-dir', str(dest)] + target, stdout=log, stderr=subprocess.STDOUT, check=True)
+    variants[feature] = str(dest / (a.rust_target or '') / 'release/libtoks.a')
 def source(s):
     text = s.read_text()
     if s.stem not in ('test_cuts', 'test_memo_hash', 'test_state_hash'): return s
@@ -82,7 +88,7 @@ with concurrent.futures.ThreadPoolExecutor(max_workers=a.jobs) as pool:
     results = list(pool.map(run, [s for s in sources if s.stem != 'test_stall']))
 for s in sources:
     if s.stem == 'test_stall': results.append(run(s))
-report = {'host': platform.platform(), 'tier': os.environ.get('TOKS_TIER', 'auto'), 'library': a.lib, 'guard': a.guard, 'results': results}
+report = {'host': platform.platform(), 'tier': os.environ.get('TOKS_TIER', 'auto'), 'library': a.lib, 'guard': a.guard, 'sanitizer': a.sanitize, 'rust_target': a.rust_target, 'results': results}
 (out/'results.json').write_text(json.dumps(report, indent=2)+'\n')
 print(json.dumps(report, indent=2))
 raise SystemExit(any(r['status'] != 'pass' for r in results))
