@@ -211,3 +211,31 @@ digests match C. The three-block arm64 short-call estimates improve from
 encode_into and decode; T5 improves from 0.718×/0.662×/0.710× to
 0.840×/0.814×/0.825×. Longer-call results remain mixed and are fully retained
 in `receipts/python-fastcall-arm64.json`.
+
+## Stronger C baseline and rejected SIMD case-folding experiment
+
+The 28-cell core matrix was repeated for five ABBA/BAAB blocks with nine inner
+repetitions. C now uses native CPU tuning and thin LTO in addition to its
+original strict arithmetic/aliasing flags; Rust uses its portable release
+profile with thin LTO. Every stream matches the original frozen C goldens.
+The descriptive cold/pass-same/warm geometric means of median ratios are
+0.991×/1.018×/1.023× on Apple M5 Max and 0.994×/1.016×/1.022× on Threadripper
+PRO 9985WX. This establishes neither a fresh-input win nor a general win across
+all workloads. The full observations and build flags are in
+`receipts/strong-c-{arm64,x86}.json`.
+
+The WordPiece profile places 1,827 of 4,236 samples in encoding/lookup, including
+key preparation. An experiment replaced two scalar ASCII folds of a 16-byte
+key with baseline NEON/SSE2 comparisons. Score: impact 3 × confidence 4 /
+effort 2 = 6. It retained every non-A–Z byte, zero padding, lookup order, hash,
+ties and output, with no floating-point or RNG changes. All byte values at all
+16 positions, randomized keys, and the WordPiece/misalignment/target/breadth/
+bounds suites passed on both hosts. All four corpus token streams matched C.
+
+The experiment is **rejected**: arm64's median-based ratios were only
+1.006×/1.005×/1.007× the preceding Rust build, while x86 regressed to
+0.984×/0.983×/0.982×. Most arm64 per-cell paired-block intervals included 1;
+CJK improved about 1%. The extra architecture-specific implementation does not
+justify this mixed result. `experiments/ascii-fold.patch` preserves the candidate,
+and `receipts/ascii-rejected-*.json` preserves all measurements. Production code
+retains scalar folding.
