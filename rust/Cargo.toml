@@ -15,8 +15,10 @@ libc = "0.2"
 [build-dependencies]
 cc = "1"
 
-# Instrumented variants are linked only by tools/rust-port/test.py.
 [features]
+# Experimental native merge probe; measured but not enabled by default.
+avx512 = []
+# Instrumented variants are linked only by tools/rust-port/test.py.
 test-api = []
 test-allocator = []
 test-internals = []

@@ -99,6 +99,8 @@ extern "C" {
     fn toks_k3_scan_dsv3_neon(t: *const toks_tables, a: *mut toks_k3_args) -> uint64_t;
     #[cfg_attr(target_arch = "aarch64", link_name = "toks_k3_scan_dsv3_neon")]
     fn toks_k3_scan_dsv3_avx2(t: *const toks_tables, a: *mut toks_k3_args) -> uint64_t;
+    #[cfg(all(feature = "avx512", target_arch = "x86_64"))]
+    fn toks_k5_encode_avx512(t: *const toks_tables, a: *mut toks_k5_args) -> uint64_t;
     fn toks_k5_encode_c(t: *const toks_tables, a: *mut toks_k5_args) -> uint64_t;
     #[cfg_attr(target_arch = "x86_64", link_name = "toks_k5_encode_avx2")]
     fn toks_k5_encode_neon(t: *const toks_tables, a: *mut toks_k5_args) -> uint64_t;
@@ -1000,7 +1002,7 @@ unsafe extern "C" fn toks_cp_decode(mut p: *const uint8_t, mut k: uint32_t) -> u
 pub const TOKS_HAVE_K3_CL100K_AVX512: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
 pub const TOKS_HAVE_K3_O200K_AVX512: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
 pub const TOKS_HAVE_K3_DSV3_AVX512: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
-pub const TOKS_HAVE_K5_AVX512: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
+pub const TOKS_HAVE_K5_AVX512: ::core::ffi::c_int = cfg!(all(feature = "avx512", target_arch = "x86_64")) as ::core::ffi::c_int;
 #[inline(always)]
 unsafe extern "C" fn toks_k3_short(
     mut twin: toks_k3_fn,
@@ -1346,6 +1348,8 @@ unsafe extern "C" fn toks_k5(
     } else {
         TOKS_TIER_SCALAR
     } {
+        #[cfg(all(feature = "avx512", target_arch = "x86_64"))]
+        TOKS_TIER_AVX512 => return toks_k5_encode_avx512(t, a),
         TOKS_TIER_NEON => return toks_k5_encode_neon(t, a),
         TOKS_TIER_AVX2 => return toks_k5_encode_avx2(t, a),
         _ => return toks_k5_encode_c(t, a),

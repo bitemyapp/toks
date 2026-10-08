@@ -9,6 +9,8 @@ extern "C" {
         c: ::core::ffi::c_int,
         n: size_t,
     ) -> *mut ::core::ffi::c_void;
+    #[cfg(all(feature = "avx512", target_arch = "x86_64"))]
+    fn toks_k6_bpe_avx512(t: *const toks_tables, a: *mut toks_k6_args) -> uint64_t;
     fn toks_k6_bpe_c(t: *const toks_tables, a: *mut toks_k6_args) -> uint64_t;
     #[cfg_attr(target_arch = "x86_64", link_name = "toks_k6_bpe_avx2")]
     fn toks_k6_bpe_neon(t: *const toks_tables, a: *mut toks_k6_args) -> uint64_t;
@@ -405,6 +407,33 @@ pub unsafe extern "C" fn toks_k5_long_avx2(
         return n;
     }
     n = toks_k6_bpe_avx2(t, a);
+    (*lc).misses = (*lc).misses.wrapping_add(1 as uint64_t);
+    if ((*a).len > 15 as uint64_t || n > 4 as uint64_t) && n != 0 as uint64_t {
+        lc_put(lc, a, s, h, n);
+    }
+    return n;
+}
+#[cfg(all(feature = "avx512", target_arch = "x86_64"))]
+#[no_mangle]
+pub unsafe extern "C" fn toks_k5_long_avx512(
+    mut t: *const toks_tables,
+    mut a: *mut toks_k6_args,
+    mut lc: *mut toks_lcache,
+) -> uint64_t {
+    if lc.is_null() || (*a).len < 5 as uint64_t {
+        return toks_k6_bpe_avx512(t, a);
+    }
+    let mut h: uint32_t = lc_hash((*a).piece, (*a).len);
+    let mut s: *mut uint32_t = (*lc)
+        .buckets
+        .offset(
+            (h as uint64_t & (*lc).mask).wrapping_mul(TOKS_BUCKET as uint64_t) as isize,
+        ) as *mut ::core::ffi::c_void as *mut uint32_t;
+    let mut n: uint64_t = lc_get(lc, a, s, h);
+    if n != 0 as uint64_t {
+        return n;
+    }
+    n = toks_k6_bpe_avx512(t, a);
     (*lc).misses = (*lc).misses.wrapping_add(1 as uint64_t);
     if ((*a).len > 15 as uint64_t || n > 4 as uint64_t) && n != 0 as uint64_t {
         lc_put(lc, a, s, h, n);

@@ -68,12 +68,24 @@
         mov     rdx, rax
         shl     rdx, 22
         vmovq   xmm1, rdx
+#if defined(TOKS_K6_AVX512)
+        vpbroadcastq zmm1, xmm1
+#else
         vpbroadcastq ymm1, xmm1                 /* key << 22: the slot's key field in place */
+#endif
         imul    rax, qword ptr [rip + L(fib64)]
         shrx    rdx, rax, r9                    /* the home bucket */
         shl     rdx, 6
         add     rdx, r10
 90:
+#if defined(TOKS_K6_AVX512)
+        /* Eight keys occupy exactly one 64-byte bucket. AVX-512 tests all
+         * eight at once; no load extends beyond the original two ymm loads. */
+        vpandnq zmm2, zmm5, zmmword ptr [rdx]
+        vpcmpeqq k1, zmm2, zmm1
+        kmovw   edi, k1
+        test    edi, edi
+#else
         vpandn  ymm2, ymm5, ymmword ptr [rdx]
         vpandn  ymm3, ymm5, ymmword ptr [rdx + 32]
         vpcmpeqq ymm2, ymm2, ymm1
@@ -82,6 +94,7 @@
         vmovmskpd eax, ymm3
         shl     eax, 4
         or      edi, eax                        /* bit j: slot j holds the key (at most one does) */
+#endif
         jz      91f
         tzcnt   edi, edi
         mov     eax, dword ptr [rdx + rdi*8]
@@ -230,7 +243,11 @@
         mov     qword ptr [rsp + S_R2I], rax
         mov     r10, qword ptr [r15 + TT_MERGE_SLOTS]
         mov     r9, qword ptr [r15 + TT_MERGE_SHIFT]
+#if defined(TOKS_K6_AVX512)
+        vpbroadcastq zmm5, qword ptr [rip + L(prio_mask)]
+#else
         vpbroadcastq ymm5, qword ptr [rip + L(prio_mask)]
+#endif
 .endm
 .macro SHORT_INIT
         mov     qword ptr [rsp + S_L], r12      /* len, for merges = len - n_out */

@@ -562,7 +562,7 @@ pub const TOKS_HAVE_K1_AVX512: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
 pub const TOKS_HAVE_K3_CL100K_AVX512: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
 pub const TOKS_HAVE_K3_O200K_AVX512: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
 pub const TOKS_HAVE_K3_DSV3_AVX512: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
-pub const TOKS_HAVE_K5_AVX512: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
+pub const TOKS_HAVE_K5_AVX512: ::core::ffi::c_int = cfg!(all(feature = "avx512", target_arch = "x86_64")) as ::core::ffi::c_int;
 pub const TOKS_HAVE_NEON: ::core::ffi::c_int = TOKS_HAVE_K1_NEON
     | TOKS_HAVE_K3_CL100K_NEON | TOKS_HAVE_K3_O200K_NEON | TOKS_HAVE_K3_DSV3_NEON
     | TOKS_HAVE_K5_NEON | TOKS_HAVE_K7_SPM_NEON;

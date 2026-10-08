@@ -15,10 +15,14 @@ p.add_argument('--lib', default='target/release/libtoks.a')
 p.add_argument('--jobs', type=int, default=8)
 p.add_argument('--tests', nargs='*')
 p.add_argument('--out', default='build/rust-tests')
+p.add_argument('--avx512', action='store_true', help='the supplied library includes the avx512 Cargo feature')
 a = p.parse_args()
 isa = 'arm64' if platform.machine() in ('arm64', 'aarch64') else 'x86_64'
 out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
 asm = sorted((ROOT / 'src/asm' / isa).glob('*.S'))
+if a.avx512:
+    if isa != 'x86_64': p.error('--avx512 requires x86-64')
+    asm += sorted((ROOT / 'rust/asm').glob('*.S'))
 flags = ['clang', '-std=c17', '-O2', '-fno-strict-aliasing', '-fwrapv', '-Wall', '-Wextra', '-Werror', '-Iinclude', '-Isrc/core', '-Isrc/platform', '-Itests/common', '-Itests/c']
 flags += [f'-DTOKS_HAVE_{f.stem.upper()}=1' for f in asm if f.stem.startswith('k')]
 flags += ['-DTOKS_ASM_SOURCES="' + ' '.join(f.name for f in asm) + '"']
@@ -32,12 +36,19 @@ tier = 'neon' if isa == 'arm64' else 'avx2'
 asm_bpe = out / f'test_bpe_{tier}.c'
 asm_bpe.write_text(f'#define K6_BPE toks_k6_bpe_{tier}\n#define K5_ENCODE toks_k5_encode_{tier}\n#define TEST_BPE_TIER "{tier}"\n#define TEST_BPE_FEAT TOKS_FEAT_{tier.upper()}_TIER\n#include "{ROOT / "tests/c/test_bpe.c"}"\n')
 sources.append(asm_bpe)
+if a.avx512:
+    avx512_bpe = out / 'test_bpe_avx512.c'
+    avx512_bpe.write_text(asm_bpe.read_text().replace('avx2','avx512').replace('AVX2','AVX512'))
+    # K6 is internal to K5 and has no public kernel declaration in upstream.
+    avx512_bpe.write_text('#include "kernels.h"\nextern uint64_t toks_k6_bpe_avx512(const toks_tables *, toks_k6_args *);\n' + avx512_bpe.read_text())
+    sources.append(avx512_bpe)
 if a.tests: sources = [s for s in sources if s.stem in a.tests]
 variants = {}
 for feature in sorted({special[s.stem] for s in sources if s.stem in special}):
     dest = out / feature
     with (out/f'{feature}.build.log').open('wb') as log:
-        subprocess.run(['cargo', 'rustc', '-p', 'toks', '--lib', '--crate-type', 'staticlib', '--release', '--features', feature, '--target-dir', str(dest)], stdout=log, stderr=subprocess.STDOUT, check=True)
+        features = feature + (',avx512' if a.avx512 else '')
+        subprocess.run(['cargo', 'rustc', '-p', 'toks', '--lib', '--crate-type', 'staticlib', '--release', '--features', features, '--target-dir', str(dest)], stdout=log, stderr=subprocess.STDOUT, check=True)
     variants[feature] = str(dest / 'release/libtoks.a')
 def source(s):
     text = s.read_text()

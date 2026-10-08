@@ -12,7 +12,11 @@ fn main() {
         let path = entry.unwrap().path();
         if path.extension().is_some_and(|x| x == "S") { asm.file(path); }
     }
+    if isa == "x86_64" && env::var_os("CARGO_FEATURE_AVX512").is_some() {
+        asm.file("asm/k5_avx512.S").file("asm/k6_avx512.S");
+    }
     asm.compile("toks_asm");
     println!("cargo:rerun-if-changed=../src/asm");
     println!("cargo:rerun-if-changed=../src/core/layout.h");
+    println!("cargo:rerun-if-changed=asm");
 }
