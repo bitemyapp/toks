@@ -173,3 +173,21 @@ byte digests match C. In the exploratory three-block arm64 measurements, long
 GPT-2 decode improves from 0.441× to 0.616× C's speed and long T5 decode from
 0.823× to 0.903×; short decode is essentially unchanged. The adapter remains
 slower than C. Raw observations are in `receipts/python-utf8-arm64.json`.
+
+## Python ID-list result construction
+
+The encode profile attributed 544 of 3,594 samples to `int_list`, including
+allocation and destruction of a temporary Rust reference vector. Score:
+impact 4 × confidence 5 / effort 2 = 10. Allocate the final Python list before
+locking the integer cache, then fill its private slots directly with owned
+integer references. Allocating first allows cyclic GC to reenter without
+deadlocking; integer construction and slot assignment cannot call user code.
+The list remains private until complete, and its uninitialized slots are NULL,
+which CPython safely handles on failure. Token order, cached object identity,
+numeric values, floating-point and RNG behavior are unchanged.
+
+All 38 API/thread/boundary tests pass and every benchmark digest matches C.
+The three-block arm64 estimate for long GPT-2 encode improves from 0.530× to
+0.944× C's speed, and batch4 from 0.545× to 0.954×. Short encode improves from
+0.607× to 0.700×. The corresponding T5 estimates are 0.983×, 0.988× and 0.718×.
+These exploratory results are in `receipts/python-intlist-arm64.json`.

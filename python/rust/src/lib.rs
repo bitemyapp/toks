@@ -112,9 +112,12 @@ impl Tokenizer {
         result
     }
     fn int_list<'py>(&self, py: Python<'py>, ids: &[u32]) -> PyResult<Bound<'py, PyList>> {
-        let mut refs = Vec::new();
-        refs.try_reserve_exact(ids.len())
-            .map_err(|_| PyMemoryError::new_err("ID list"))?;
+        let len = isize::try_from(ids.len()).map_err(|_| PyMemoryError::new_err("ID list"))?;
+        // List allocation may run cyclic GC and reenter this tokenizer. Do it
+        // before taking the cache lock. The new list is private until every
+        // slot is initialized; CPython safely destroys NULL slots on error.
+        let out = unsafe { Bound::from_owned_ptr_or_err(py, pyo3::ffi::PyList_New(len))? }
+            .cast_into::<PyList>()?;
         {
             let mut cache = lock(&self.cache);
             if cache.ints.is_empty() {
@@ -125,7 +128,7 @@ impl Tokenizer {
                     .map_err(|_| PyMemoryError::new_err("ID cache"))?;
                 cache.ints.resize_with(n, || None);
             }
-            for &id in ids {
+            for (i, &id) in ids.iter().enumerate() {
                 // Exact integer construction cannot invoke Python callbacks.
                 let value = if let Some(entry) = cache.ints.get_mut(id as usize) {
                     if entry.is_none() {
@@ -138,11 +141,12 @@ impl Tokenizer {
                 } else {
                     id.into_pyobject(py)?.into_any().unbind()
                 };
-                refs.push(value);
+                // The list owns this reference; no temporary Rust vector or
+                // second reference-count pass is needed.
+                unsafe { pyo3::ffi::PyList_SET_ITEM(out.as_ptr(), i as isize, value.into_ptr()) };
             }
         }
-        // List allocation may collect cycles; it must happen outside the lock.
-        PyList::new(py, refs)
+        Ok(out)
     }
     fn vocab<'py>(&self, py: Python<'py>) -> PyResult<Bound<'py, PyTuple>> {
         if let Some(v) = lock(&self.cache).vocab.as_ref().map(|v| v.clone_ref(py)) {
