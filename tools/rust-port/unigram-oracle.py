@@ -18,6 +18,8 @@ p.add_argument('--jobs', type=int, default=4)
 p.add_argument('--out', default='build/rust-unigram-oracle')
 p.add_argument('--reuse', action='store_true', help='use existing pinned oracle streams')
 p.add_argument('--python', help='Python with tokenizers==0.23.2; otherwise use uv')
+p.add_argument('--c-lib', help='separate C reference archive (default: build/c-reference/<platform>/libtoks.a)')
+p.add_argument('--rust-lib', default='target/release/libtoks.a')
 a = p.parse_args()
 out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
 cache = Path(os.environ.get('TOKS_TOKENIZER_CACHE', Path.home()/'.cache/toks/tokenizers'))
@@ -27,7 +29,8 @@ cache = Path(os.environ.get('TOKS_TOKENIZER_CACHE', Path.home()/'.cache/toks/tok
 models = a.models or sorted(x.name for x in cache.glob('uni_*') if x.name not in ('uni_albert', 'uni_xlnet'))
 isa = 'arm64' if platform.machine() in ('arm64','aarch64') else 'x86_64'
 plat = 'macos' if platform.system() == 'Darwin' else 'linux'
-for side, lib in [('c', f'build/{plat}-{isa}/libtoks.a'), ('rust', 'target/release/libtoks.a')]:
+libraries = {'c': a.c_lib or f'build/c-reference/{plat}-{isa}/libtoks.a', 'rust': a.rust_lib}
+for side, lib in libraries.items():
     subprocess.run(['clang', '-O2', '-std=c17', '-Iinclude', 'tests/unigram/e2e_check.c', lib,
                     '-lpthread', '-lm', '-o', str(out/side)] + (['-ldl'] if plat=='linux' else []), check=True)
 def run(model):
@@ -50,6 +53,7 @@ def run(model):
     return result
 with ThreadPoolExecutor(max_workers=a.jobs) as pool:
     results = list(pool.map(run, models))
-(out/'results.json').write_text(json.dumps({'host': platform.platform(), 'models': results,
+(out/'results.json').write_text(json.dumps({'host': platform.platform(),
+    'libraries': {s: {'path': lib, 'sha256': hashlib.sha256(Path(lib).read_bytes()).hexdigest()} for s,lib in libraries.items()}, 'models': results,
     'generator_exclusions': [] if a.models else ['uni_albert', 'uni_xlnet']},indent=2)+'\n')
 raise SystemExit(any(r['status'] != 0 for m in results for r in m['results'].values()))
