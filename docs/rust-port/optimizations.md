@@ -1,5 +1,46 @@
 # Optimization record
 
+## Follow-up: emit the winning Unigram path directly
+
+A fresh arm64 T5 multilingual profile put about 60% of samples in `uni_piece`.
+The completed dynamic program already stores a predecessor length at each
+reachable end. Previously emission marked the winning ends, then inspected
+every byte to find those marks. Reverse just the winning predecessor chain in
+place, saving each old predecessor before replacing it with a forward length.
+Emission can then jump directly between the chosen boundaries. Opportunity
+score: impact 3 × confidence 4 / effort 2 = 6.
+
+Let the winning boundaries be `0 = v0 < v1 < ... < vm = L`. Before reversal,
+`delta[vi] = vi - v(i-1)`, with each length in `1..=127`. Walking backward saves
+the predecessor's old length before writing `delta[v(i-1)] = vi - v(i-1)`.
+Thus the subsequent forward walk visits precisely `v1, ..., vm`. Empty input
+returns before either walk. Every read/write remains within the initialized
+`L + 1` bytes, and callers do not inspect these lengths after emission. The
+next invocation clears the buffer again.
+
+- Ordering preserved: the same chosen ends are emitted in ascending order;
+  unknown spans are coalesced by the unchanged emission code.
+- Tie-breaking unchanged: DP traversal and strict-greater comparisons are
+  untouched. Short pieces read the same saved IDs; long pieces look up the same
+  spans.
+- Floating-point: identical score additions in the original order.
+- RNG seeds: no production randomness; benchmark resampling seed is unchanged.
+- Golden outputs: every measured full token stream matches the frozen C
+  goldens; the 12-model pinned oracle passes against separate C/Rust archives.
+
+The added owned-API test covers 504 input configurations and 1,008 full/short
+output calls, including the 512-byte saved-ID boundary, multibyte and invalid
+UTF-8, unknowns, virtual prefixes and continuation. The expected results also
+pass against the frozen C wheel. Debug/release tests and targeted native and
+both guard-page placements pass on both architectures. The full measurements,
+scope and receipts are in [unigram-path.md](unigram-path.md). Reverting the
+commit that introduces this walk restores the old marking/scan algorithm.
+
+The first candidate removed two saved-ID bounds checks (score 3 × 5 / 1 = 15).
+It tied on arm64 and regressed slightly on x86, so it was rejected. Production
+keeps those checks. Its patch and all paired observations are retained with
+the follow-up receipts; it is not part of the measured winning candidate.
+
 ## 1. Initialize Unigram dynamic-programming entries when reached
 
 The initial translation cleared a 128-double score ring and a 512-ID array on

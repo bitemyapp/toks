@@ -1,0 +1,265 @@
+{
+  "arm64": {
+    "core-tests": {
+      "host": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+      "tier": "auto",
+      "library": "build/rust-native/release/libtoks.a",
+      "guard": null,
+      "sanitizer": null,
+      "rust_target": null,
+      "results": [
+        {
+          "test": "test_bound",
+          "status": "pass",
+          "rc": 0,
+          "seconds": 2.478869374957867
+        },
+        {
+          "test": "test_breadth",
+          "status": "pass",
+          "rc": 0,
+          "seconds": 1.3161317089688964
+        },
+        {
+          "test": "test_misalign",
+          "status": "pass",
+          "rc": 0,
+          "seconds": 2.8299261250067502
+        },
+        {
+          "test": "test_targets",
+          "status": "pass",
+          "rc": 0,
+          "seconds": 6.443023917032406
+        }
+      ]
+    },
+    "guard1": {
+      "host": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+      "tier": "auto",
+      "library": "build/rust-guard/release/libtoks.a",
+      "guard": 1,
+      "sanitizer": null,
+      "rust_target": null,
+      "results": [
+        {
+          "test": "test_bound",
+          "status": "pass",
+          "rc": 0,
+          "seconds": 2.7074819579720497
+        },
+        {
+          "test": "test_breadth",
+          "status": "pass",
+          "rc": 0,
+          "seconds": 1.6341557090054266
+        },
+        {
+          "test": "test_misalign",
+          "status": "pass",
+          "rc": 0,
+          "seconds": 3.0304219590034336
+        },
+        {
+          "test": "test_targets",
+          "status": "pass",
+          "rc": 0,
+          "seconds": 6.658938959008083
+        }
+      ]
+    },
+    "guard2": {
+      "host": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+      "tier": "auto",
+      "library": "build/rust-guard/release/libtoks.a",
+      "guard": 2,
+      "sanitizer": null,
+      "rust_target": null,
+      "results": [
+        {
+          "test": "test_bound",
+          "status": "pass",
+          "rc": 0,
+          "seconds": 2.6418973749969155
+        },
+        {
+          "test": "test_breadth",
+          "status": "pass",
+          "rc": 0,
+          "seconds": 1.4593064580112696
+        },
+        {
+          "test": "test_misalign",
+          "status": "pass",
+          "rc": 0,
+          "seconds": 2.8949987920350395
+        },
+        {
+          "test": "test_targets",
+          "status": "pass",
+          "rc": 0,
+          "seconds": 6.476297124987468
+        }
+      ]
+    },
+    "owned-debug": [
+      "test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.08s"
+    ],
+    "owned-release": [
+      "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+      "test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s"
+    ],
+    "python_api": {
+      "summary": "........................................                                 [100%]\n40 passed in 3.77s",
+      "python": "3.13",
+      "suites": [
+        "test_api.py",
+        "test_threads.py",
+        "test_rust_boundary.py"
+      ]
+    },
+    "rebuilt_default_artifacts": {
+      "build/rust-port/round2/wheels/toks-0.3.2-cp313-cp313-macosx_11_0_arm64.whl": "01f777182dfe708921e05f85b4a7057eb12010dc34d957a03be74c782014d57d",
+      "build/macos-arm64/libtoks.a": "a914085ce20679f31c35a120ac3ab9fc4bb43c4b24b52f1cafc630b66b45f6d5"
+    }
+  },
+  "x86": {
+    "core-tests": {
+      "host": "Linux-6.17.0-1032-oem-x86_64-with-glibc2.39",
+      "tier": "auto",
+      "library": "build/rust-native/release/libtoks.a",
+      "guard": null,
+      "sanitizer": null,
+      "rust_target": null,
+      "results": [
+        {
+          "test": "test_bound",
+          "status": "pass",
+          "rc": 0,
+          "seconds": 2.1594036519527435
+        },
+        {
+          "test": "test_breadth",
+          "status": "pass",
+          "rc": 0,
+          "seconds": 1.7611962100490928
+        },
+        {
+          "test": "test_misalign",
+          "status": "pass",
+          "rc": 0,
+          "seconds": 2.6861039847135544
+        },
+        {
+          "test": "test_targets",
+          "status": "pass",
+          "rc": 0,
+          "seconds": 7.533963195979595
+        }
+      ]
+    },
+    "guard1": {
+      "host": "Linux-6.17.0-1032-oem-x86_64-with-glibc2.39",
+      "tier": "auto",
+      "library": "build/rust-guard/release/libtoks.a",
+      "guard": 1,
+      "sanitizer": null,
+      "rust_target": null,
+      "results": [
+        {
+          "test": "test_bound",
+          "status": "pass",
+          "rc": 0,
+          "seconds": 2.525786093901843
+        },
+        {
+          "test": "test_breadth",
+          "status": "pass",
+          "rc": 0,
+          "seconds": 2.0408776309341192
+        },
+        {
+          "test": "test_misalign",
+          "status": "pass",
+          "rc": 0,
+          "seconds": 2.8831472247838974
+        },
+        {
+          "test": "test_targets",
+          "status": "pass",
+          "rc": 0,
+          "seconds": 7.1340053379535675
+        }
+      ]
+    },
+    "guard2": {
+      "host": "Linux-6.17.0-1032-oem-x86_64-with-glibc2.39",
+      "tier": "auto",
+      "library": "build/rust-guard/release/libtoks.a",
+      "guard": 2,
+      "sanitizer": null,
+      "rust_target": null,
+      "results": [
+        {
+          "test": "test_bound",
+          "status": "pass",
+          "rc": 0,
+          "seconds": 2.3959548780694604
+        },
+        {
+          "test": "test_breadth",
+          "status": "pass",
+          "rc": 0,
+          "seconds": 1.9828733881004155
+        },
+        {
+          "test": "test_misalign",
+          "status": "pass",
+          "rc": 0,
+          "seconds": 2.9310596329160035
+        },
+        {
+          "test": "test_targets",
+          "status": "pass",
+          "rc": 0,
+          "seconds": 7.177487627137452
+        }
+      ]
+    },
+    "owned-debug": [
+      "test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s"
+    ],
+    "owned-release": [
+      "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s",
+      "test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s"
+    ],
+    "python_api": {
+      "summary": "........................................                                 [100%]\n40 passed in 3.91s",
+      "python": "3.13",
+      "suites": [
+        "test_api.py",
+        "test_threads.py",
+        "test_rust_boundary.py"
+      ]
+    },
+    "rebuilt_default_artifacts": {
+      "build/rust-port/round2/wheels/toks-0.3.2-cp313-cp313-linux_x86_64.whl": "8a83a068c29e22e33719875167cbdcde4599d478173f28d08a47e31d48fa68d2",
+      "build/linux-x86_64/libtoks.a": "8327444a758092cdfeebb462f96032c0a3c55ba8394f3b6b3d3f25ab9e744d5c"
+    }
+  },
+  "boundary_c_reference": {
+    "implementation": "frozen C Python wheel",
+    "cases": 504,
+    "encodes_and_short_outputs": 1008,
+    "sha256": "5ad5526c73e78e52bee95c8fcca44fa45219e9483eb1e388826a3ccf8409c248"
+  },
+  "source_sha256": "31b008bdc98f247974443db88ce49409228c7c23aae27bdcab740d1dc8fdc9b8",
+  "fixture_notes": "Reused corrected LLM-jp 3/4 and MiniLM streams whose SHA-256 matches the committed prior oracle receipts. The older build directory retained pre-correction streams; C and Rust failed those identically.",
+  "input_source": {
+    "file": "rust/src/core/unigram.rs",
+    "sha256": "31b008bdc98f247974443db88ce49409228c7c23aae27bdcab740d1dc8fdc9b8",
+    "previous_rust_commit": "9d5f1bf76c976b28f4182976d0bab8a1d27cc25d",
+    "unchanged_core_since": "77e5448",
+    "c_reference_commit": "55a5230b08a75916a2b36f92c320f057376833ea"
+  }
+}

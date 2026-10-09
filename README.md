@@ -24,6 +24,9 @@ native-CPU encoder matrix measures aggregate fresh-scratch speedups of **1.009×
 on arm64 and 1.015× on x86**, with larger streaming/replay gains and individual
 regressions. The Python adapter remains slower than C. See [all paired results,
 build flags and uncertainty intervals](docs/rust-port/benchmarks.md).
+A later [Unigram optimization](docs/rust-port/unigram-path.md) improves T5 by
+4.6% on arm64 and 8.1% on x86 versus that Rust baseline at 4096-byte chunks;
+its separate 12-cell comparison with C reports 5.6% and 9.9% fresh-input gains.
 
 The upstream description and historical benchmark results below describe the
 original **C implementation**, not measurements of this Rust fork.

@@ -1,0 +1,29 @@
+diff --git a/rust/src/core/unigram.rs b/rust/src/core/unigram.rs
+index d1007e0..a3b943c 100644
+--- a/rust/src/core/unigram.rs
++++ b/rust/src/core/unigram.rs
+@@ -1702,7 +1702,11 @@ unsafe extern "C" fn uni_piece(
+                     best[(e & UNI_MAX_PIECE as uint64_t) as usize].write(cand);
+                     *delta.offset(e as isize) = k.wrapping_add(1 as uint64_t) as uint8_t;
+                     if keep != 0 {
+-                        bid[e as usize].write(*term.offset(t as isize));
++                        // k < lim <= L - s, hence e = s + k + 1 <= L.
++                        // keep implies L < bid.len(). These loop invariants
++                        // are not recovered from wrapping arithmetic by LLVM.
++                        debug_assert!(e < bid.len() as u64);
++                        bid.get_unchecked_mut(e as usize).write(*term.offset(t as isize));
+                     }
+                 }
+                 if k.wrapping_add(1 as uint64_t) == mb as uint64_t {
+@@ -1721,7 +1725,10 @@ unsafe extern "C" fn uni_piece(
+                 best[(e_0 & UNI_MAX_PIECE as uint64_t) as usize].write(cand_0);
+                 *delta.offset(e_0 as isize) = mb as uint8_t;
+                 if keep != 0 {
+-                    bid[e_0 as usize].write(-1);
++                    // mb is one virtual/invalid byte or a validated UTF-8
++                    // width <= L - s. Thus e_0 <= L < bid.len() under keep.
++                    debug_assert!(e_0 < bid.len() as u64);
++                    bid.get_unchecked_mut(e_0 as usize).write(-1);
+                 }
+             }
+         }

@@ -11,6 +11,73 @@ const WP: &[u8] = br###"{
 }"###;
 
 #[test]
+fn unigram_dp_at_id_buffer_boundary() {
+    // The private DP retains token IDs only for pieces shorter than 512 bytes.
+    // Single-character vocabularies give independent, explicit expected IDs
+    // while driving known, unknown and invalid UTF-8 edges across that boundary.
+    for meta in [false, true] {
+        let pre = if meta {
+            r#"{"type":"Metaspace","replacement":"▁","prepend_scheme":"always","split":false}"#
+        } else {
+            "null"
+        };
+        let model = format!(
+            r#"{{"pre_tokenizer":{pre},"model":{{"type":"Unigram","unk_id":0,"byte_fallback":false,"vocab":[["<unk>",-100],["a",-1],["é",-1],["😀",-1],["▁",-1]]}}}}"#
+        );
+        let tok = Tokenizer::from_bytes(model.as_bytes(), Tier::Scalar).unwrap();
+        let mut encoder = tok
+            .encoder(ScratchOptions {
+                memo_mib: Some(0),
+                cache_mib: 0,
+            })
+            .unwrap();
+        for n in [
+            0, 1, 15, 16, 17, 126, 127, 128, 129, 507, 508, 509, 510, 511, 512, 513, 514, 515,
+            1023, 1024, 1025,
+        ] {
+            for (suffix, last) in [
+                (b"".as_slice(), None),
+                ("é".as_bytes(), Some(2)),
+                ("😀".as_bytes(), Some(3)),
+                (b"z", Some(0)),
+                (b"\xff", Some(0)),
+                (b"\xf0\x9f", Some(0)),
+            ] {
+                let mut input = vec![b'a'; n];
+                input.extend_from_slice(suffix);
+                for continuation in [false, true] {
+                    let mut want = Vec::new();
+                    if meta && !input.is_empty() {
+                        want.push(4);
+                    }
+                    want.extend(std::iter::repeat_n(1, n));
+                    want.extend(last);
+                    let flags = if continuation {
+                        E::CONTINUATION
+                    } else {
+                        E::ALL
+                    };
+                    encoder.clear_cache();
+                    assert_eq!(
+                        encoder.encode(&input, flags).unwrap(),
+                        want,
+                        "meta={meta}, n={n}, suffix={suffix:?}, continuation={continuation}"
+                    );
+                    let mut short = [u32::MAX];
+                    assert_eq!(
+                        encoder.encode_into(&input, flags, &mut short).unwrap(),
+                        want.len()
+                    );
+                    if let Some(&first) = want.first() {
+                        assert_eq!(short[0], first);
+                    }
+                }
+            }
+        }
+    }
+}
+
+#[test]
 fn exact_prefix_reuse_and_raw_bytes() {
     let tokenizer = Tokenizer::from_bytes(BYTE, Tier::Auto).unwrap();
     let mut encoder = tokenizer.encoder(ScratchOptions::default()).unwrap();

@@ -1,0 +1,223 @@
+{
+  "host": "Linux-6.17.0-1032-oem-x86_64-with-glibc2.39",
+  "libraries": {
+    "c": {
+      "path": "build/c-reference/linux-x86_64/libtoks.a",
+      "sha256": "1c11abe438848e228d21743729a7126486125d03148a058f504318b01df8a490"
+    },
+    "rust": {
+      "path": "build/rust-native/release/libtoks.a",
+      "sha256": "a0b2292d37c7e4b573103bf8ad5feb947a595452964c89622c12084dcd7f92a8"
+    }
+  },
+  "models": [
+    {
+      "model": "uni_arctic2",
+      "model_sha256": "39feb9863a378165ab9c5c689047203d789422966c0c58721c5309fd039a8edc",
+      "oracle_sha256": "1247cc1543ce9f309690fc85a96f52550df40f88f889d56ccb8a14db6c4eae5a",
+      "generator": "tokenizers==0.23.2",
+      "random_cases_requested": 2500,
+      "results": {
+        "c": {
+          "status": 0,
+          "log": "e2e /home/callen/.cache/toks/tokenizers/uni_arctic2: 17500 encodes, 2500 pieces, 1564 decodes, 0 mismatches\n"
+        },
+        "rust": {
+          "status": 0,
+          "log": "e2e /home/callen/.cache/toks/tokenizers/uni_arctic2: 17500 encodes, 2500 pieces, 1564 decodes, 0 mismatches\n"
+        }
+      }
+    },
+    {
+      "model": "uni_bgem3",
+      "model_sha256": "21106b6d7dab2952c1d496fb21d5dc9db75c28ed361a05f5020bbba27810dd08",
+      "oracle_sha256": "1247cc1543ce9f309690fc85a96f52550df40f88f889d56ccb8a14db6c4eae5a",
+      "generator": "tokenizers==0.23.2",
+      "random_cases_requested": 2500,
+      "results": {
+        "c": {
+          "status": 0,
+          "log": "e2e /home/callen/.cache/toks/tokenizers/uni_bgem3: 17500 encodes, 2500 pieces, 1564 decodes, 0 mismatches\n"
+        },
+        "rust": {
+          "status": 0,
+          "log": "e2e /home/callen/.cache/toks/tokenizers/uni_bgem3: 17500 encodes, 2500 pieces, 1564 decodes, 0 mismatches\n"
+        }
+      }
+    },
+    {
+      "model": "uni_bgererank",
+      "model_sha256": "9eb652ac4e40cc093272bbbe0f55d521cf67570060227109b5cdc20945a4489e",
+      "oracle_sha256": "5315c98211038e2026eda8da68f8f68a706795ad7ad3b33300a553f848f37c9c",
+      "generator": "tokenizers==0.23.2",
+      "random_cases_requested": 2500,
+      "results": {
+        "c": {
+          "status": 0,
+          "log": "e2e /home/callen/.cache/toks/tokenizers/uni_bgererank: 17500 encodes, 2500 pieces, 1564 decodes, 0 mismatches\n"
+        },
+        "rust": {
+          "status": 0,
+          "log": "e2e /home/callen/.cache/toks/tokenizers/uni_bgererank: 17500 encodes, 2500 pieces, 1564 decodes, 0 mismatches\n"
+        }
+      }
+    },
+    {
+      "model": "uni_flant5",
+      "model_sha256": "fe2ebbbbde2985be723e0ce18217853e4020c5e9d35bd07be2c27ab9d3ead57a",
+      "oracle_sha256": "09cc3fca0891fe1c820bc0e597afb1f66e44762c4bb408d4838fa891548c3a17",
+      "generator": "tokenizers==0.23.2",
+      "random_cases_requested": 2500,
+      "results": {
+        "c": {
+          "status": 0,
+          "log": "e2e /home/callen/.cache/toks/tokenizers/uni_flant5: 17500 encodes, 2500 pieces, 1564 decodes, 0 mismatches\n"
+        },
+        "rust": {
+          "status": 0,
+          "log": "e2e /home/callen/.cache/toks/tokenizers/uni_flant5: 17500 encodes, 2500 pieces, 1564 decodes, 0 mismatches\n"
+        }
+      }
+    },
+    {
+      "model": "uni_llmjp3",
+      "model_sha256": "955dc1fa623fab38cc92a3f4ee172423ae6d73201c4207569bfdf5626bc733f0",
+      "oracle_sha256": "ad0df58f24b0491be6db9d7d9f8c9dfbdbfc36c7d859583a402c435df6b5c0b8",
+      "generator": "tokenizers==0.23.2",
+      "random_cases_requested": 2500,
+      "results": {
+        "c": {
+          "status": 0,
+          "log": "e2e /home/callen/.cache/toks/tokenizers/uni_llmjp3: 17500 encodes, 2500 pieces, 1564 decodes, 0 mismatches\n"
+        },
+        "rust": {
+          "status": 0,
+          "log": "e2e /home/callen/.cache/toks/tokenizers/uni_llmjp3: 17500 encodes, 2500 pieces, 1564 decodes, 0 mismatches\n"
+        }
+      }
+    },
+    {
+      "model": "uni_llmjp4",
+      "model_sha256": "a35f390c6489427e4dcac7d957f34d9dacd7332972c990f4b4eb6b724c8873f4",
+      "oracle_sha256": "005ef0bdaff25c9c245045a163967d612191673f37c93151eea0f55632357412",
+      "generator": "tokenizers==0.23.2",
+      "random_cases_requested": 2500,
+      "results": {
+        "c": {
+          "status": 0,
+          "log": "e2e /home/callen/.cache/toks/tokenizers/uni_llmjp4: 17500 encodes, 2500 pieces, 1564 decodes, 0 mismatches\n"
+        },
+        "rust": {
+          "status": 0,
+          "log": "e2e /home/callen/.cache/toks/tokenizers/uni_llmjp4: 17500 encodes, 2500 pieces, 1564 decodes, 0 mismatches\n"
+        }
+      }
+    },
+    {
+      "model": "uni_me5large",
+      "model_sha256": "62c24cdc13d4c9952d63718d6c9fa4c287974249e16b7ade6d5a85e7bbb75626",
+      "oracle_sha256": "caa6ad16976f72270ef227d574a43ea3ed9d58f6f3560b8f6f505c96c6cf3f31",
+      "generator": "tokenizers==0.23.2",
+      "random_cases_requested": 2500,
+      "results": {
+        "c": {
+          "status": 0,
+          "log": "e2e /home/callen/.cache/toks/tokenizers/uni_me5large: 17500 encodes, 2500 pieces, 1564 decodes, 0 mismatches\n"
+        },
+        "rust": {
+          "status": 0,
+          "log": "e2e /home/callen/.cache/toks/tokenizers/uni_me5large: 17500 encodes, 2500 pieces, 1564 decodes, 0 mismatches\n"
+        }
+      }
+    },
+    {
+      "model": "uni_me5small",
+      "model_sha256": "0b44a9d7b51c3c62626640cda0e2c2f70fdacdc25bbbd68038369d14ebdf4c39",
+      "oracle_sha256": "a87310b3ae8e82a7f37216dd03856c1b769a691ecaac9e11e3a0bf74a8a1ff0b",
+      "generator": "tokenizers==0.23.2",
+      "random_cases_requested": 2500,
+      "results": {
+        "c": {
+          "status": 0,
+          "log": "e2e /home/callen/.cache/toks/tokenizers/uni_me5small: 17500 encodes, 2500 pieces, 1564 decodes, 0 mismatches\n"
+        },
+        "rust": {
+          "status": 0,
+          "log": "e2e /home/callen/.cache/toks/tokenizers/uni_me5small: 17500 encodes, 2500 pieces, 1564 decodes, 0 mismatches\n"
+        }
+      }
+    },
+    {
+      "model": "uni_mxbaixs",
+      "model_sha256": "305674b4d785287feecfb5f73f24aa75e9b57c87c579cfe24fbd207987d4b4c4",
+      "oracle_sha256": "6d928d309c024c129993fcc106fe3d23eb9eb1085c965b5c13143f121a54a2d0",
+      "generator": "tokenizers==0.23.2",
+      "random_cases_requested": 2500,
+      "results": {
+        "c": {
+          "status": 0,
+          "log": "e2e /home/callen/.cache/toks/tokenizers/uni_mxbaixs: 17500 encodes, 2500 pieces, 1564 decodes, 0 mismatches\n"
+        },
+        "rust": {
+          "status": 0,
+          "log": "e2e /home/callen/.cache/toks/tokenizers/uni_mxbaixs: 17500 encodes, 2500 pieces, 1564 decodes, 0 mismatches\n"
+        }
+      }
+    },
+    {
+      "model": "uni_pmminilm",
+      "model_sha256": "2c3387be76557bd40970cec13153b3bbf80407865484b209e655e5e4729076b8",
+      "oracle_sha256": "b91c34844c60e76fc7bfda64a737a403eef13e6053814dc6386a131513fcc769",
+      "generator": "tokenizers==0.23.2",
+      "random_cases_requested": 2500,
+      "results": {
+        "c": {
+          "status": 0,
+          "log": "e2e /home/callen/.cache/toks/tokenizers/uni_pmminilm: 17500 encodes, 2500 pieces, 1564 decodes, 0 mismatches\n"
+        },
+        "rust": {
+          "status": 0,
+          "log": "e2e /home/callen/.cache/toks/tokenizers/uni_pmminilm: 17500 encodes, 2500 pieces, 1564 decodes, 0 mismatches\n"
+        }
+      }
+    },
+    {
+      "model": "uni_ruri3",
+      "model_sha256": "0a94ac9a0a02c067bdef25b72ae9f4ee33f48f552e55988d444f6d25eeb1d062",
+      "oracle_sha256": "11dbb457d25890b97015aba0993d5a5aa87cdce5da446d534738da5ae7dac6ce",
+      "generator": "tokenizers==0.23.2",
+      "random_cases_requested": 2500,
+      "results": {
+        "c": {
+          "status": 0,
+          "log": "e2e /home/callen/.cache/toks/tokenizers/uni_ruri3: 17500 encodes, 2500 pieces, 1564 decodes, 0 mismatches\n"
+        },
+        "rust": {
+          "status": 0,
+          "log": "e2e /home/callen/.cache/toks/tokenizers/uni_ruri3: 17500 encodes, 2500 pieces, 1564 decodes, 0 mismatches\n"
+        }
+      }
+    },
+    {
+      "model": "uni_t5base",
+      "model_sha256": "d2acde0d8d71dd30a711834b07781b9c89feaac33fd332f60507699282740066",
+      "oracle_sha256": "65a20c3af64738d1ec6737861ae3c018128ce17062dd08c3aaca9ec4bfe647c6",
+      "generator": "tokenizers==0.23.2",
+      "random_cases_requested": 2500,
+      "results": {
+        "c": {
+          "status": 0,
+          "log": "e2e /home/callen/.cache/toks/tokenizers/uni_t5base: 17500 encodes, 2500 pieces, 1564 decodes, 0 mismatches\n"
+        },
+        "rust": {
+          "status": 0,
+          "log": "e2e /home/callen/.cache/toks/tokenizers/uni_t5base: 17500 encodes, 2500 pieces, 1564 decodes, 0 mismatches\n"
+        }
+      }
+    }
+  ],
+  "generator_exclusions": [
+    "uni_albert",
+    "uni_xlnet"
+  ]
+}

@@ -18,6 +18,12 @@ fresh-scratch/stream/replay speedups are 1.009×/1.025×/1.039× on arm64 and
 defaults are unchanged. Some workloads regress, and the Python adapter remains
 slower than C despite its optimizations.
 
+A subsequent [Unigram path-emission optimization](unigram-path.md) improves
+T5 fresh-scratch encoding by 4.6% on arm64 and 8.1% on x86 versus that Rust
+baseline, across four corpora at 4096-byte chunks. The linked follow-up also
+compares three chunk settings against C. The historical 84-cell matrix above
+has not been rerun for this narrower change.
+
 ## Build and check
 
 ```sh

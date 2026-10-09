@@ -1727,41 +1727,46 @@ unsafe extern "C" fn uni_piece(
         }
         s = s.wrapping_add(mb as uint64_t);
     }
-    let mut e_1: uint64_t = L;
-    while e_1 > 0 as uint64_t {
-        let mut d: uint32_t = *delta.offset(e_1 as isize) as uint32_t & 0x7f as uint32_t;
-        *delta.offset(e_1 as isize) = (*delta.offset(e_1 as isize) as ::core::ffi::c_uint
-            | 0x80 as ::core::ffi::c_uint) as uint8_t;
-        e_1 = e_1.wrapping_sub(d as uint64_t);
+    // Reverse only the winning predecessor chain into forward lengths. Save
+    // each predecessor's old length before overwriting it. The DP is complete,
+    // and callers do not inspect delta after this function. Every edge advances
+    // by 1..=127 bytes, so the forward walk visits exactly the same chosen ends
+    // as the former high-bit marking plus byte-by-byte scan, in the same order.
+    let mut e_1 = L;
+    let mut step = *delta.offset(e_1 as isize);
+    while e_1 > 0 {
+        debug_assert!(step > 0 && step <= 127 && step as u64 <= e_1);
+        let previous = e_1.wrapping_sub(step as u64);
+        let previous_step = *delta.offset(previous as isize);
+        *delta.offset(previous as isize) = step;
+        e_1 = previous;
+        step = previous_step;
     }
     let mut ps: uint64_t = 0 as uint64_t;
     let mut us: uint64_t = 0 as uint64_t;
     let mut in_unk: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
-    let mut x: uint64_t = 1 as uint64_t;
-    while x <= L {
-        if !(*delta.offset(x as isize) as ::core::ffi::c_uint
-            & 0x80 as ::core::ffi::c_uint == 0 as ::core::ffi::c_uint)
-        {
-            let mut id: int32_t = if keep != 0 {
-                bid[x as usize].assume_init()
-            } else {
-                exact_id(u, virt, p, ps, x)
-            };
-            if id < 0 as int32_t || id as uint32_t == (*u).unk_id {
-                if in_unk == 0 {
-                    in_unk = 1 as ::core::ffi::c_int;
-                    us = ps;
-                }
-            } else {
-                if in_unk != 0 {
-                    emit_unknown(u, virt, p, us, ps, em);
-                    in_unk = 0 as ::core::ffi::c_int;
-                }
-                toks_put(em, id as uint32_t);
+    let mut x: uint64_t = 0;
+    while x < L {
+        x = x.wrapping_add(*delta.offset(x as isize) as u64);
+        debug_assert!(x > ps && x <= L);
+        let mut id: int32_t = if keep != 0 {
+            bid[x as usize].assume_init()
+        } else {
+            exact_id(u, virt, p, ps, x)
+        };
+        if id < 0 as int32_t || id as uint32_t == (*u).unk_id {
+            if in_unk == 0 {
+                in_unk = 1 as ::core::ffi::c_int;
+                us = ps;
             }
-            ps = x;
+        } else {
+            if in_unk != 0 {
+                emit_unknown(u, virt, p, us, ps, em);
+                in_unk = 0 as ::core::ffi::c_int;
+            }
+            toks_put(em, id as uint32_t);
         }
-        x = x.wrapping_add(1);
+        ps = x;
     }
     if in_unk != 0 {
         emit_unknown(u, virt, p, us, L, em);
